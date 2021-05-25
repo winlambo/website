@@ -245,9 +245,30 @@ nav {
 	align-items: center
 }
 
+.ticketrotatorouter{
+	display:flex;
+	margin:0 6px;
+	width:240px;
+	overflow:hidden	
+}
+.ticketrotator{
+	display:flex;
+	position:relative;
+	transition:all 0.5s ease;
+}
+.ticketblkbx{
+	min-width:110px;
+	max-width:110px;
+	background: #000;
+	color: #fff;
+	padding: 4px 10px;
+	margin: 0 5px;
+	text-align:center;
+	font-size:13px;
+}
 .ticket-bx {
 	display: flex;
-	align-items: center;
+	align-items: center;	
 }
 
 .ticket-bx-outer {
@@ -259,13 +280,6 @@ nav {
 		font-size: 20px;
 		cursor:pointer;
 	}
-}
-
-.ticketbx {
-	background: #000;
-	color: #fff;
-	padding: 4px 10px;
-	margin: 0 6px
 }
 
 .main-wraper {
