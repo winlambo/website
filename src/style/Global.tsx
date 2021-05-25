@@ -155,6 +155,16 @@ section {
 	transform: scale(1.06);
 }
 
+.btn-black:focus,
+.btn-black:hover {
+	color:#fff;
+}
+
+.btn-white:focus,
+.btn-white:hover {
+	color:#000
+}
+
 .btn-white {
 	background: #fff;
 	color: #000;
@@ -247,6 +257,7 @@ nav {
 
 	i {
 		font-size: 20px;
+		cursor:pointer;
 	}
 }
 

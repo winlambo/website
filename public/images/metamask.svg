@@ -1,0 +1,18 @@
+<svg version="1.2" baseProfile="tiny-ps" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 17" width="19" height="17">
+	<title>winlambo</title>
+	<defs>
+		<image  width="19" height="17" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAARCAMAAAAIRmf1AAAAAXNSR0IB2cksfwAAAXFQTFRFAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDkxguYAAAAHt0Uk5TSptb0bJSFQlOr9Nelo1NACu3/96lpNq7MEOPgC4DauTocAUmglRlL6D5+zJcXTGL9fhViDkdnQwBCHLt/u94BJ4gEI7Dxj2YE2b6dYWV1p9r/XHmGkGwsdVRg0DfyU/d60dE6uwcBpnIk7acs85sxKsfQveXIT8i4Nth7JGmPQAAAPlJREFUeJxdzdk7AnEYxfHX0owsHd4aSxEtY4msSRhCosIwRPZ97PvOX6/fjAt8rz4X53kOUUlpWblDkkVShbOyqtpBNS7U1rHboyiKp54bGtHkJV8z0OJvZVFbIAiEwqS2o1hHZxdHlG7Bnij19gnA1c8Dg5aGYjQcH0FidGxcY21iUk4gOTVNM6lozDfLdunwnDqfIWQj/LvcAii5yH9bClJGF1heMZhX44JreVrXBPSN4m9h0xpuUYD/t007NozdPbdhc5+kAwuHRzg+sXRq0tk5X1z603x1fcO3d6l740EmPD6ZgOl95tzLK5B/ewfBTtU/Pr9+/A2H3S8xcMgbggAAAABJRU5ErkJggg=="/>
+	</defs>
+	<style>
+		tspan { white-space:pre }
+	</style>
+	<g id="winlambo">
+		<g id="Slide">
+			<g id="Navigation">
+				<g id="Online">
+					<use id="Ebene 23" href="#img1" x="0" y="0" />
+				</g>
+			</g>
+		</g>
+	</g>
+</svg>
