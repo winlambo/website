@@ -7,7 +7,7 @@ const Topnav: React.FC = () => {
       <div className="nav-main">
         <img src="images/footerlogo.png" className="logo" />
         <div className="nav-left">
-          <TwoTicket />
+          {/* <TwoTicket /> */}
         </div>
       </div>
     </nav>

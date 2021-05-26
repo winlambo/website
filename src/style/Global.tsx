@@ -155,6 +155,48 @@ section {
 	transform: scale(1.06);
 }
 
+.btn-medium {
+	font-size: 13px;
+	font-weight: 500;
+	color: #000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 4px 10px;
+	border-radius: 2px;
+	text-align: center;
+	position: relative;
+	border: none;
+	background-color: #fff;
+	-webkit-transition: all 0.4s ease;
+	-o-transition: all 0.4s ease;
+	transition: all 0.4s ease;
+	background: #0dd5f7;
+	font-weight: 600;
+	z-index: 10;
+	min-width: 110px;
+	margin-bottom: 0px;
+
+	i {
+		font-size: 20px;
+		margin: 0 6px;
+	}
+
+	.fa-mouse-pointer {
+		font-size: 14px;
+		margin: 6px 6px 0;
+	}
+}
+
+.btn-medium:focus,
+.btn-medium:hover {
+	outline: none;
+	border: none;
+	transform: scale(1.06);
+}
+
+
+
 .btn-black:focus,
 .btn-black:hover {
 	color:#fff;

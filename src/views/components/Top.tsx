@@ -2,7 +2,7 @@ import React from 'react';
 
 const Top: React.FC = () => {
     const Ranklist = []
-    for (let i = 1; i < 10; i++) {
+    for (let i = 1; i < 100; i++) {
         var sno = i <= 3 ? (<img src={'images/' + i + '.png'} />) : (i);
 
         var temp = (<div className="row">
