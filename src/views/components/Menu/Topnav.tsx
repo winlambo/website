@@ -57,7 +57,8 @@ const Topnav: React.FC = () => {
                 <div className="nav-left">
                     <TwoTicket tickets={tickets} />
                     <div className="afterlog">
-                        <button className="btn-medium btn-black" onClick={!(active && account) ? connectAccount : () => {}}>
+                        <button className="btn-medium" onClick={!(active && account) ? connectAccount : () => {}}>
+                        <img src="images/metamask.svg" className="meta" />
                             { (active && account) ? shorter(account) : 'Connect'}
                         </button>
                     </div>

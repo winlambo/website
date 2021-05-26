@@ -377,6 +377,10 @@ nav {
 .toptable {
 
 	font-weight: 600;
+	height: 500px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	padding-right: 25px;
 
 	.row {
 		display: flex;

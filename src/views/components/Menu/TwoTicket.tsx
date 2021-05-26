@@ -9,6 +9,7 @@ const Ticket: React.FC<TicketListProps> = ({tickets}) => {
 
   const TicketlistArr=[];
     let totaltickets = tickets.length;
+    let amount = 0;
     const [count, setCount] = useState(0);
     const [left, setLeft] = useState(0);
     // let count = 0;
@@ -27,11 +28,12 @@ const Ticket: React.FC<TicketListProps> = ({tickets}) => {
     }
     for(let i=0; i<totaltickets;i++){
       TicketlistArr.push(<div className="ticketblkbx">{tickets[i][0].toNumber()} - {tickets[i][1].toNumber()}</div>);
+      amount = amount + tickets[i][1].toNumber() - tickets[i][0].toNumber() + 1
     }
   return (
 
     <div className="ticket-bx">
-      <div>{totaltickets} tickets</div>
+      <div>{amount} tickets</div>
       <div className="ticket-bx-outer">
         <i className="fa fa-angle-left" aria-hidden="true" onClick={backward} style={{color: count == 0?"gray":"black"}}></i>
         <div className="ticketrotatorouter">
