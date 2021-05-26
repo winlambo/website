@@ -131,7 +131,7 @@ section {
 	-webkit-transition: all 0.4s ease;
 	-o-transition: all 0.4s ease;
 	transition: all 0.4s ease;
-	background: #0dd5f7;
+	background: #000;
 	font-weight: 600;
 	z-index: 10;
 	min-width: 140px;
@@ -217,8 +217,22 @@ section {
 	background: #000;
 	color: #fff;
 	margin-right: 12px;
+	i{
+		color:#fff
+	}
 }
-
+.btn-transparent{
+	background:transparent;
+	color:#000;
+	transistion:none;
+	transform:scale(1) !important;
+	cursor:auto !important;
+	padding:6px;
+	margin:0;
+}
+.btn-transparent:hover{
+	transform:scale(1)
+}
 .bg-white {
 	color: #000;
 	padding: 10vh 0;
@@ -283,7 +297,7 @@ nav {
 .nav-left {
 	width: 45%;
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-end;
 	align-items: center
 }
 
