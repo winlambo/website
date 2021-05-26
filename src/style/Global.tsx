@@ -20,6 +20,10 @@ const GlobalStyle=createGlobalStyle` * {
 	font-family: 'Amazing Slab Bold';
 	src: url('../fonts/Amazing-Slab-Bold.ttf') format('truetype');
 }
+@font-face {
+	font-family: 'Macchina';
+	src: url('../fonts/LaMacchinaRegular.ttf') format('truetype');
+}
 
 
 
@@ -61,7 +65,9 @@ ul {
 	margin: 0;
 	padding: 0;
 }
-
+html{
+	scroll-behavior: smooth;
+}
 img {
 	display: block;
 }
@@ -285,7 +291,17 @@ nav {
 }
 
 .logo {
-	height: 40px;
+	//height: 40px;
+	font-family: 'Macchina';
+	font-size:46px;
+	position:relative;
+	line-height: 1;
+	img{
+		position:absolute;
+		height: 15px;
+   		top: 9px;
+		left:0;
+	}
 }
 
 .meta {
