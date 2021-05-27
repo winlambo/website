@@ -55,12 +55,17 @@ const Topnav: React.FC = () => {
     return (
         <nav className="container">
             <div className="nav-main">
-                <img src="images/logo.svg" className="logo" />
+                {/* <img src="images/logo.png" className="logo" /> */}
+                <div className="logo">
+                    winlambo
+                    <img src="images/sports-car.png" alt="sports" />
+                </div>
                 <div className="nav-left">
-                    <TwoTicket tickets={tickets} />
+                    { (active && account) ? <TwoTicket tickets={tickets} />:"" }
+                    
                     <div className="afterlog">
-                        <button className="btn-medium" onClick={!(active && account) ? connectAccount : () => {}}>
-                        <img src="images/metamask.svg" className="meta" />
+                        <button className={(active && account)? "btn-main btn-transparent" : "btn-main btn-black m-0"} onClick={!(active && account) ? connectAccount : () => {}}>
+                        <img src="images/mt.svg" className="meta" />
                             { (active && account) ? shorter(account) : 'Connect'}
                         </button>
                     </div>
