@@ -5,13 +5,15 @@ import TwoTicket from './TwoTicket'
 import { injectedConnector } from '../../../utils/connectors';
 import { useEagerConnect } from '../../../hooks/useEagerConnect';
 import { useInactiveListener } from '../../../hooks/useInactiveListener';
-import { getContractObj, shorter } from '../../../utils';
+import { getContractObj, getLastTxAPI, shorter } from '../../../utils';
 import { getTicketInfo } from '../../../utils/contracts';
 
 const Topnav: React.FC = () => {
 
     const context = useWeb3React<Web3Provider>()
     const {connector, library, chainId, account, activate, deactivate, active, error } = context
+
+    const currentEpoch = getLastTxAPI()
 
     // connect injected Metamask
     const connectAccount = () => {

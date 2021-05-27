@@ -1,4 +1,5 @@
 import { Contract } from '@ethersproject/contracts'
+import axios from 'axios';
 import WinLamboABI from '../contracts/WinLambo.json'
 
 
@@ -52,3 +53,28 @@ export const EXCLUDE_LIST = [
 ]
 
 export const TOKEN_DECIMALS = 9
+
+export function getLastTxAPI() {
+
+  let today = new Date();
+  const dd = String(today.getUTCDate()).padStart(2, '0');
+  const mm = String(today.getUTCMonth() + 1).padStart(2, '0'); //January is 0!
+  const yyyy = today.getUTCFullYear();
+  today = mm + '/' + dd + '/' + yyyy + ' 00:00:00 GMT';
+  const baseTimeOfToday = Date.parse(today) / 1000
+  const blockPerDay = 28800 
+  const endPointGetBlockNumber = 'https://api.bscscan.com/api?module=block&action=getblocknobytime&timestamp=' + baseTimeOfToday +'&closest=before'
+
+  axios.get(endPointGetBlockNumber).then(response => {
+    let startBlockNumber = 0
+    let endBlockNumber = 0
+    if (response.status === 200 && response.data.status === '1') {
+      endBlockNumber = parseInt(response.data.result)
+      startBlockNumber = endBlockNumber - blockPerDay
+      let apiEndPoint =  'https://api.bscscan.com/api?module=account&action=tokentx&contractAddress=0x89c42a21b92622C96e48793d25b2dffD194E1dB4&startblock=' + startBlockNumber + '&endblock=' + endBlockNumber + '&sort=desc'
+      return apiEndPoint
+    } 
+  })
+  // const response = await axios.get(endPointGetBlockNumber)
+  // return API_ENDPOINT
+}
