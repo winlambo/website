@@ -2,7 +2,7 @@ import { BigNumber } from '@ethersproject/bignumber';
 import axios from 'axios';
 import { ethers } from 'ethers';
 import React, { useEffect, useMemo, useState } from 'react';
-import { API_ENDPOINT, EXCLUDE_LIST, getLastTxAPI, TOKEN_DECIMALS } from '../../utils';
+import { API_ENDPOINT, BSC_LAUNCH_TIME, EXCLUDE_LIST, TOKEN_DECIMALS } from '../../utils';
 
 interface ITopAccount {
     address: any,
@@ -13,30 +13,23 @@ const Top: React.FC = () => {
 
     
     const [topAccounts, setTopAccounts] = useState<ITopAccount[]>([])
-    const [topAccountsAPI, setTopAccountsAPI] = useState('')
 
-    let today = new Date();
+    const blockPerDay = 28800 
+    const today = new Date()
     const dd = String(today.getUTCDate()).padStart(2, '0');
     const mm = String(today.getUTCMonth() + 1).padStart(2, '0'); //January is 0!
     const yyyy = today.getUTCFullYear();
     let baseOftoday = mm + '/' + dd + '/' + yyyy + ' 00:00:00 GMT';
     const baseTimeOfToday = Date.parse(baseOftoday) / 1000
-    const blockPerDay = 28800 
-    const endPointGetBlockNumber = 'https://api.bscscan.com/api?module=block&action=getblocknobytime&timestamp=' + baseTimeOfToday +'&closest=before'
-  
-    axios.get(endPointGetBlockNumber).then(response => {
-      if (response.status === 200 && response.data.status === '1') {
-        const endBlockNumber = parseInt(response.data.result)
-        const startBlockNumber = endBlockNumber - blockPerDay
-        const apiEndPoint =  'https://api.bscscan.com/api?module=account&action=tokentx&contractAddress=0x89c42a21b92622C96e48793d25b2dffD194E1dB4&startblock=' + startBlockNumber + '&endblock=' + endBlockNumber + '&sort=desc'
-        setTopAccountsAPI(apiEndPoint)
-      } 
-    })
+    const endBlock = Math.round((baseTimeOfToday - BSC_LAUNCH_TIME.BLOCK_TIMESTEMP) / BSC_LAUNCH_TIME.BLOCK_TIME + BSC_LAUNCH_TIME.BLOCK_HEIGHT);
+    const startBlock = endBlock - blockPerDay
+    const topAccountsAPI = 'https://api.bscscan.com/api?module=account&action=tokentx&contractAddress=0x569bD611fc8A799AF49b18395E0147AdC152934e&startblock=' + startBlock + '&endblock=' + endBlock + '&sort=desc'
 
     useEffect(() => {
         if (topAccountsAPI) { 
             setTimeout(function(){
                 axios.get(topAccountsAPI).then((response) => {
+                    console.info(response)
                     if (response.status === 200) {
                         const holderList = response.data.result
                         if (holderList) {
@@ -93,7 +86,7 @@ const Top: React.FC = () => {
                         }
                     }
                 })
-            }, 3000)
+            }, 10000)
 
         }
     }, [topAccountsAPI])

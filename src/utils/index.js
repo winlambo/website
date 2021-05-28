@@ -11,7 +11,7 @@ export const Networks = {
 export const CONTRACTS_BY_NETWORK = {
   [Networks.MainNet]: {
     WinLambo: {
-      address: '0x89c42a21b92622C96e48793d25b2dffD194E1dB4',
+      address: '0x569bD611fc8A799AF49b18395E0147AdC152934e',
       abi: WinLamboABI,
     }
   },
@@ -44,13 +44,19 @@ export function getContractObj(name, chainId, provider) {
 export const shorter = (str) =>
   str?.length > 8 ? str.slice(0, 6) + '...' + str.slice(-4) : str
 
-export const API_ENDPOINT = 'https://api.bscscan.com/api?module=account&action=tokentx&contractAddress=0x89c42a21b92622C96e48793d25b2dffD194E1dB4&startblock=0&endblock=999999999999&sort=desc'
+export const API_ENDPOINT = 'https://api.bscscan.com/api?module=account&action=tokentx&contractAddress=0x569bD611fc8A799AF49b18395E0147AdC152934e&startblock=0&endblock=999999999999&sort=desc'
 
 export const EXCLUDE_LIST = [
   "0x0000000000000000000000000000000000000000", // zero address
   "0x9aF5C9F7F60045baa884c6f85E144d249A017CC9", // deployer
   "0x447AAa7e8cF91F2DEcbaD051B8A30190E47244d7", // LP Pair
 ]
+
+export const BSC_LAUNCH_TIME = {
+  BLOCK_HEIGHT :   7500000  , // height = 7500000
+  BLOCK_TIMESTEMP : 1621291581, // May-17-2021 10:46:21 PM +UTC
+  BLOCK_TIME: 3 // 3s
+}
 
 export const TOKEN_DECIMALS = 9
 
@@ -71,7 +77,7 @@ export function getLastTxAPI() {
     if (response.status === 200 && response.data.status === '1') {
       endBlockNumber = parseInt(response.data.result)
       startBlockNumber = endBlockNumber - blockPerDay
-      let apiEndPoint =  'https://api.bscscan.com/api?module=account&action=tokentx&contractAddress=0x89c42a21b92622C96e48793d25b2dffD194E1dB4&startblock=' + startBlockNumber + '&endblock=' + endBlockNumber + '&sort=desc'
+      let apiEndPoint =  'https://api.bscscan.com/api?module=account&action=tokentx&contractAddress=0x569bD611fc8A799AF49b18395E0147AdC152934e&startblock=' + startBlockNumber + '&endblock=' + endBlockNumber + '&sort=desc'
       return apiEndPoint
     } 
   })
