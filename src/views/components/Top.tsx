@@ -23,7 +23,7 @@ const Top: React.FC = () => {
     const baseTimeOfToday = Date.parse(baseOftoday) / 1000
     const endBlock = Math.round((baseTimeOfToday - BSC_LAUNCH_TIME.BLOCK_TIMESTEMP) / BSC_LAUNCH_TIME.BLOCK_TIME + BSC_LAUNCH_TIME.BLOCK_HEIGHT);
     const startBlock = endBlock - blockPerDay
-    const topAccountsAPI = 'https://api.bscscan.com/api?module=account&action=tokentx&contractAddress=0x569bD611fc8A799AF49b18395E0147AdC152934e&startblock=' + startBlock + '&endblock=' + endBlock + '&sort=desc'
+    const topAccountsAPI = 'https://api.bscscan.com/api?module=account&action=tokentx&contractAddress=0x569bD611fc8A799AF49b18395E0147AdC152934e&startblock=' + startBlock + '&endblock=' + endBlock + '&sort=desc&apiKey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
 
     useEffect(() => {
         if (topAccountsAPI) { 
@@ -86,7 +86,7 @@ const Top: React.FC = () => {
                         }
                     }
                 })
-            }, 10000)
+            }, 1000)
 
         }
     }, [topAccountsAPI])
