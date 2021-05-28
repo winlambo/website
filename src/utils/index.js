@@ -11,7 +11,7 @@ export const Networks = {
 export const CONTRACTS_BY_NETWORK = {
   [Networks.MainNet]: {
     WinLambo: {
-      address: '0x569bD611fc8A799AF49b18395E0147AdC152934e',
+      address: '0x6a79e08db6c08b8f88703794bf1a47f5a01eb9dc',
       abi: WinLamboABI,
     }
   },
@@ -44,8 +44,6 @@ export function getContractObj(name, chainId, provider) {
 export const shorter = (str) =>
   str?.length > 8 ? str.slice(0, 6) + '...' + str.slice(-4) : str
 
-export const API_ENDPOINT = 'https://api.bscscan.com/api?module=account&action=tokentx&contractAddress=0x569bD611fc8A799AF49b18395E0147AdC152934e&startblock=0&endblock=999999999999&sort=desc'
-
 export const EXCLUDE_LIST = [
   "0x0000000000000000000000000000000000000000", // zero address
   "0x9aF5C9F7F60045baa884c6f85E144d249A017CC9", // deployer
@@ -77,10 +75,8 @@ export function getLastTxAPI() {
     if (response.status === 200 && response.data.status === '1') {
       endBlockNumber = parseInt(response.data.result)
       startBlockNumber = endBlockNumber - blockPerDay
-      let apiEndPoint =  'https://api.bscscan.com/api?module=account&action=tokentx&contractAddress=0x569bD611fc8A799AF49b18395E0147AdC152934e&startblock=' + startBlockNumber + '&endblock=' + endBlockNumber + '&sort=desc'
+      let apiEndPoint =  'https://api.bscscan.com/api?module=account&action=tokentx&contractAddress=0x6a79e08db6c08b8f88703794bf1a47f5a01eb9dc&startblock=' + startBlockNumber + '&endblock=' + endBlockNumber + '&sort=desc'
       return apiEndPoint
     } 
   })
-  // const response = await axios.get(endPointGetBlockNumber)
-  // return API_ENDPOINT
 }
