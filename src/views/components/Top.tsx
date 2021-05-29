@@ -13,6 +13,7 @@ const Top: React.FC = () => {
 
     
     const [topAccounts, setTopAccounts] = useState<ITopAccount[]>([])
+    const [topAccountsAPI, setTopAccountsAPI] = useState('')
 
     const blockPerDay = 28800
     const today = new Date()
@@ -21,9 +22,16 @@ const Top: React.FC = () => {
     const yyyy = today.getUTCFullYear();
     let baseOftoday = mm + '/' + dd + '/' + yyyy + ' 00:00:00 GMT';
     const baseTimeOfToday = Date.parse(baseOftoday) / 1000
-    const endBlock = Math.round((baseTimeOfToday - BSC_LAUNCH_TIME.BLOCK_TIMESTEMP) / BSC_LAUNCH_TIME.BLOCK_TIME + BSC_LAUNCH_TIME.BLOCK_HEIGHT);
-    const startBlock = endBlock - blockPerDay
-    const topAccountsAPI = 'https://api.bscscan.com/api?module=account&action=tokentx&contractAddress=0x6a79e08db6c08b8f88703794bf1a47f5a01eb9dc&startblock=' + startBlock + '&endblock=' + endBlock + '&sort=desc&apiKey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
+    const endPointGetBlockNumber = 'https://api.bscscan.com/api?module=block&action=getblocknobytime&timestamp=' + baseTimeOfToday +'&closest=before&apiKey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
+  
+    axios.get(endPointGetBlockNumber).then(response => {
+      if (response.status === 200 && response.data.status === '1') {
+        const endBlockNumber = parseInt(response.data.result)
+        const startBlockNumber = endBlockNumber - blockPerDay
+        const apiEndPoint =  'https://api.bscscan.com/api?module=account&action=tokentx&contractAddress=0x6a79e08db6c08b8f88703794bf1a47f5a01eb9dc&startblock=' + startBlockNumber + '&endblock=' + endBlockNumber + '&sort=desc&apiKey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
+        setTopAccountsAPI(apiEndPoint)
+      } 
+    })    
 
     useEffect(() => {
         if (topAccountsAPI) { 
