@@ -22,14 +22,25 @@ const Top: React.FC = () => {
     const yyyy = today.getUTCFullYear();
     let baseOftoday = mm + '/' + dd + '/' + yyyy + ' 00:00:00 GMT';
     const baseTimeOfToday = Date.parse(baseOftoday) / 1000
-    const endPointGetBlockNumber = 'https://api.bscscan.com/api?module=block&action=getblocknobytime&timestamp=' + baseTimeOfToday +'&closest=before&apiKey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
+    const baseTimeOfCurrent = Date.parse(today.toString()) / 1000
+    const endPointGetStartBlockNumber = 'https://api.bscscan.com/api?module=block&action=getblocknobytime&timestamp=' + baseTimeOfToday +'&closest=before&apiKey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
+    const endPointGetEndBlockNumber = 'https://api.bscscan.com/api?module=block&action=getblocknobytime&timestamp=' + baseTimeOfCurrent +'&closest=before&apiKey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
   
-    axios.get(endPointGetBlockNumber).then(response => {
+    // get start block number
+    axios.get(endPointGetStartBlockNumber).then(response => {
       if (response.status === 200 && response.data.status === '1') {
-        const endBlockNumber = parseInt(response.data.result)
-        const startBlockNumber = endBlockNumber - blockPerDay
-        const apiEndPoint =  'https://api.bscscan.com/api?module=account&action=tokentx&contractAddress=0x6a79e08db6c08b8f88703794bf1a47f5a01eb9dc&startblock=' + startBlockNumber + '&endblock=' + endBlockNumber + '&sort=desc&apiKey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
-        setTopAccountsAPI(apiEndPoint)
+        const startBlockNumber = parseInt(response.data.result)
+
+        // get end block number
+        axios.get(endPointGetEndBlockNumber).then(secondResponse => {
+          if (secondResponse.status === 200 && secondResponse.data.status === '1') {
+            const endBlockNumber = parseInt(secondResponse.data.result)
+
+            // get top 100 leaders
+            const apiEndPoint =  'https://api.bscscan.com/api?module=account&action=tokentx&contractAddress=0x6a79e08db6c08b8f88703794bf1a47f5a01eb9dc&startblock=' + startBlockNumber + '&endblock=' + endBlockNumber + '&sort=desc&apiKey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
+            setTopAccountsAPI(apiEndPoint)
+          } 
+        })    
       } 
     })    
 
@@ -94,7 +105,7 @@ const Top: React.FC = () => {
                         }
                     }
                 })
-            }, 1000)
+            }, 10000)
 
         }
     }, [topAccountsAPI])
