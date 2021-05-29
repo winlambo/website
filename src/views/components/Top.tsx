@@ -14,7 +14,7 @@ const Top: React.FC = () => {
     
     const [topAccounts, setTopAccounts] = useState<ITopAccount[]>([])
 
-    const blockPerDay = 28800 
+    const blockPerDay = 28800
     const today = new Date()
     const dd = String(today.getUTCDate()).padStart(2, '0');
     const mm = String(today.getUTCMonth() + 1).padStart(2, '0'); //January is 0!

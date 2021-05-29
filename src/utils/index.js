@@ -45,9 +45,12 @@ export const shorter = (str) =>
   str?.length > 8 ? str.slice(0, 6) + '...' + str.slice(-4) : str
 
 export const EXCLUDE_LIST = [
-  "0x0000000000000000000000000000000000000000", // zero address
-  "0x9aF5C9F7F60045baa884c6f85E144d249A017CC9", // deployer
-  "0x447AAa7e8cF91F2DEcbaD051B8A30190E47244d7", // LP Pair
+  "0xc0d9abbac582a5347370035c5d3cb5923e6ed1d0", // deployer
+  "0x0414e30a875a81a892f02265426166f48969456d", // LP Pair
+  "0x6A79E08db6c08b8F88703794bF1a47f5a01eB9dC", // token contract
+  "0xeaed594b5926a7d5fbbc61985390baaf936a6b8d", // unicrypt locker
+  "0x458b14915e651243acf89c05859a22d5cff976a6", // bulksender.app
+  "0x6a79e08db6c08b8f88703794bf1a47f5a01eb9dc", // token contract
 ]
 
 export const BSC_LAUNCH_TIME = {
