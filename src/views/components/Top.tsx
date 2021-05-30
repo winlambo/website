@@ -110,8 +110,6 @@ const Top: React.FC = () => {
 
         }
     }, [topAccountsAPI])
-
-    console.log(topAccounts);
     
     
     const Ranklist = []
