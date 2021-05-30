@@ -52,7 +52,32 @@ const GlobalStyle=createGlobalStyle` * {
 
 /* Scroll Bar Css Ends */
 
+/* sound button pause */
+#sound{
 
+}
+.volmute{
+	position:fixed;
+	right:10px;
+	bottom:10px;
+	width:50px;
+	height:50px;
+	border-radius:50%;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	background:black;
+	border:1px solid #fff;
+	cursor:pointer;
+	i{
+		font-size:20px;
+		color:#fff;
+		position:absolute;
+	}
+}
+.fa-volume-mute{
+	z-index:50
+}
 /*Comman Css*/
 a:hover,
 a:focus,
