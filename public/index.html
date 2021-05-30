@@ -39,6 +39,11 @@
   <link rel="stylesheet" href="https://cdn.rawgit.com/mfd/09b70eb47474836f25a21660282ce0fd/raw/e06a670afcb2b861ed2ac4a1ef752d062ef6b46b/Gilroy.css">
   </head>
   <body>
+    <audio autoplay loop id="sound">
+      <source src="musicbg.mp3" type="audio/mpeg" >
+      <p>Your browser doesn't support HTML5 audio. Here is
+         a <a href="myAudio.mp3">link to the audio</a> instead.</p>
+    </audio>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--
@@ -51,5 +56,14 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+      <div class="volmute" >
+        <i class="fas fa-volume-mute" onclick="muteaudio()"></i>        
+      </div>
+      <script type="text/javascript">
+        function muteaudio(){
+          var snd = document.getElementById("sound");
+          snd.pause();
+        }
+        </script>
   </body>
 </html>
