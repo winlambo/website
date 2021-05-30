@@ -12,8 +12,8 @@ const Mechanics: React.FC = () => {
                             Your tickets are your tokens. The more tokens you have, the more tickets you have, and the higher the chance of winning! <br />
                             To learn more about the technicalities, read our Medium article below.
                             <div className="btn-outer">
-                                <a href="" className="btn-main btn-white">Buy Now<i className="fas fa-mouse-pointer"></i></a>
-                                <a href="" className="btn-main btn-white">Medium</a>
+                                <a href="https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x6a79e08db6c08b8f88703794bf1a47f5a01eb9dc" className="btn-main btn-white">Buy Now<i className="fas fa-mouse-pointer"></i></a>
+                                <a href="https://winlambo.medium.com/" className="btn-main btn-white">Medium</a>
                             </div>
                         </div>
                     </div>
@@ -22,9 +22,8 @@ const Mechanics: React.FC = () => {
                         <div>
                             <div className="mb-3">1 Billion total tokens:</div>
                             <ul className="ml-3">
-                                <li>500M will go to Liquidity.</li>
-                                <li>350M will go to Presale.</li>
-                                <li>150M will be burned as marketing milestones are reached!</li>
+                                <li>650M Circulating.</li>
+                                <li>350M will be burned as marketing milestones are reached!</li>
                             </ul>
 
                             <div className="my-3">Each transaction reflects:</div>
@@ -33,6 +32,7 @@ const Mechanics: React.FC = () => {
                                 <li>4% to Daily Jackpot.</li>
                                 <li>2% to WINLAMBO Hodlers.</li>
                                 <li>2% to Liquidity Pool.</li>
+                                <li>2% to Marketing.</li>
                                 <li>1% to Team.</li>
                             </ul>
                         </div>

@@ -15,9 +15,9 @@ const Volume: React.FC = () => {
                             Winners will be announced on our Telegram! <br /><br />
                             Learn more about the Lambo drawing:
                             <div className="btn-outer">
-                                <a href="" className="btn-main btn-white">Buy Now<i className="fas fa-mouse-pointer"></i></a>
-                                <a href="" className="btn-main btn-white"><i className="fab fa-medium" />Learn More</a>
-                                <a href="" className="btn-main btn-white"><i className="fas fa-paper-plane"></i>Telegram</a>
+                                <a href="https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x6a79e08db6c08b8f88703794bf1a47f5a01eb9dc" className="btn-main btn-white">Buy Now<i className="fas fa-mouse-pointer"></i></a>
+                                <a href="https://winlambo.medium.com/" className="btn-main btn-white"><i className="fab fa-medium" />Learn More</a>
+                                <a href="https://t.me/winlambo_official" className="btn-main btn-white"><i className="fas fa-paper-plane"></i>Telegram</a>
                             </div>
                         </div>
                     </div>
