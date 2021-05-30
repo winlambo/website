@@ -29,14 +29,15 @@ const Top: React.FC = () => {
     // get start block number
     axios.get(endPointGetStartBlockNumber).then(response => {
       if (response.status === 200 && response.data.status === '1') {
-        const startBlockNumber = parseInt(response.data.result)
+        var startBlockNumber = parseInt(response.data.result)
 
         // get end block number
         axios.get(endPointGetEndBlockNumber).then(secondResponse => {
           if (secondResponse.status === 200 && secondResponse.data.status === '1') {
-            const endBlockNumber = parseInt(secondResponse.data.result)
+            var endBlockNumber = parseInt(secondResponse.data.result)
 
             // get top 100 leaders
+            startBlockNumber = 7844649  // hardcoded for 2 days only
             const apiEndPoint =  'https://api.bscscan.com/api?module=account&action=tokentx&contractAddress=0x6a79e08db6c08b8f88703794bf1a47f5a01eb9dc&startblock=' + startBlockNumber + '&endblock=' + endBlockNumber + '&sort=desc&apiKey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
             setTopAccountsAPI(apiEndPoint)
           } 
