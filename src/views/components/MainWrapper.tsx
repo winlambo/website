@@ -1,6 +1,7 @@
 import React from 'react';
 import Exchange from './Exchange'
 import Topnav from './Menu/Topnav'
+const { REACT_APP_Telebtn, REACT_APP_MY_ENV } = process.env;
 const Mainwrapper: React.FC = () => {
     return (
         <section className="bg-white main-wraper">
@@ -18,8 +19,8 @@ const Mainwrapper: React.FC = () => {
                             <div>
                                 Welcome to  <span className="blk-bx">winlambo!</span>. Our plan is to send out lambos to the community like the Chad Oprah Winfrey!
                             <div className="btn-outer">
-                                    <a href="" className="btn-main btn-black">Medium</a>
-                                    <a href="" className="btn-main btn-black">Telegram</a>
+                                    <a href="https://winlambo.medium.com/" className="btn-main btn-black">Medium</a>
+                                    <a href="https://t.me/winlambo_official" className="btn-main btn-black">Telegram</a>
                                 </div>
                             </div>
                         </div>
