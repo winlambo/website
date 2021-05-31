@@ -56,28 +56,12 @@ const GlobalStyle=createGlobalStyle` * {
 #sound{
 
 }
-.volmute{
-	position:fixed;
-	right:10px;
-	bottom:10px;
-	width:50px;
-	height:50px;
-	border-radius:50%;
-	display:flex;
-	justify-content:center;
-	align-items:center;
-	background:black;
-	border:1px solid #fff;
-	cursor:pointer;
-	i{
-		font-size:20px;
-		color:#fff;
-		position:absolute;
-	}
+.volbtn{
+	position:absolute;
+	right:-10%;
+	font-size:22px;
 }
-.fa-volume-mute{
-	z-index:50
-}
+
 /*Comman Css*/
 a:hover,
 a:focus,
@@ -280,6 +264,17 @@ section {
 	display: flex;
 	flex-flow: wrap;
 }
+.btn-auto{
+	width:auto;
+	min-width:45px;
+	padding:10px 7px;
+	i{
+		font-size:16px;
+	}
+	img{
+		height:20px;
+	}
+}
 
 nav {
 	position: absolute;
@@ -310,22 +305,32 @@ nav {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 16px 0;
+	margin: 16px 0;
+	position:relative;
 
 
 }
 
 .logo {
 	//height: 40px;
-	font-family: 'Macchina';
-	font-size:46px;
-	position:relative;
-	line-height: 1;
+	// font-family: 'Macchina';
+	// font-size:46px;
+	// position:relative;
+	// line-height: 1;
+	// img{
+	// 	position:absolute;
+	// 	height: 15px;
+   	// 	top: 9px;
+	// 	left:0;
+	// }
+	position:absolute;
+	left:50%;
+	transform:translateX(-55px);
+	width:100px;
+	top:0;
 	img{
-		position:absolute;
-		height: 15px;
-   		top: 9px;
-		left:0;
+		width:100%;
+		height:auto;
 	}
 }
 
@@ -333,6 +338,20 @@ nav {
 	height: 20px;
 	display: inline;
 	margin-right: 6px;
+}
+.nav-right{
+	width:calc(50% - 100px);
+	display:flex;
+	justify-content:space-between;
+	.valouter{
+		display:flex;
+		flex-direction:column;
+		font-weight: 600;
+		&:nth-child(2){
+			margin:0 20px;
+		}
+		div{font-weight: 600;}
+	}
 }
 
 .nav-left {
@@ -393,6 +412,20 @@ nav {
 	h1 {
 		font-size: 50px;
 		margin: 10px 0 30px;
+		position:relative;
+		.arrow{
+			position:absolute;
+			content:'';
+			width: 0; 
+			height: 0; 
+			right:-10px;
+			border-top: 20px solid transparent;
+			border-bottom: 20px solid transparent; 
+			
+			border-right:20px solid black; 
+			top:50%;
+			transform:translateY(-50%);
+		}
 	}
 }
 
