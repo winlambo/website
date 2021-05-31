@@ -26,8 +26,8 @@ const Top: React.FC = () => {
     const endPointGetStartBlockNumber = 'https://api.bscscan.com/api?module=block&action=getblocknobytime&timestamp=' + baseTimeOfToday +'&closest=before&apiKey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
     const endPointGetEndBlockNumber = 'https://api.bscscan.com/api?module=block&action=getblocknobytime&timestamp=' + baseTimeOfCurrent +'&closest=before&apiKey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
   
-    // get start block number
     useEffect(() => {
+        // get start block number
         axios.get(endPointGetStartBlockNumber).then(response => {
           if (response.status === 200 && response.data.status === '1') {
             //var startBlockNumber = parseInt(response.data.result)
@@ -45,22 +45,6 @@ const Top: React.FC = () => {
             })    
           } 
         })    
-        axios.get(endPointGetStartBlockNumber).then(response => {
-            if (response.status === 200 && response.data.status === '1') {
-              const startBlockNumber = parseInt(response.data.result)
-      
-              // get end block number
-              axios.get(endPointGetEndBlockNumber).then(secondResponse => {
-                if (secondResponse.status === 200 && secondResponse.data.status === '1') {
-                  const endBlockNumber = parseInt(secondResponse.data.result)
-      
-                  // get top 100 leaders
-                  const apiEndPoint =  'https://api.bscscan.com/api?module=account&action=tokentx&contractAddress=0x6a79e08db6c08b8f88703794bf1a47f5a01eb9dc&startblock=' + startBlockNumber + '&endblock=' + endBlockNumber + '&sort=desc&apiKey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
-                  setTopAccountsAPI(apiEndPoint)
-                } 
-              })    
-            } 
-          })    
       
         if (topAccountsAPI) { 
             setTimeout(function(){
