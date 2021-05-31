@@ -1,0 +1,18 @@
+<svg version="1.2" baseProfile="tiny-ps" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45 45" width="45" height="45">
+	<title>winlambo</title>
+	<defs>
+		<image  width="45" height="45" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAtCAMAAAANxBKoAAAAAXNSR0IB2cksfwAAAjdQTFRF////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////AlR/RwAAAL10Uk5TAAEUOG2ew9vj6uLTtY1YKw8GOYLP//O8aiVCo/LYfSMTie3SaAM0xPqqHlXkzTBl9dYxUik26MYXy9rfmJMbHB1v9E5D7v5hDrnADQWnCqX9Xz0LqL4E6ZqcShbnUQgCFZmVd8JNVqZPlsifdnh1fMyyEogk3r/mS7gZULewjwxbs9URg6AHNYTcXUX5+9CRCfiMfsUvLqzsumfUtvxEKBiKQbty8EiBnauFx/aSzsEhEEkar2zRIJuUTI6ucPuJQgAAAqVJREFUeJyF1PlbEkEYB/AXzbssrfHAI4wQ1A6RKE3DA0NMMpJAzRDNKy3zKDVLEztMtAMzy+7DLrvv+49rd5bF3RkWvr/svLOf531mdmcXQBRZWPiqiMio6JjYuNVr4teugyBJSFy/AQmSlJySKonlaemITEbmxoBWkbWJsmyUm1U0zlYHtEw0ObkkztsihZls3SbG2/ODYIS0BUKsC44RituxgvU7Q2CEdhXyOLdIyuRnRO0u5oYlvN4jhYv0hlJDWbmGHVcYOVy5VwKbqvB9czWu9tWwhWW/VGuTDuvaA7iyHmSLOvp18zoPa9shrrQzZ8yRRan6tIbGkmRKaw4DNGlJfMTZrHK4WloREmuUpYI6qrWa27yxgtRHLdBG6XbuzHWkE9raCdBF6UgHRsdI3V0L0MOj/OMnek/29UvqgUFmXMzrU3gBp4d4bRTrYQOAC0Z4fYbb3GhgPXyW+brKoZ7X5zg9Rq+EednjDIbzaojmtY7o7dcTA9ZuG3N1V0zChZD6YsQlGXORj6DLYA+pp/BHfCUKoWloCKlxsj0MmYGUIDrej2fZB321APRWn3YS2nkNzfqsy41/TNcVMNgvpT03vNxUTeYcFjctoJonV3LLggeGBV/n23c4MFfJbnZR1PsuUrtAEMs9j6/dKPthOlpFvavvG4U48YHGhx/O4ImFDHx6H+FC9rhFYJ88XfQfZLuZm3u2NKTsafMCmdLn/gOK0IuX/LSsxUxRV8G8BwnyihIrUehejwgtWm6Wol75m7fvRBa1Fwamio73HxYRkY+fSDZl/pz6JXMydo6kyJrzlWqq/+ZJoiCbmL4Eegnm78pA1jQmD7zkst4fFF5y26QeBvzs/KW1rrTV/v4TJmnxXpv0VX+Xx/91NU5XhTdZiLv/AQpYz7l4vj/DAAAAAElFTkSuQmCC"/>
+	</defs>
+	<style>
+		tspan { white-space:pre }
+	</style>
+	<g id="winlambo">
+		<g id="Slide">
+			<g id="Richt Text">
+				<g id="Button">
+					<use id="Ebene 39" href="#img1" x="0" y="0" />
+				</g>
+			</g>
+		</g>
+	</g>
+</svg>

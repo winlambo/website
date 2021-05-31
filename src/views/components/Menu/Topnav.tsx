@@ -8,7 +8,37 @@ import { useInactiveListener } from '../../../hooks/useInactiveListener';
 import { getContractObj, shorter } from '../../../utils';
 import { getTicketInfo } from '../../../utils/contracts';
 
+
+// const useAudio = () => {
+    
+  
+//     return [playing, toggle];
+//   };
+
+
 const Topnav: React.FC = () => {
+
+    // for bg audio start
+    const [audio] = useState(new Audio('/musicbg.mp3'));
+    const [playing, setPlaying] = useState(true);
+  
+    const toggle = () => setPlaying(!playing);
+  
+    useEffect(() => {
+        playing ? audio.play() : audio.pause();
+      },
+      [playing]
+    );
+  
+    useEffect(() => {
+      audio.addEventListener('ended', () => setPlaying(false));
+      return () => {
+        audio.removeEventListener('ended', () => setPlaying(false));
+      };
+    }, []);
+    // bg audio ended
+
+
 
     const context = useWeb3React<Web3Provider>()
     const {connector, library, chainId, account, activate, deactivate, active, error } = context
@@ -50,9 +80,11 @@ const Topnav: React.FC = () => {
 
     }, [account, chainId, library])
 
+    
     return (
         <nav className="container">
             <div className="nav-main">
+                 
                 {/* <img src="images/logo.png" className="logo" /> */}
                 <div className="nav-right">
                  
@@ -88,11 +120,17 @@ const Topnav: React.FC = () => {
                     <div className="afterlog">
                         <button className={(active && account)? "btn-main btn-transparent" : "btn-main btn-black m-0"} onClick={!(active && account) ? connectAccount : () => {}}>
                         <img src="images/mt.svg" className="meta" />
-                            { (active && account) ? shorter(account) : 'Connect'}
+                            { (active && account) ? <div>{shorter(account)}<div style={{fontWeight:400}}>12% win chance</div></div>: 'Connect'}
                         </button>
                     </div>
                 </div>
+                <i className={playing ?"volbtn fas fa-volume-mute":"volbtn fas fa-volume-up"} onClick={toggle}></i>   
             </div>
+            <audio id="sound">
+                <source src="/musicbg.mp3" type="audio/mpeg" />
+                <p>Your browser doesn't support HTML5 audio. Here is
+                    a <a href="myAudio.mp3">link to the audio</a> instead.</p>
+            </audio>
         </nav>
     );
 }
