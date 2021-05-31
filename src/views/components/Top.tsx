@@ -30,8 +30,7 @@ const Top: React.FC = () => {
         // get start block number
         axios.get(endPointGetStartBlockNumber).then(response => {
           if (response.status === 200 && response.data.status === '1') {
-            //var startBlockNumber = parseInt(response.data.result)
-            var startBlockNumber = 7844649  // hardcoded for 2 days only
+            var startBlockNumber = parseInt(response.data.result)
 
             // get end block number
             axios.get(endPointGetEndBlockNumber).then(secondResponse => {
