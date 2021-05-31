@@ -28,8 +28,8 @@ const Volume: React.FC = () => {
                                 We plan on pumping out Lambos by incentivizing volume with a Daily Jackpot! The Daily jackpot will be distributed to winners in 2 ways:
                             </div>
                             <ul className="my-3 ml-3">
-                                <li>70% will go to the top 3 users in terms of volume for that day.</li>
-                                <li>30% will go to 6 lucky users.</li>
+                                <li>30% will go to the top 3 users in terms of volume for that day.</li>
++                               <li>70% will go to 7 lucky users.</li>
                             </ul>
 
                             <div>
