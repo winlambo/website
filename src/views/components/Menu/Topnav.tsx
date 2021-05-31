@@ -54,9 +54,33 @@ const Topnav: React.FC = () => {
         <nav className="container">
             <div className="nav-main">
                 {/* <img src="images/logo.png" className="logo" /> */}
+                <div className="nav-right">
+                 
+                        <div className="valouter">
+                            <div>
+                                <span style={{"color":"#1aa351"}}>$</span>
+                                WINLAMBO:
+                            </div>
+                            0,0015123$
+                        </div>
+                        <div className="valouter">
+                            <div>
+                                <span style={{"color":"#1aa351"}}>$</span>
+                                LAMBOFUND:
+                            </div>
+                            0,0015123$
+                        </div>
+                        <div className="valouter">
+                            <div>
+                                <span style={{"color":"#1aa351"}}>$</span>
+                                DAILYFUND:
+                            </div>
+                            0,0015123$
+                        </div>
+
+                </div>
                 <div className="logo">
-                    winlambo
-                    <img src="images/sports-car.png" alt="sports" />
+                    <img src="images/logon.png" alt="sports" />
                 </div>
                 <div className="nav-left">
                     { (active && account) ? <TwoTicket tickets={tickets} />:"" }

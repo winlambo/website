@@ -310,29 +310,49 @@ nav {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 16px 0;
+	margin: 16px 0;
+	position:relative;
 
 
 }
 
 .logo {
 	//height: 40px;
-	font-family: 'Macchina';
-	font-size:46px;
-	position:relative;
-	line-height: 1;
-	img{
-		position:absolute;
-		height: 15px;
-   		top: 9px;
-		left:0;
-	}
+	// font-family: 'Macchina';
+	// font-size:46px;
+	// position:relative;
+	// line-height: 1;
+	// img{
+	// 	position:absolute;
+	// 	height: 15px;
+   	// 	top: 9px;
+	// 	left:0;
+	// }
+	position:absolute;
+	left:50%;
+	transform:translateX(-50%);
+	height:70px;
+	top:0;
 }
 
 .meta {
 	height: 20px;
 	display: inline;
 	margin-right: 6px;
+}
+.nav-right{
+	width:calc(50% - 100px);
+	display:flex;
+	justify-content:space-between;
+	.valouter{
+		display:flex;
+		flex-direction:column;
+		font-weight: 800;
+		&:nth-child(2){
+			margin:0 20px;
+		}
+		div{font-weight: 800;}
+	}
 }
 
 .nav-left {
