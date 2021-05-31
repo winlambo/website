@@ -20,7 +20,7 @@ const Top: React.FC = () => {
     const dd = String(today.getUTCDate()).padStart(2, '0');
     const mm = String(today.getUTCMonth() + 1).padStart(2, '0'); //January is 0!
     const yyyy = today.getUTCFullYear();
-    let baseOftoday = mm + '/' + dd + '/' + yyyy + ' 00:00:00 GMT';
+    let baseOftoday = mm + '/' + dd + '/' + yyyy + ' 16:00:00 GMT';
     const baseTimeOfToday = Date.parse(baseOftoday) / 1000
     const baseTimeOfCurrent = Date.parse(today.toString()) / 1000
     const endPointGetStartBlockNumber = 'https://api.bscscan.com/api?module=block&action=getblocknobytime&timestamp=' + baseTimeOfToday +'&closest=before&apiKey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
