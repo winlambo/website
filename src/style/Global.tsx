@@ -311,19 +311,22 @@ nav {
 	align-items: center;
 	justify-content: space-between;
 	padding: 16px 0;
+	margin-top:10px;
 
 
 }
 
 .logo {
 	//height: 40px;
-	font-family: 'Macchina';
-	font-size:46px;
-	position:relative;
-	line-height: 1;
+	// font-family: 'Macchina';
+	// font-size:46px;
+	// position:relative;
+	// line-height: 1;
+	position:absolute;
+	left:50%;
+	transform:translateX(-50%);
 	img{
-		position:absolute;
-		height: 15px;
+		height:60px;
    		top: 9px;
 		left:0;
 	}
@@ -340,6 +343,21 @@ nav {
 	display: flex;
 	justify-content: flex-end;
 	align-items: center
+}
+.nav-right {
+	display:flex;
+	justify-content:space-between;
+	width:calc(50% - 100px);
+	.valouter{
+		display:flex;
+		flex-direction:column;
+		&:nth-child(2){
+			margin:0 20px;
+		}
+	}
+	div{
+		font-weight:700;
+	}
 }
 
 .ticketrotatorouter{
