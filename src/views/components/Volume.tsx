@@ -29,7 +29,7 @@ const Volume: React.FC = () => {
                             </div>
                             <ul className="my-3 ml-3">
                                 <li>30% will go to the top 3 users in terms of volume for that day.</li>
-+                               <li>70% will go to 7 lucky users.</li>
+                                <li>70% will go to 7 lucky users.</li>
                             </ul>
 
                             <div>
