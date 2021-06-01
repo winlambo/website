@@ -113,7 +113,7 @@ const Topnav: React.FC = () => {
 
                 </div>
                 <div className="logo">
-                    <img src="images/logon.png" alt="sports" />
+                    <img src="images/logon.svg" alt="sports" />
                 </div>
                 <div className="nav-left">
                     { (active && account) ? <TwoTicket tickets={tickets} />:"" }

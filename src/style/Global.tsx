@@ -254,7 +254,7 @@ section {
 }
 
 .bg-black {
-	background: #000;
+	background-color: #000;
 	color: #fff;
 	padding: 20vh 0;
 }
@@ -291,6 +291,7 @@ nav {
 	padding: 10px 0;
 
 	.logo {
+		position:static;
 		height: 30px;
 		width: auto;
 	}
@@ -418,7 +419,7 @@ nav {
 			content:'';
 			width: 0; 
 			height: 0; 
-			right:-10px;
+			right:-6px;
 			border-top: 20px solid transparent;
 			border-bottom: 20px solid transparent; 
 			
@@ -438,13 +439,22 @@ nav {
 .maincol2 {
 	display: flex;
 	align-items: center;
-	background: url(../images/lambo.png) center center no-repeat, url(../images/bggradient.png) center center repeat;
-	background-size: 100%, cover;
+	background: url(../images/bggradient.png) center center repeat;
+	background-size:  cover;
 	position: absolute;
 	min-height: 100vh;
 	height: 100%;
 	width: 50vw;
 	right: 0;
+	img{
+		width:90%;
+		display:block;
+		margin:auto;
+	}
+	.carousel-inner{
+		display: flex;
+		align-items: center;
+	}
 }
 
 .excig {
@@ -500,6 +510,79 @@ nav {
 }
 
 
+
+/* volume section */
+.chad-bg{
+	background: url(/images/chadr.png) 102% bottom no-repeat, url(/images/chadl.png) -2% bottom no-repeat;
+		background-size: auto 400px,auto 400px;
+	position:relative;
+	padding: 5vh 0 20vh;
+	&:before{
+		position:absolute;
+		content:"";
+		background:#000;
+		height:100%;
+		width:100%;
+		top:0;
+		z-index:-1
+	}
+	.chadheading{
+		font-size:40px;
+		line-height: 38px;
+		font-weight:700;
+		display:flex;
+		text-align:right;
+		margin-bottom:60px;
+		.chadheadingoter{
+			margin:auto;
+		}
+		.chadchadbg{
+			color:#444444;
+			display:flex;
+			justify-content: flex-end;	
+			font-weight: 700;
+			span{
+				margin-left:10px;
+				position:relative;
+				top:-4px;
+				font-weight: 700;				
+			}	
+			&.chadbottom{
+				position:relative;
+				right:-30px;
+			}
+		}
+	}
+	.chadcols{
+		padding:0 20px 100px;
+		div{
+			color:#feffff;	
+			font-weight:300;
+		}
+		h1{
+			font-size:28px;
+		}
+	}
+
+	.chadcol1{
+		background:url(/images/col1.png);
+		background-size: 75%;
+		background-repeat: no-repeat;
+		background-position: center bottom;
+	}
+	.chadcol2{
+		background:url(/images/col2.png);
+		background-size: 75%;
+		background-repeat: no-repeat;
+		background-position: center bottom;
+	}
+	.chadcol3{
+		background:url(/images/col3.png);
+		background-size: 75%;
+		background-repeat: no-repeat;
+		background-position: center bottom;
+	}
+}
 
 
 

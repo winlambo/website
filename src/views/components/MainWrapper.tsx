@@ -7,7 +7,19 @@ const Mainwrapper: React.FC = () => {
         <section className="bg-white main-wraper">
             <Topnav />
 
-            <div className="maincol2"></div>
+            <div className="maincol2">
+                {/* <img src="images/lambo.png" alt="" /> */}
+                <div className="carousel slide" data-ride="carousel" data-interval="2400">
+                    <div className="carousel-inner">
+                        <div className="carousel-item active">
+                            <img src="images/lambo.png" alt="" />
+                        </div>
+                        <div className="carousel-item">
+                        <img src="images/lambo2.png" alt="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div className="container">
                 <div className="row">
                     <div className="col-md-6">
