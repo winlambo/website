@@ -58,3 +58,7 @@ export function getERC20Contract(address, provider) {
 
 export const shorter = (str) =>
   str?.length > 8 ? str.slice(0, 6) + '...' + str.slice(-4) : str
+
+export const LAMBO_FUND_ADDRESS = '0x8dA5e332A088779be241C79B8ffe53003E4529A2'
+export const DAILY_FUND_ADDRESS = '0xb61ED72A55fF87A2b731E8d247555c1eE499a56A'
+export const TOTAL_SUPPLY = 650000000

@@ -5,8 +5,8 @@ import TwoTicket from './TwoTicket'
 import { injectedConnector } from '../../../utils/connectors';
 import { useEagerConnect } from '../../../hooks/useEagerConnect';
 import { useInactiveListener } from '../../../hooks/useInactiveListener';
-import { getContractObj, shorter } from '../../../utils';
-import { getTicketInfo, getViolaPrice } from '../../../utils/contracts';
+import { getContractObj, shorter, TOTAL_SUPPLY } from '../../../utils';
+import { getDailyFund, getLamboFund, getTicketInfo, getViolaPrice } from '../../../utils/contracts';
 
 
 
@@ -56,6 +56,9 @@ const Topnav: React.FC = () => {
     const [balance, setBalance] = useState(null)
     const [tickets, setTickets] = useState([])
     const [nativeTokenPrice, setNativeTokenPrice] = useState(0);
+    const [lamboFundAmount, setLamboFundAmount] = useState(0);
+    const [dailyFundAmount, setDailyFundAmount] = useState(0);
+    const [ticketAmount, setTicketAmount] = useState(0);
     useEffect(() => {
         getViolaPrice(chainId, library?.getSigner()).then((violaPrice) => {
             setNativeTokenPrice(violaPrice)
@@ -65,11 +68,32 @@ const Topnav: React.FC = () => {
     }, [chainId, library])
 
     useEffect(() => {
+        getLamboFund(chainId, library?.getSigner()).then((busdAmount) => {
+            setLamboFundAmount(busdAmount)
+        }).catch(e => {
+            setLamboFundAmount(0)
+        })
+    }, [chainId, library])
+
+    useEffect(() => {
+        getDailyFund(chainId, library?.getSigner()).then((busdAmount) => {
+            setDailyFundAmount(busdAmount)
+        }).catch(e => {
+            setDailyFundAmount(0)
+        })
+    }, [chainId, library])    
+
+    useEffect(() => {
         if (!!account && !!library) {
             const WinLamboContract = getContractObj('WinLambo', chainId, library.getSigner())
             if (WinLamboContract) {
                 getTicketInfo(chainId, account, library).then((tickets) => {
                     setTickets(tickets)
+                    let sum = 0
+                    for (let idx = 0; idx < tickets.length; idx++) {
+                        sum += tickets[idx][1].toNumber() - tickets[idx][0].toNumber() + 1
+                    }
+                    setTicketAmount(sum)
                 }).catch(e => {
                     setTickets([])
                 })
@@ -101,14 +125,14 @@ const Topnav: React.FC = () => {
                                 <span style={{"color":"#1aa351"}}>$</span>
                                 LAMBOFUND:
                             </div>
-                            0,0015123$
+                            {lamboFundAmount}$
                         </div>
                         <div className="valouter">
                             <div>
                                 <span style={{"color":"#1aa351"}}>$</span>
                                 DAILYFUND:
                             </div>
-                            0,0015123$
+                            {dailyFundAmount}$
                         </div>
 
                 </div>
@@ -121,7 +145,7 @@ const Topnav: React.FC = () => {
                     <div className="afterlog">
                         <button className={(active && account)? "btn-main btn-transparent" : "btn-main btn-black m-0"} onClick={!(active && account) ? connectAccount : () => {}}>
                         <img src="images/mt.svg" className="meta" />
-                            { (active && account) ? <div>{shorter(account)}<div style={{fontWeight:400}}>12% win chance</div></div>: 'Connect'}
+                            { (active && account) ? <div>{shorter(account)}<div style={{fontWeight:400}}>{(ticketAmount * 100 / TOTAL_SUPPLY).toFixed(2)}% win chance</div></div>: 'Connect'}
                         </button>
                     </div>
                 </div>

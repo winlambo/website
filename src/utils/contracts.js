@@ -1,7 +1,8 @@
 import { BigNumber, ethers } from "ethers";
-import { getContractObj, getERC20Contract } from ".";
+import { getContractObj, getERC20Contract, LAMBO_FUND_ADDRESS, DAILY_FUND_ADDRESS } from ".";
 import PairConfig, { QuoteToken } from "./types"
 import Pairs from "./pairs"
+import tokens from './tokens'
 
 export async function getTicketInfo(chainId, account, provider) {
     const winlamboContract = getContractObj('WinLambo', chainId, provider)
@@ -59,8 +60,33 @@ export async function getBnbToBusdPrice(chainId, provider) {
         return quoteTokenAmount.div(tokenAmount)
     } catch (e) {
         console.error(e)
-        return new BigNumber(0)
+        return BigNumber.from(0)
     }
+}
 
+export async function getLamboFund(chainId, provider) {
+    const tokenAddress = tokens.busd[chainId]
+    const tokenContract = getERC20Contract(tokenAddress, provider)
+    try {
+        const tokenAmount = await tokenContract.balanceOf(LAMBO_FUND_ADDRESS)
+        const ret = tokenAmount.mul(BigNumber.from(10).pow(2)).div(BigNumber.from(10).pow(18))
+        return ret.toNumber() / 1e2
+    } catch (e) {
+        console.error(e)
+        return 0
+    }
+}
+
+export async function getDailyFund(chainId, provider) {
+    const tokenAddress = tokens.busd[chainId]
+    const tokenContract = getERC20Contract(tokenAddress, provider)
+    try {
+        const tokenAmount = await tokenContract.balanceOf(DAILY_FUND_ADDRESS)
+        const ret = tokenAmount.mul(BigNumber.from(10).pow(2)).div(BigNumber.from(10).pow(18))
+        return ret.toNumber() / 1e2
+    } catch (e) {
+        console.error(e)
+        return 0
+    }
 }
 
