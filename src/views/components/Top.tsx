@@ -17,6 +17,9 @@ const Top: React.FC = () => {
     // set the start time to 16:00 UTC in local time
     const startTime = new Date();
     startTime.setUTCHours(16);
+    startTime.setUTCMinutes(0);
+    startTime.setUTCSeconds(0);
+    startTime.setUTCMilliseconds(0);
 
     // the end time is now
     const endTime = new Date();
@@ -27,11 +30,7 @@ const Top: React.FC = () => {
     }
 
     // get the start and end times in seconds since epoch
-    const dd = String(startTime.getDate()).padStart(2, '0');
-    const mm = String(startTime.getMonth() + 1).padStart(2, '0'); //January is 0!
-    const yyyy = startTime.getFullYear();
-    let baseOfStart = mm + '/' + dd + '/' + yyyy + ' 16:00:00 GMT';
-    const baseTimeOfStart = Date.parse(baseOfStart) / 1000
+    const baseTimeOfStart = Date.parse(startTime.toString()) / 1000
     const baseTimeOfCurrent = Date.parse(endTime.toString()) / 1000
 
     // build the API requests for the start and end blocks
