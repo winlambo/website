@@ -419,7 +419,7 @@ nav {
 			content:'';
 			width: 0; 
 			height: 0; 
-			right:-10px;
+			right:-6px;
 			border-top: 20px solid transparent;
 			border-bottom: 20px solid transparent; 
 			
@@ -439,13 +439,22 @@ nav {
 .maincol2 {
 	display: flex;
 	align-items: center;
-	background: url(../images/lambo.png) center center no-repeat, url(../images/bggradient.png) center center repeat;
-	background-size: 100%, cover;
+	background: url(../images/bggradient.png) center center repeat;
+	background-size:  cover;
 	position: absolute;
 	min-height: 100vh;
 	height: 100%;
 	width: 50vw;
 	right: 0;
+	img{
+		width:90%;
+		display:block;
+		margin:auto;
+	}
+	.carousel-inner{
+		display: flex;
+		align-items: center;
+	}
 }
 
 .excig {
@@ -505,7 +514,7 @@ nav {
 /* volume section */
 .chad-bg{
 	background: url(/images/chadr.png) 102% bottom no-repeat, url(/images/chadl.png) -2% bottom no-repeat;
-		background-size: auto 50%,auto 50%;
+		background-size: auto 400px,auto 400px;
 	position:relative;
 	padding: 5vh 0 20vh;
 	&:before{
