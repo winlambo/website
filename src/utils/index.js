@@ -1,6 +1,9 @@
 import { Contract } from '@ethersproject/contracts'
 import axios from 'axios';
 import WinLamboABI from '../contracts/WinLambo.json'
+import MulticallABI from '../contracts/Multicall.json'
+import ERC20ABI from '../contracts/erc20.json'
+import tokens from './tokens'
 
 
 export const Networks = {
@@ -13,13 +16,21 @@ export const CONTRACTS_BY_NETWORK = {
     WinLambo: {
       address: '0x6a79e08db6c08b8f88703794bf1a47f5a01eb9dc',
       abi: WinLamboABI,
+    },
+    Multicall: {
+      address: '0x1ee38d535d541c55c9dae27b12edf090c608e6fb',
+      abi: MulticallABI
     }
   },
   [Networks.Testnet]: {
     WinLambo: {
       address: '',
       abi: WinLamboABI,
-    }
+    },
+    Multicall: {
+      address: '0x67ADCB4dF3931b0C5Da724058ADC2174a9844412',
+      abi: MulticallABI
+    } 
   },
 }
 
@@ -41,45 +52,9 @@ export function getContractObj(name, chainId, provider) {
   return !!info && new Contract(info.address, info.abi, provider);
 }
 
+export function getERC20Contract(address, provider) {
+  return new Contract(address, ERC20ABI, provider)
+}
+
 export const shorter = (str) =>
   str?.length > 8 ? str.slice(0, 6) + '...' + str.slice(-4) : str
-
-export const EXCLUDE_LIST = [
-  "0xc0d9abbac582a5347370035c5d3cb5923e6ed1d0", // deployer
-  "0x0414e30a875a81a892f02265426166f48969456d", // LP Pair
-  "0x6A79E08db6c08b8F88703794bF1a47f5a01eB9dC", // token contract
-  "0xeaed594b5926a7d5fbbc61985390baaf936a6b8d", // unicrypt locker
-  "0x458b14915e651243acf89c05859a22d5cff976a6", // bulksender.app
-  "0x6a79e08db6c08b8f88703794bf1a47f5a01eb9dc", // token contract
-]
-
-export const BSC_LAUNCH_TIME = {
-  BLOCK_HEIGHT :   7500000  , // height = 7500000
-  BLOCK_TIMESTEMP : 1621291581, // May-17-2021 10:46:21 PM +UTC
-  BLOCK_TIME: 3 // 3s
-}
-
-export const TOKEN_DECIMALS = 9
-
-export function getLastTxAPI() {
-
-  let today = new Date();
-  const dd = String(today.getUTCDate()).padStart(2, '0');
-  const mm = String(today.getUTCMonth() + 1).padStart(2, '0'); //January is 0!
-  const yyyy = today.getUTCFullYear();
-  today = mm + '/' + dd + '/' + yyyy + ' 00:00:00 GMT';
-  const baseTimeOfToday = Date.parse(today) / 1000
-  const blockPerDay = 28800 
-  const endPointGetBlockNumber = 'https://api.bscscan.com/api?module=block&action=getblocknobytime&timestamp=' + baseTimeOfToday +'&closest=before'
-
-  axios.get(endPointGetBlockNumber).then(response => {
-    let startBlockNumber = 0
-    let endBlockNumber = 0
-    if (response.status === 200 && response.data.status === '1') {
-      endBlockNumber = parseInt(response.data.result)
-      startBlockNumber = endBlockNumber - blockPerDay
-      let apiEndPoint =  'https://api.bscscan.com/api?module=account&action=tokentx&contractAddress=0x6a79e08db6c08b8f88703794bf1a47f5a01eb9dc&startblock=' + startBlockNumber + '&endblock=' + endBlockNumber + '&sort=desc'
-      return apiEndPoint
-    } 
-  })
-}

@@ -2,7 +2,7 @@ import { BigNumber } from '@ethersproject/bignumber';
 import axios from 'axios';
 import { ethers } from 'ethers';
 import React, { useEffect, useMemo, useState } from 'react';
-import { BSC_LAUNCH_TIME, EXCLUDE_LIST, TOKEN_DECIMALS } from '../../utils';
+import { BSC_LAUNCH_TIME, EXCLUDE_LIST, TOKEN_DECIMALS } from '../../utils/constants';
 
 interface ITopAccount {
     address: any,

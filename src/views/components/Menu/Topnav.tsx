@@ -6,14 +6,8 @@ import { injectedConnector } from '../../../utils/connectors';
 import { useEagerConnect } from '../../../hooks/useEagerConnect';
 import { useInactiveListener } from '../../../hooks/useInactiveListener';
 import { getContractObj, shorter } from '../../../utils';
-import { getTicketInfo } from '../../../utils/contracts';
+import { getTicketInfo, getViolaPrice } from '../../../utils/contracts';
 
-
-// const useAudio = () => {
-    
-  
-//     return [playing, toggle];
-//   };
 
 
 const Topnav: React.FC = () => {
@@ -21,7 +15,7 @@ const Topnav: React.FC = () => {
     // for bg audio start
     const [audio] = useState(new Audio('/musicbg.mp3'));
     const [playing, setPlaying] = useState(true);
-  
+
     const toggle = () => setPlaying(!playing);
   
     useEffect(() => {
@@ -38,8 +32,7 @@ const Topnav: React.FC = () => {
     }, []);
     // bg audio ended
 
-
-
+    
     const context = useWeb3React<Web3Provider>()
     const {connector, library, chainId, account, activate, deactivate, active, error } = context
 
@@ -62,6 +55,14 @@ const Topnav: React.FC = () => {
     
     const [balance, setBalance] = useState(null)
     const [tickets, setTickets] = useState([])
+    const [nativeTokenPrice, setNativeTokenPrice] = useState(0);
+    useEffect(() => {
+        getViolaPrice(chainId, library?.getSigner()).then((violaPrice) => {
+            setNativeTokenPrice(violaPrice)
+        }).catch(e => {
+            setNativeTokenPrice(0)
+        })
+    }, [chainId, library])
 
     useEffect(() => {
         if (!!account && !!library) {
@@ -93,7 +94,7 @@ const Topnav: React.FC = () => {
                                 <span style={{"color":"#1aa351"}}>$</span>
                                 WINLAMBO:
                             </div>
-                            0,0015123$
+                            {nativeTokenPrice}$
                         </div>
                         <div className="valouter">
                             <div>
