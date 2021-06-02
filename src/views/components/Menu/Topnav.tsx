@@ -107,7 +107,7 @@ const Topnav: React.FC = () => {
 
     
     return (
-        <nav className="container">
+        <nav className="navcontainer">
             <div className="nav-main">
                  
                 {/* <img src="images/logo.png" className="logo" /> */}
@@ -115,24 +115,21 @@ const Topnav: React.FC = () => {
                  
                         <div className="valouter">
                             <div>
-                                <span style={{"color":"#1aa351"}}>$</span>
-                                WINLAMBO:
+                                WINLAMBO
                             </div>
-                            {nativeTokenPrice}$
+                            <div><span style={{"color":"#1aa351"}}>$</span>{nativeTokenPrice}</div>
                         </div>
                         <div className="valouter">
                             <div>
-                                <span style={{"color":"#1aa351"}}>$</span>
-                                LAMBOFUND:
+                                LAMBOFUND
                             </div>
-                            {lamboFundAmount}$
+                            <div><span style={{"color":"#1aa351"}}>$</span>{lamboFundAmount}</div>
                         </div>
                         <div className="valouter">
                             <div>
-                                <span style={{"color":"#1aa351"}}>$</span>
-                                DAILYFUND:
+                                DAILYFUND
                             </div>
-                            {dailyFundAmount}$
+                            <div><span style={{"color":"#1aa351"}}>$</span>{dailyFundAmount}</div>
                         </div>
 
                 </div>

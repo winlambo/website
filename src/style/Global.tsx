@@ -58,7 +58,7 @@ const GlobalStyle=createGlobalStyle` * {
 }
 .volbtn{
 	position:absolute;
-	right:-10%;
+	right:-5%;
 	font-size:22px;
 }
 
@@ -244,6 +244,7 @@ section {
 	cursor:auto !important;
 	padding:6px;
 	margin:0;
+	padding-bottom: 0;
 }
 .btn-transparent:hover{
 	transform:scale(1)
@@ -291,7 +292,7 @@ nav {
 	padding: 10px 0;
 
 	.logo {
-		position:static;
+		position:relative;
 		height: 30px;
 		width: auto;
 	}
@@ -340,18 +341,23 @@ nav {
 	display: inline;
 	margin-right: 6px;
 }
+.navcontainer{
+	width: 85vw;
+    margin: auto;	
+}
 .nav-right{
 	width:calc(50% - 100px);
 	display:flex;
 	justify-content:space-between;
 	.valouter{
 		display:flex;
-		flex-direction:column;
+		flex-direction:row;
 		font-weight: 600;
 		&:nth-child(2){
 			margin:0 20px;
 		}
 		div{font-weight: 600;}
+		span{padding:0 0px 0 6px }
 	}
 }
 
@@ -419,7 +425,7 @@ nav {
 			content:'';
 			width: 0; 
 			height: 0; 
-			right:-6px;
+			right:-10px;
 			border-top: 20px solid transparent;
 			border-bottom: 20px solid transparent; 
 			
@@ -427,6 +433,10 @@ nav {
 			top:50%;
 			transform:translateY(-50%);
 		}
+	}
+	.info{
+		color: #030303;
+		font-weight: 300;
 	}
 }
 
@@ -513,7 +523,7 @@ nav {
 
 /* volume section */
 .chad-bg{
-	background: url(/images/chadr.png) 102% bottom no-repeat, url(/images/chadl.png) -2% bottom no-repeat;
+	background: url(/images/chadr.png) 102% bottom no-repeat, url(/images/chadl.png) 0% bottom no-repeat;
 		background-size: auto 400px,auto 400px;
 	position:relative;
 	padding: 5vh 0 20vh;
@@ -586,25 +596,67 @@ nav {
 
 
 
-@media(min-width:1024px) and (max-width:1200px) {
-	.nav-left {
-		width: 70%;
+@media(min-width:1260px) and (max-width:1400px) {
+	.navcontainer{
+		width: 90vw;
+		margin: auto;	
+		.volbtn{
+			right:-40px;
+		}
 	}
 }
 
-@media(min-width:992px) and (max-width:1024px) {
+@media(min-width:1024px) and (max-width:1260px) {
+	.navcontainer{
+		width: 90vw;
+		margin: auto;	
+		.volbtn{
+			right:-20px;
+		}
+	}
 	.nav-left {
-		width: 70%;
+		flex-direction:column;
+	}
+	.nav-right .valouter{
+		flex-direction:column;
 	}
 }
 
-@media(min-width:768px) and (max-width:992px) {
+@media(min-width:862px) and (max-width:1024px) {
+	.navcontainer{
+		width: 90vw;
+		margin: auto;	
+		.volbtn{
+			right:-20px;
+		}
+	}
 	.nav-left {
-		width: 66%;
+		flex-direction:column;
+	}
+	.nav-right .valouter{
+		flex-direction:column;
 	}
 }
 
-@media(min-width:576px) and (max-width:768px) {
+
+
+@media(min-width:576px) and (max-width:862px) {
+	.logo{
+		position:relative;
+		order:1;
+		transform: translateX(-50vw);
+		left:50vw;
+		margin-bottom:20px;
+	}
+	.nav-right{
+		order:2;
+		width:100%;
+		max-width:600px;
+		margin-bottom:10px;
+		.valouter{
+			flex-direction:row;
+		}
+	}
 	.maincol2 {
 		width: 100vw;
 	}
@@ -620,10 +672,18 @@ nav {
 	.main-wraper {
 		background: url(../images/lambo.png) center center no-repeat, url(../images/bggradient.png) center center no-repeat;
 		background-size: 80%, 100% 100%;
+		.container{
+			.col-md-6{
+				width:100%;
+				max-width:unset;
+				flex:unset;
+			}
+		}
 
 		.row {
-			padding-top: 180px;
+			padding-top: 220px;
 		}
+		
 	}
 
 	.exchangebx {
@@ -639,7 +699,9 @@ nav {
 
 		.nav-left {
 			width: 100%;
-			flex-direction: column;
+			flex-direction: row;
+			order:3;
+			justify-content: center;
 
 			.ticket-bx {
 				margin: 20px 0;
@@ -647,9 +709,51 @@ nav {
 			}
 		}
 	}
+
+	.chad-bg {
+		padding-bottom:100px;
+		background-size: auto 220px,auto 220px;
+		.container{
+			.col-md-4{
+				width:100%;
+				max-width:unset;
+				flex:unset;
+			}
+		}
+		.chadcols{
+			background-size:200px;
+			padding-bottom: 80px;
+			margin-bottom: 50px;
+		}
+		.chadheading{
+			font-size:29px;
+			line-height: 30px;
+		}
+		.chadcols h1{
+			font-size:20px !important;
+			margin-bottom:14px;
+		}
+	}
 }
 
 @media(min-width:448px) and (max-width:576px) {
+	.logo{
+		position:relative;
+		order:1;
+		transform: translateX(-50vw);
+		left:50vw;
+		margin-bottom:20px;
+	}
+	.nav-right{
+		order:2;
+		width:100%;
+		max-width:600px;
+		margin-bottom:10px;
+		.valouter{
+			flex-direction:row;
+			font-size:10px;
+		}
+	}
 	.maincol2 {
 		width: 100vw;
 	}
@@ -671,7 +775,7 @@ nav {
 		background-size: 80%, 100% 100%;
 
 		.row {
-			padding-top: 190px;
+			padding-top: 280px;
 		}
 	}
 
@@ -689,6 +793,7 @@ nav {
 		.nav-left {
 			width: 100%;
 			flex-direction: column;
+			order:3;
 
 			.ticket-bx {
 				margin: 20px 0;
@@ -696,10 +801,48 @@ nav {
 			}
 		}
 	}
+	.chad-bg {
+		padding-bottom:100px;
+		background-size: auto 220px,auto 220px;
+		.chadcols{
+			background-size:200px;
+			padding-bottom: 80px;
+			margin-bottom: 50px;
+		}
+		.chadheading{
+			font-size:29px;
+			line-height: 30px;
+		}
+		.chadcols h1{
+			font-size:20px !important;
+			margin-bottom:14px;
+		}
+	}
 }
 
 
 @media (max-width:447px) {
+	.logo{
+		position:relative;
+		order:1;
+		transform: translateX(-50vw);
+		left:50vw;
+		margin-bottom:20px;
+	}
+	.nav-right{
+		order:2;
+		width:100%;
+		max-width:600px;
+		margin-bottom:10px;
+		flex-direction:column;
+		align-items:center;
+		.valouter{
+			flex-direction:row;
+		}
+	}
+	.volbtn{
+		right: -6px;
+	}
 	h1 {
 		font-size: 36px !important
 	}
@@ -726,7 +869,7 @@ nav {
 		background-size: 80%, 100% 100%;
 
 		.row {
-			padding-top: 190px;
+			padding-top: 320px;
 		}
 	}
 
@@ -744,7 +887,7 @@ nav {
 		.nav-left {
 			width: 100%;
 			flex-direction: column;
-
+			order:3;
 			.ticket-bx {
 				margin: 20px 0;
 				font-size: 12px;
@@ -758,6 +901,23 @@ nav {
 		overflow: hidden;
 		text-overflow: ellipsis;
 		width: 120px;
+	}
+	.chad-bg {
+		padding-bottom:100px;
+		background-size: auto 220px,auto 220px;
+		.chadcols{
+			background-size:60%;
+			padding-bottom: 40px;
+			margin-bottom: 50px;
+		}
+		.chadheading{
+			font-size:29px;
+			line-height: 30px;
+		}
+		.chadcols h1{
+			font-size:20px !important;
+			margin-bottom:14px;
+		}
 	}
 }
 

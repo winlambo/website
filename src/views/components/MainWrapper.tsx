@@ -28,13 +28,17 @@ const Mainwrapper: React.FC = () => {
                                 Wen Lambo? Wen Moon?
                             </div>
                             <h1>Lambo Generation Hold and Win <div className="arrow"></div> </h1>
-                            <div>
-                                Welcome to  <span className="blk-bx">winlambo!</span>. Our plan is to send out lambos to the community like the Chad Oprah Winfrey!
+                            <div className="info">
+                            A winner is chosen once the Lambo multisig reaches a balance of $210,000- enough to buy a sexy 2021 Huracan EVO! <br /><br />
+
+                            Your tickets are your tokens. The more tokens you have, the more tickets you have, and the higher the chance of winning!<br /><br />
+
+                            To learn more about the technicalities, read our Medium article below.
                                 <div className="btn-outer">
                                     <a href="https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x6a79e08db6c08b8f88703794bf1a47f5a01eb9dc" className="btn-main btn-black">Buy Now</a>
                                     <a href="https://winlambo.medium.com/" className="btn-main btn-black btn-auto"><i className="fab fa-medium-m"></i></a>
                                     <a href="https://t.me/winlambo_official" className="btn-main btn-black btn-auto"><i className="fas fa-paper-plane"></i></a>
-                                    <a href="https://t.me/winlambo_official" className="btn-main btn-black btn-auto"><img src="images/bscscn.svg" /></a>
+                                    <a href="https://bscscan.com/token/0x6a79e08db6c08b8f88703794bf1a47f5a01eb9dc" className="btn-main btn-black btn-auto"><img src="images/bscscn.svg" /></a>
                                 </div>
                             </div>
                         </div>
