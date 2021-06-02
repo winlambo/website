@@ -12,25 +12,7 @@ import { getDailyFund, getLamboFund, getTicketInfo, getViolaPrice } from '../../
 
 const Topnav: React.FC = () => {
 
-    // for bg audio start
-    const [audio] = useState(new Audio('/musicbg.mp3'));
-    const [playing, setPlaying] = useState(true);
-
-    const toggle = () => setPlaying(!playing);
-  
-    useEffect(() => {
-        playing ? audio.play() : audio.pause();
-      },
-      [playing]
-    );
-  
-    useEffect(() => {
-      audio.addEventListener('ended', () => setPlaying(false));
-      return () => {
-        audio.removeEventListener('ended', () => setPlaying(false));
-      };
-    }, []);
-    // bg audio ended
+    
 
     
     const context = useWeb3React<Web3Provider>()
@@ -105,11 +87,30 @@ const Topnav: React.FC = () => {
 
     }, [account, chainId, library])
 
+    // for bg audio start
+    const [audio] = useState(new Audio('/musicbg.mp3'));
+    const [playing, setPlaying] = useState(true);
+
+    const toggle = () => setPlaying(!playing);
+  
+    useEffect(() => {
+        audio.pause()
+        playing ? audio.play() : audio.pause();
+      },
+      [playing]
+    );
+  
+    useEffect(() => {
+      audio.addEventListener('ended', () => setPlaying(false));
+      return () => {
+        audio.removeEventListener('ended', () => setPlaying(false));
+      };
+    }, []);
+
     
     return (
         <nav className="navcontainer">
             <div className="nav-main">
-                 
                 {/* <img src="images/logo.png" className="logo" /> */}
                 <div className="nav-right">
                  
@@ -148,11 +149,6 @@ const Topnav: React.FC = () => {
                 </div>
                 <i className={playing ?"volbtn fas fa-volume-mute":"volbtn fas fa-volume-up"} onClick={toggle}></i>   
             </div>
-            <audio id="sound">
-                <source src="/musicbg.mp3" type="audio/mpeg" />
-                <p>Your browser doesn't support HTML5 audio. Here is
-                    a <a href="myAudio.mp3">link to the audio</a> instead.</p>
-            </audio>
         </nav>
     );
 }
