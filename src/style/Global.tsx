@@ -60,6 +60,7 @@ const GlobalStyle=createGlobalStyle` * {
 	position:absolute;
 	right:-5%;
 	font-size:22px;
+	cursor:pointer;
 }
 
 /*Comman Css*/

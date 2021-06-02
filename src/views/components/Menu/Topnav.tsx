@@ -94,7 +94,6 @@ const Topnav: React.FC = () => {
     const toggle = () => setPlaying(!playing);
   
     useEffect(() => {
-        audio.pause()
         playing ? audio.play() : audio.pause();
       },
       [playing]
