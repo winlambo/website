@@ -10,9 +10,7 @@ const Home: React.FC = () => {
         <>
             <Mainwrapper />
             <Volume />
-            {/* <Mechanics /> */}
             <Top />
-            
             <Footer />
         </>
     );
