@@ -2,7 +2,7 @@ import { BigNumber } from '@ethersproject/bignumber';
 import axios from 'axios';
 import { ethers } from 'ethers';
 import React, { useEffect, useMemo, useState } from 'react';
-import { BSC_LAUNCH_TIME, EXCLUDE_LIST, TOKEN_DECIMALS } from '../../utils';
+import { BSC_LAUNCH_TIME, EXCLUDE_LIST, TOKEN_DECIMALS } from '../../utils/constants';
 
 interface ITopAccount {
     address: any,
@@ -11,7 +11,6 @@ interface ITopAccount {
 
 const Top: React.FC = () => {
 
-    
     const [topAccounts, setTopAccounts] = useState<ITopAccount[]>([])
     const [topAccountsAPI, setTopAccountsAPI] = useState('')
 
@@ -37,6 +36,7 @@ const Top: React.FC = () => {
     // build the API requests for the start and end blocks
     const endPointGetStartBlockNumber = 'https://api.bscscan.com/api?module=block&action=getblocknobytime&timestamp=' + baseTimeOfStart +'&closest=before&apiKey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
     const endPointGetEndBlockNumber = 'https://api.bscscan.com/api?module=block&action=getblocknobytime&timestamp=' + baseTimeOfCurrent +'&closest=before&apiKey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
+
   
     useEffect(() => {
         // get start block number

@@ -56,28 +56,13 @@ const GlobalStyle=createGlobalStyle` * {
 #sound{
 
 }
-.volmute{
-	position:fixed;
-	right:10px;
-	bottom:10px;
-	width:50px;
-	height:50px;
-	border-radius:50%;
-	display:flex;
-	justify-content:center;
-	align-items:center;
-	background:black;
-	border:1px solid #fff;
-	cursor:pointer;
-	i{
-		font-size:20px;
-		color:#fff;
-		position:absolute;
-	}
+.volbtn{
+	position:absolute;
+	right:-5%;
+	font-size:22px;
+	
 }
-.fa-volume-mute{
-	z-index:50
-}
+
 /*Comman Css*/
 a:hover,
 a:focus,
@@ -260,6 +245,8 @@ section {
 	cursor:auto !important;
 	padding:6px;
 	margin:0;
+	padding-bottom: 0;
+	align-items: flex-start;
 }
 .btn-transparent:hover{
 	transform:scale(1)
@@ -270,7 +257,7 @@ section {
 }
 
 .bg-black {
-	background: #000;
+	background-color: #000;
 	color: #fff;
 	padding: 20vh 0;
 }
@@ -279,6 +266,17 @@ section {
 	margin: 20px 0;
 	display: flex;
 	flex-flow: wrap;
+}
+.btn-auto{
+	width:auto;
+	min-width:45px;
+	padding:10px 7px;
+	i{
+		font-size:16px;
+	}
+	img{
+		height:20px;
+	}
 }
 
 nav {
@@ -296,12 +294,15 @@ nav {
 	padding: 10px 0;
 
 	.logo {
+		position:relative;
 		height: 30px;
 		width: auto;
+		left:0;
+		transform:translate(0);
 	}
 
 	.nav-left {
-		width: 100%;
+		// width: 100%;
 		justify-content: flex-end;
 	}
 }
@@ -310,11 +311,9 @@ nav {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 16px 0;
-	margin-top:10px;
-
-
-}
+	margin: 16px 0;
+	position:relative;
+ }
 
 .logo {
 	//height: 40px;
@@ -322,13 +321,20 @@ nav {
 	// font-size:46px;
 	// position:relative;
 	// line-height: 1;
+	// img{
+	// 	position:absolute;
+	// 	height: 15px;
+   	// 	top: 9px;
+	// 	left:0;
+	// }
 	position:absolute;
 	left:50%;
-	transform:translateX(-50%);
+	transform:translateX(-55px);
+	width:100px;
+	top:0;
 	img{
-		height:60px;
-   		top: 9px;
-		left:0;
+		width:100%;
+		height:auto;
 	}
 }
 
@@ -337,11 +343,49 @@ nav {
 	display: inline;
 	margin-right: 6px;
 }
+.navcontainer{
+	width: 85vw;
+    margin: auto;	
+}
+.nav-right{
+	width:calc(50% - 100px);
+	display:flex;
+	justify-content:space-between;
+	.valouter{
+		display:flex;
+		flex-direction:row;
+		font-weight: 600;
+		&:nth-child(2){
+			margin:0 20px;
+		}
+		div{font-weight: 600;}
+		span{padding:0 0px 0 6px }
+	}
+}
+.arrowanimated{
+	display:flex;
+	color:#fff;
+	align-items: flex-end;
+	position: absolute;
+	
+	top: 50px;
+	right: -25px;
+	img{
+		width:20px;
+		height:auto;
+		margin-right:10px;
+	}
+	.text{
+		font-family: 'Architects Daughter', cursive;
+		font-size:15px;
+		line-height: 20px;
+	}
+}
 
 .nav-left {
-	width: 45%;
+	width: 40%;
 	display: flex;
-	justify-content: flex-end;
+	justify-content: space-between;
 	align-items: center
 }
 .nav-right {
@@ -411,6 +455,41 @@ nav {
 	h1 {
 		font-size: 50px;
 		margin: 10px 0 30px;
+		position:relative;
+		.arrow{
+			right: -6.5px;
+			width:40px;
+			height:40px;
+			position:absolute;
+			&:before{
+				position:absolute;
+				content:'';
+				width: 0; 
+				height: 0; 
+				left:0;
+				border-top: 20px solid transparent;
+				border-bottom: 20px solid transparent; 
+				
+				border-right:20px solid black; 
+			}
+			&:after{
+				position:absolute;
+				content:'';
+				width: 0; 
+				height: 0; 
+				right:0px;
+				border-top: 20px solid transparent;
+				border-bottom: 20px solid transparent; 
+				
+				border-left:20px solid #9cb2a8; 
+			}
+			top:50%;
+			transform: translate(50%,-50%);
+		}
+	}
+	.info{
+		color: #030303;
+		font-weight: 300;
 	}
 }
 
@@ -423,13 +502,22 @@ nav {
 .maincol2 {
 	display: flex;
 	align-items: center;
-	background: url(../images/lambo.png) center center no-repeat, url(../images/bggradient.png) center center repeat;
-	background-size: 100%, cover;
+	background: url(../images/bggradient.png) center center repeat;
+	background-size:  cover;
 	position: absolute;
 	min-height: 100vh;
 	height: 100%;
 	width: 50vw;
 	right: 0;
+	img{
+		width:90%;
+		display:block;
+		margin:auto;
+	}
+	.carousel-inner{
+		display: flex;
+		align-items: center;
+	}
 }
 
 .excig {
@@ -486,27 +574,155 @@ nav {
 
 
 
+/* volume section */
+.chad-bg{
+	background: url(/images/chadr.png) 102% bottom no-repeat, url(/images/chadl.png) 0% bottom no-repeat;
+		background-size: auto 400px,auto 400px;
+	position:relative;
+	padding: 5vh 0 20vh;
+	&:before{
+		position:absolute;
+		content:"";
+		background:#000;
+		height:100%;
+		width:100%;
+		top:0;
+		z-index:-1
+	}
+	.chadheading{
+		font-size:40px;
+		line-height: 38px;
+		font-weight:700;
+		display:flex;
+		text-align:right;
+		margin-bottom:60px;
+		.chadheadingoter{
+			margin:auto;
+		}
+		.chadchadbg{
+			color:#444444;
+			display:flex;
+			justify-content: flex-end;	
+			font-weight: 700;
+			span{
+				margin-left:10px;
+				position:relative;
+				top:-4px;
+				font-weight: 700;				
+			}	
+			&.chadbottom{
+				position:relative;
+				right:-30px;
+			}
+		}
+	}
+	.chadcols{
+		padding:0 20px 100px;
+		div{
+			color:#feffff;	
+			font-weight:300;
+		}
+		h1{
+			font-size:28px;
+		}
+	}
 
-
-@media(min-width:1024px) and (max-width:1200px) {
-	.nav-left {
-		width: 70%;
+	.chadcol1{
+		background:url(/images/col1.png);
+		background-size: 75%;
+		background-repeat: no-repeat;
+		background-position: center bottom;
+	}
+	.chadcol2{
+		background:url(/images/col2.png);
+		background-size: 75%;
+		background-repeat: no-repeat;
+		background-position: center bottom;
+	}
+	.chadcol3{
+		background:url(/images/col3.png);
+		background-size: 75%;
+		background-repeat: no-repeat;
+		background-position: center bottom;
 	}
 }
 
-@media(min-width:992px) and (max-width:1024px) {
-	.nav-left {
-		width: 70%;
+
+
+@media(min-width:1260px) and (max-width:1400px) {
+	.navcontainer{
+		width: 90vw;
+		margin: auto;	
+		.volbtn{
+			right:-40px;
+		}
 	}
 }
 
-@media(min-width:768px) and (max-width:992px) {
+@media(min-width:1024px) and (max-width:1260px) {
+	.navcontainer{
+		width: 90vw;
+		margin: auto;	
+		.volbtn{
+			right:-20px;
+		}
+	}
 	.nav-left {
-		width: 66%;
+		flex-direction:column;
+	}
+	.nav-right .valouter{
+		flex-direction:column;
+	}
+	.arrowanimated{
+		top: 75px;
+		right: 80px;
 	}
 }
 
-@media(min-width:576px) and (max-width:768px) {
+@media(min-width:862px) and (max-width:1024px) {
+	.navcontainer{
+		width: 90vw;
+		margin: auto;	
+		.volbtn{
+			right:-20px;
+		}
+	}
+	.nav-left {
+		flex-direction:column;
+	}
+	.nav-right .valouter{
+		flex-direction:column;
+	}
+	.arrowanimated{
+		top: 82px;
+		right: 80px;
+	}
+}
+
+
+
+@media(min-width:576px) and (max-width:862px) {
+	.arrowanimated{
+		top: 190px;
+		right: 0.5%;
+		img{transform: rotate(-20deg);}
+	}
+	.logo{
+		position:relative;
+		order:1;
+		transform: translateX(-50vw);
+		left:50vw;
+		margin-bottom:20px;
+	}
+	.nav-right{
+		order:2;
+		width:100%;
+		max-width:600px;
+		margin-bottom:10px;
+		.valouter{
+			flex-direction:row;
+		}
+	}
 	.maincol2 {
 		width: 100vw;
 	}
@@ -522,10 +738,18 @@ nav {
 	.main-wraper {
 		background: url(../images/lambo.png) center center no-repeat, url(../images/bggradient.png) center center no-repeat;
 		background-size: 80%, 100% 100%;
+		.container{
+			.col-md-6{
+				width:100%;
+				max-width:unset;
+				flex:unset;
+			}
+		}
 
 		.row {
-			padding-top: 180px;
+			padding-top: 220px;
 		}
+		
 	}
 
 	.exchangebx {
@@ -541,7 +765,9 @@ nav {
 
 		.nav-left {
 			width: 100%;
-			flex-direction: column;
+			flex-direction: row;
+			order:3;
+			justify-content: center;
 
 			.ticket-bx {
 				margin: 20px 0;
@@ -549,9 +775,65 @@ nav {
 			}
 		}
 	}
+
+	.chad-bg {
+		padding-bottom:100px;
+		background-size: auto 220px,auto 220px;
+		.container{
+			.col-md-4{
+				width:100%;
+				max-width:unset;
+				flex:unset;
+			}
+		}
+		.chadcols{
+			background-size:200px;
+			padding-bottom: 80px;
+			margin-bottom: 50px;
+		}
+		.chadheading{
+			font-size:29px;
+			line-height: 30px;
+		}
+		.chadcols h1{
+			font-size:20px !important;
+			margin-bottom:14px;
+		}
+	}
+	.footer-nav{
+		.nav-main{
+			flex-direction:column-reverse;
+			.logo{
+				margin-top:20px;
+				margin-bottom:0;
+			}
+		}
+	}
 }
 
 @media(min-width:448px) and (max-width:576px) {
+	.arrowanimated{
+		top: 240px;
+		right: 0.5%;
+		img{transform: rotate(-20deg);}
+	}
+	.logo{
+		position:relative;
+		order:1;
+		transform: translateX(-50vw);
+		left:50vw;
+		margin-bottom:20px;
+	}
+	.nav-right{
+		order:2;
+		width:100%;
+		max-width:600px;
+		margin-bottom:10px;
+		.valouter{
+			flex-direction:row;
+			font-size:10px;
+		}
+	}
 	.maincol2 {
 		width: 100vw;
 	}
@@ -573,7 +855,7 @@ nav {
 		background-size: 80%, 100% 100%;
 
 		.row {
-			padding-top: 190px;
+			padding-top: 280px;
 		}
 	}
 
@@ -591,6 +873,7 @@ nav {
 		.nav-left {
 			width: 100%;
 			flex-direction: column;
+			order:3;
 
 			.ticket-bx {
 				margin: 20px 0;
@@ -598,10 +881,62 @@ nav {
 			}
 		}
 	}
+	.chad-bg {
+		padding-bottom:100px;
+		background-size: auto 220px,auto 220px;
+		.chadcols{
+			background-size:200px;
+			padding-bottom: 80px;
+			margin-bottom: 50px;
+		}
+		.chadheading{
+			font-size:29px;
+			line-height: 30px;
+		}
+		.chadcols h1{
+			font-size:20px !important;
+			margin-bottom:14px;
+		}
+	}
+	.footer-nav{
+		.nav-main{
+			flex-direction:column-reverse;
+			.logo{
+				margin-top:20px;
+				margin-bottom:0;
+			}
+		}
+	}
 }
 
 
 @media (max-width:447px) {
+	.arrowanimated{
+		top: 290px;
+		right: 0.5%;
+		img{transform: rotate(-20deg)translateY(10px);width:16px;}
+	}
+	.logo{
+		position:relative;
+		order:1;
+		transform: translateX(-50vw);
+		left:50vw;
+		margin-bottom:20px;
+	}
+	.nav-right{
+		order:2;
+		width:100%;
+		max-width:600px;
+		margin-bottom:10px;
+		flex-direction:column;
+		align-items:center;
+		.valouter{
+			flex-direction:row;
+		}
+	}
+	.volbtn{
+		right: -6px;
+	}
 	h1 {
 		font-size: 36px !important
 	}
@@ -628,7 +963,7 @@ nav {
 		background-size: 80%, 100% 100%;
 
 		.row {
-			padding-top: 190px;
+			padding-top: 350px;
 		}
 	}
 
@@ -646,7 +981,7 @@ nav {
 		.nav-left {
 			width: 100%;
 			flex-direction: column;
-
+			order:3;
 			.ticket-bx {
 				margin: 20px 0;
 				font-size: 12px;
@@ -660,6 +995,32 @@ nav {
 		overflow: hidden;
 		text-overflow: ellipsis;
 		width: 120px;
+	}
+	.chad-bg {
+		padding-bottom:100px;
+		background-size: auto 220px,auto 220px;
+		.chadcols{
+			background-size:60%;
+			padding-bottom: 40px;
+			margin-bottom: 50px;
+		}
+		.chadheading{
+			font-size:29px;
+			line-height: 30px;
+		}
+		.chadcols h1{
+			font-size:20px !important;
+			margin-bottom:14px;
+		}
+	}
+	.footer-nav{
+		.nav-main{
+			flex-direction:column-reverse;
+			.logo{
+				margin-top:20px;
+				margin-bottom:0;
+			}
+		}
 	}
 }
 

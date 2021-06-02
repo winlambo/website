@@ -9,9 +9,8 @@ const Home: React.FC = () => {
     return (
         <>
             <Mainwrapper />
-            <Mechanics />
-            <Top />
             <Volume />
+            <Top />
             <Footer />
         </>
     );
