@@ -60,7 +60,7 @@ const GlobalStyle=createGlobalStyle` * {
 	position:absolute;
 	right:-5%;
 	font-size:22px;
-	cursor:pointer;
+	
 }
 
 /*Comman Css*/
@@ -246,6 +246,7 @@ section {
 	padding:6px;
 	margin:0;
 	padding-bottom: 0;
+	align-items: flex-start;
 }
 .btn-transparent:hover{
 	transform:scale(1)
@@ -361,11 +362,30 @@ nav {
 		span{padding:0 0px 0 6px }
 	}
 }
+.arrowanimated{
+	display:flex;
+	color:#fff;
+	align-items: flex-end;
+	position: absolute;
+	
+	top: 50px;
+	right: -25px;
+	img{
+		width:20px;
+		height:auto;
+		margin-right:10px;
+	}
+	.text{
+		font-family: 'Architects Daughter', cursive;
+		font-size:15px;
+		line-height: 20px;
+	}
+}
 
 .nav-left {
-	width: 45%;
+	width: 40%;
 	display: flex;
-	justify-content: flex-end;
+	justify-content: space-between;
 	align-items: center
 }
 
@@ -422,17 +442,34 @@ nav {
 		margin: 10px 0 30px;
 		position:relative;
 		.arrow{
+			right: -6.5px;
+			width:40px;
+			height:40px;
 			position:absolute;
-			content:'';
-			width: 0; 
-			height: 0; 
-			right:-10px;
-			border-top: 20px solid transparent;
-			border-bottom: 20px solid transparent; 
-			
-			border-right:20px solid black; 
+			&:before{
+				position:absolute;
+				content:'';
+				width: 0; 
+				height: 0; 
+				left:0;
+				border-top: 20px solid transparent;
+				border-bottom: 20px solid transparent; 
+				
+				border-right:20px solid black; 
+			}
+			&:after{
+				position:absolute;
+				content:'';
+				width: 0; 
+				height: 0; 
+				right:0px;
+				border-top: 20px solid transparent;
+				border-bottom: 20px solid transparent; 
+				
+				border-left:20px solid #9cb2a8; 
+			}
 			top:50%;
-			transform:translateY(-50%);
+			transform: translate(50%,-50%);
 		}
 	}
 	.info{
@@ -621,6 +658,10 @@ nav {
 	.nav-right .valouter{
 		flex-direction:column;
 	}
+	.arrowanimated{
+		top: 75px;
+		right: 80px;
+	}
 }
 
 @media(min-width:862px) and (max-width:1024px) {
@@ -637,11 +678,20 @@ nav {
 	.nav-right .valouter{
 		flex-direction:column;
 	}
+	.arrowanimated{
+		top: 82px;
+		right: 80px;
+	}
 }
 
 
 
 @media(min-width:576px) and (max-width:862px) {
+	.arrowanimated{
+		top: 190px;
+		right: 0.5%;
+		img{transform: rotate(-20deg);}
+	}
 	.logo{
 		position:relative;
 		order:1;
@@ -738,6 +788,11 @@ nav {
 }
 
 @media(min-width:448px) and (max-width:576px) {
+	.arrowanimated{
+		top: 240px;
+		right: 0.5%;
+		img{transform: rotate(-20deg);}
+	}
 	.logo{
 		position:relative;
 		order:1;
@@ -823,6 +878,11 @@ nav {
 
 
 @media (max-width:447px) {
+	.arrowanimated{
+		top: 290px;
+		right: 0.5%;
+		img{transform: rotate(-20deg)translateY(10px);width:16px;}
+	}
 	.logo{
 		position:relative;
 		order:1;
@@ -870,7 +930,7 @@ nav {
 		background-size: 80%, 100% 100%;
 
 		.row {
-			padding-top: 320px;
+			padding-top: 350px;
 		}
 	}
 

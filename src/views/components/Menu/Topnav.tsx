@@ -142,8 +142,14 @@ const Topnav: React.FC = () => {
                     <div className="afterlog">
                         <button className={(active && account)? "btn-main btn-transparent" : "btn-main btn-black m-0"} onClick={!(active && account) ? connectAccount : () => {}}>
                         <img src="images/mt.svg" className="meta" />
-                            { (active && account) ? <div>{shorter(account)}<div style={{fontWeight:400}}>{(ticketAmount * 100 / TOTAL_SUPPLY).toFixed(8)}% win chance</div></div>: 'Connect'}
+                            { (active && account) ? <div>{shorter(account)}<div>{(ticketAmount * 100 / TOTAL_SUPPLY).toFixed(8)}%</div></div>: 'Connect'}
                         </button>
+                        <div className="arrowanimated">
+                            <img src="images/up-arrow.png" alt="arrow" />
+                            <div className="text">
+                            THAT’S YOUR <br /> WIN CHANCE
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <i className={playing ?"volbtn fas fa-volume-mute":"volbtn fas fa-volume-up"} onClick={toggle}></i>   
