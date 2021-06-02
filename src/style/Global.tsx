@@ -297,10 +297,12 @@ nav {
 		position:relative;
 		height: 30px;
 		width: auto;
+		left:0;
+		transform:translate(0);
 	}
 
 	.nav-left {
-		width: 100%;
+		// width: 100%;
 		justify-content: flex-end;
 	}
 }
@@ -785,6 +787,15 @@ nav {
 			margin-bottom:14px;
 		}
 	}
+	.footer-nav{
+		.nav-main{
+			flex-direction:column-reverse;
+			.logo{
+				margin-top:20px;
+				margin-bottom:0;
+			}
+		}
+	}
 }
 
 @media(min-width:448px) and (max-width:576px) {
@@ -872,6 +883,15 @@ nav {
 		.chadcols h1{
 			font-size:20px !important;
 			margin-bottom:14px;
+		}
+	}
+	.footer-nav{
+		.nav-main{
+			flex-direction:column-reverse;
+			.logo{
+				margin-top:20px;
+				margin-bottom:0;
+			}
 		}
 	}
 }
@@ -978,6 +998,15 @@ nav {
 		.chadcols h1{
 			font-size:20px !important;
 			margin-bottom:14px;
+		}
+	}
+	.footer-nav{
+		.nav-main{
+			flex-direction:column-reverse;
+			.logo{
+				margin-top:20px;
+				margin-bottom:0;
+			}
 		}
 	}
 }

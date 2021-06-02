@@ -74,7 +74,7 @@ const Footer: React.FC = () => {
   }, [account, chainId, library])
 
   return (
-    <nav className="container footer-nav">
+    <nav className="navcontainer footer-nav">
       <div className="nav-main">
           <div className="logo">
           <img src="images/logof.svg" alt="sports" />

@@ -147,7 +147,7 @@ const Topnav: React.FC = () => {
                         <div className="arrowanimated">
                             <img src="images/up-arrow.png" alt="arrow" />
                             <div className="text">
-                            THAT’S YOUR <br /> WIN CHANCE
+                            THAT’S YOUR <br /> CHANCE AT WINNING
                             </div>
                         </div>
                     </div>
