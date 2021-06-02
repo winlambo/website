@@ -15,15 +15,27 @@ const Top: React.FC = () => {
     const [topAccounts, setTopAccounts] = useState<ITopAccount[]>([])
     const [topAccountsAPI, setTopAccountsAPI] = useState('')
 
-    const blockPerDay = 28800
-    const today = new Date()
-    const dd = String(today.getUTCDate()).padStart(2, '0');
-    const mm = String(today.getUTCMonth() + 1).padStart(2, '0'); //January is 0!
-    const yyyy = today.getUTCFullYear();
-    let baseOftoday = mm + '/' + dd + '/' + yyyy + ' 00:00:00 GMT';
-    const baseTimeOfToday = Date.parse(baseOftoday) / 1000
-    const baseTimeOfCurrent = Date.parse(today.toString()) / 1000
-    const endPointGetStartBlockNumber = 'https://api.bscscan.com/api?module=block&action=getblocknobytime&timestamp=' + baseTimeOfToday +'&closest=before&apiKey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
+    // set the start time to 16:00 UTC in local time
+    const startTime = new Date();
+    startTime.setUTCHours(16);
+    startTime.setUTCMinutes(0);
+    startTime.setUTCSeconds(0);
+    startTime.setUTCMilliseconds(0);
+
+    // the end time is now
+    const endTime = new Date();
+
+    // if the start time is in the future, then set it to the previous day
+    if (startTime >= endTime) {
+        startTime.setDate(startTime.getDate() - 1);
+    }
+
+    // get the start and end times in seconds since epoch
+    const baseTimeOfStart = Date.parse(startTime.toString()) / 1000
+    const baseTimeOfCurrent = Date.parse(endTime.toString()) / 1000
+
+    // build the API requests for the start and end blocks
+    const endPointGetStartBlockNumber = 'https://api.bscscan.com/api?module=block&action=getblocknobytime&timestamp=' + baseTimeOfStart +'&closest=before&apiKey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
     const endPointGetEndBlockNumber = 'https://api.bscscan.com/api?module=block&action=getblocknobytime&timestamp=' + baseTimeOfCurrent +'&closest=before&apiKey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
   
     useEffect(() => {
