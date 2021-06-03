@@ -428,6 +428,7 @@ nav {
 	i {
 		font-size: 20px;
 		cursor:pointer;
+		color:#000;
 	}
 }
 
@@ -649,6 +650,11 @@ nav {
 		.ticketblkbx{
 			background:#fff !important;
 			color:#000 !important
+		}
+		.ticket-bx-outer {
+			i {
+				color:#fff;
+			}
 		}
 	}
 	.header{
