@@ -3,6 +3,7 @@ import Mechanics from './components/Mechanics'
 import Mainwrapper from './components/MainWrapper'
 import Volume from './components/Volume'
 import Top from './components/Top'
+import Draw from './components/Draw'
 import Footer from './components/Menu/Footer'
 
 const Home: React.FC = () => {
@@ -11,6 +12,7 @@ const Home: React.FC = () => {
             <Mainwrapper />
             <Volume />
             <Top />
+            <Draw/>
             <Footer />
         </>
     );

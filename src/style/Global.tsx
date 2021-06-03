@@ -152,6 +152,7 @@ section {
 	z-index: 10;
 	min-width: 140px;
 	margin-bottom: 10px;
+	cursor:pointer;
 
 	i {
 		font-size: 20px;
@@ -227,6 +228,7 @@ section {
 	background: #fff;
 	color: #000;
 	margin-right: 12px;
+	font-weight:700;
 }
 
 .btn-black {
@@ -634,7 +636,139 @@ nav {
 	}
 }
 
+/* draw section */
+.lamb-draw{
+	padding-bottom:0;
+	.header{
+		display:flex;
+		align-items:center;
+		justify-content:space-between;
+		margin-bottom:20px;
+		.btn-main{
+			margin-right:20px;
+			margin-bottom:0;
+		}
+		h1{
+			margin:0;
+			position:absolute;
+			left:50%;
+			transform:translateX(-50%);
+		}
+		.lg1{
+			display:flex;
+			align-items:center;
+		}
+		.wlogo{
+			height:80px;
+			margin-right:30px;
+		}
+		.date{
+			h3{
+				margin-bottom:3px;
+				font-size:20px;	
+			}
+			font-weight:300;
+			// margin-left:auto;
+		}
+	}
+	.wallet{
+		display:flex;
+		justify-content:flex-end;
+		background:#141515;
+		width:fit-content;
+		margin-left:auto;
+		padding:0 6px;
+		.wallet-inner{
+			margin-top:-9px;
+			display:flex;
+			text-align:right;
+			align-items:center;
+			h5{
+				font-weight:300;
+				margin-bottom:0;
+				font-size:16px;
+			}
+			img{
+				height:30px;
+				margin-left:10px;
+			}
+		}
+	}
+	.info{
+	    display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align:center;
+		.btn-main{
+			margin: 16px 0;
+		}
+		.asterisk{
+			margin:0 5%;
+			max-width:700px;
+		}
+		.asterisk{
+			font-size:13px;
+		}
+		.luckybx{
+			display:flex;
+			.lckybxinnr{
+				padding: 60px 40px;
+				background:#fff;
+				color:#000;
+				margin:0 6px;
+				font-size:30px;
+				font-weight:600;
+			}
+			margin:30px 0 20px;
+		}
+	}
+	.drawcar{
+		width:80%;
+		display:block;
+		margin:auto ;
+		transform:translateY(40px);
+	}
+}
 
+.ReactModal__Overlay {
+	background-color: rgba(0, 0, 0, 0.95) !important;
+	z-index:10;
+}
+.ReactModal__Content {
+	border:6px solid #fff !important;
+	overflow:visible !important;
+}
+.lossmodal{
+	text-align:center;
+	.btn-main{
+		width: fit-content;
+	}
+}
+.winmodal{
+	.infoouter{
+		font-weight:300;
+	}
+	text-align:center;
+	.btn-main{
+		width: fit-content;
+	}
+	.modallambo{
+		width:80%;
+		display:block;
+		margin:auto;
+		transform:translateY(80px);
+	}
+}
+.moneybg{
+	position: absolute;
+	max-width:700px;
+    width: 40vw;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    z-index: -1;
+    transform: translate(-50%,-50%);
+}
 
 @media(min-width:1260px) and (max-width:1400px) {
 	.navcontainer{
@@ -664,6 +798,16 @@ nav {
 		top: 75px;
 		right: 80px;
 	}
+	.lamb-draw{
+		.header h1{
+			position:relative;
+			transform:translateX(0);
+			left:0;
+		}
+		.drawcar{
+			margin: 30px auto;
+		}
+	}
 }
 
 @media(min-width:862px) and (max-width:1024px) {
@@ -683,6 +827,21 @@ nav {
 	.arrowanimated{
 		top: 82px;
 		right: 80px;
+	}
+	.lamb-draw{
+		.header {
+			flex-direction:column;
+			text-align:center;
+			h1{
+				position:relative;
+				transform:translateX(0);
+				left:0;
+				margin: 20px 0 10px;;
+			}
+		}
+		.drawcar{
+			margin: 30px auto;
+		}
 	}
 }
 
@@ -796,6 +955,26 @@ nav {
 			}
 		}
 	}
+	.lamb-draw{
+		.header {
+			flex-direction:column;
+			text-align:center;
+			h1{
+				position:relative;
+				transform:translateX(0);
+				left:0;
+				margin: 20px 0 10px;;
+			}
+		}
+		.drawcar{
+			margin: 30px auto;
+		}
+		.luckybx {
+			.lckybxinnr{
+				padding: 30px 24px !important;
+			}
+		}
+	}
 }
 
 @media(min-width:448px) and (max-width:576px) {
@@ -891,6 +1070,26 @@ nav {
 			.logo{
 				margin-top:20px;
 				margin-bottom:0;
+			}
+		}
+	}
+	.lamb-draw{
+		.header {
+			flex-direction:column;
+			text-align:center;
+			h1{
+				position:relative;
+				transform:translateX(0);
+				left:0;
+				margin: 20px 0 10px;;
+			}
+		}
+		.drawcar{
+			margin: 30px auto;
+		}
+		.luckybx {
+			.lckybxinnr{
+				padding: 24px 18px !important;
 			}
 		}
 	}
@@ -1007,6 +1206,29 @@ nav {
 				margin-top:20px;
 				margin-bottom:0;
 			}
+		}
+	}
+	.lamb-draw{
+		.header {
+			flex-direction:column;
+			text-align:center;
+			h1{
+				position:relative;
+				transform:translateX(0);
+				left:0;
+				margin: 20px 0 10px;;
+			}
+		}
+		.drawcar{
+			margin: 30px auto;
+		}
+		.luckybx {
+			.lckybxinnr{
+				padding: 8px 10px !important;
+			}
+		}
+		.wallet-inner{
+			font-size:11px;
 		}
 	}
 }
