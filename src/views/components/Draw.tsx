@@ -3,17 +3,26 @@ import Lose from './Popup/Loss'
 import Winmodal from './Popup/Win'
 const Draw: React.FC = () => {
 
-    const depositRef = useRef();
+    const losRef = useRef(null);
+    const winRef = useRef(null);
+      function lossmodal(){
+          // @ts-ignore
+          losRef.current.openModal();
+      }
+      function winmodal(){
+        // @ts-ignore
+        winRef.current.openModal();
+    }
     return (
         <section className="bg-black lamb-draw">
             
-            <Lose ref={depositRef}/>
-            {/* <Winmodal ref={winRef}/> */}
+            <Lose ref={losRef}/>
+            <Winmodal ref={winRef}/>
             <div className="container">
                 <div className="header">
                     <div className="lg1">
                         <img src="images/logow.png" alt="Logo" className="wlogo" />
-                        <a href="#" className="btn-main btn-white">Check on Chainlink</a>
+                        <button className="btn-main btn-white" onClick={winmodal}>Check on Chainlink</button>
                     </div>
                     <h1>THE LAMBO DRAW</h1>
                     <div className="date">
@@ -43,9 +52,9 @@ const Draw: React.FC = () => {
                     <div>
       
                     </div>
-                    <button className="btn-main" onClick={() => {if(depositRef.current) console.log(depositRef.current)}}> Compound</button>
+         
                     <h6>We would LOVE it if you tweet this win! Help us pump out the next Lambo! Click the button below to see a suggested tweet.</h6>
-                    <a href="#" className="btn-main btn-white"  ><i className="fab fa-twitter"></i> TWITTER FOR LAMBO</a>
+                    <button className="btn-main btn-white"  onClick={lossmodal}><i className="fab fa-twitter"></i> TWITTER FOR LAMBO</button>
                     <div className="asterisk">
                         *DO NOT transfer/buy/sell any WINLAMBO tokens in the meantime. Your tokens are your tickets and moving them around could
                         alter your ticket range. We need to verify that your ticket matches the winning ticket.

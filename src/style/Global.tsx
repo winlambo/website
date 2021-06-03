@@ -1231,6 +1231,9 @@ nav {
 			font-size:11px;
 		}
 	}
+	.ReactModal__Content{
+		width: min-content !important;
+	}
 }
 
 ` 
