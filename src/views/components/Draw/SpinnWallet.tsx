@@ -1,16 +1,16 @@
+
 import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers'
 import React, { useEffect, useState } from 'react';
-import TwoTicket from './TwoTicket'
+import TwoTicket from '../Menu/TwoTicket'
 import { injectedConnector } from '../../../utils/connectors';
 import { useEagerConnect } from '../../../hooks/useEagerConnect';
 import { useInactiveListener } from '../../../hooks/useInactiveListener';
 import { getContractObj, shorter, TOTAL_SUPPLY } from '../../../utils';
 import { getDailyFund, getLamboFund, getTicketInfo, getViolaPrice } from '../../../utils/contracts';
+import Luckybx from './Luckybx'
 
-
-
-const Topnav: React.FC = () => {   
+const SpinnWallet: React.FC = () => {
     const context = useWeb3React<Web3Provider>()
     const {connector, library, chainId, account, activate, deactivate, active, error } = context
 
@@ -83,76 +83,36 @@ const Topnav: React.FC = () => {
 
     }, [account, chainId, library])
 
-    // for bg audio start
-    const [audio] = useState(new Audio('/musicbg.mp3'));
-    const [playing, setPlaying] = useState(true);
-
-    const toggle = () => setPlaying(!playing);
-  
-    useEffect(() => {
-        playing ? audio.play() : audio.pause();
-      },
-      [playing]
-    );
-  
-    useEffect(() => {
-      audio.addEventListener('ended', () => setPlaying(false));
-      return () => {
-        audio.removeEventListener('ended', () => setPlaying(false));
-      };
-    }, []);
-
-    
-    return (
-        <nav className="navcontainer">
-            <div className="nav-main">
-                {/* <img src="images/logo.png" className="logo" /> */}
-                <div className="nav-right">
-                 
-                        <div className="valouter">
-                            <div>
-                                WINLAMBO
-                            </div>
-                            <div><span style={{"color":"#1aa351"}}>$</span>{nativeTokenPrice}</div>
-                        </div>
-                        <div className="valouter">
-                            <div>
-                                LAMBOFUND
-                            </div>
-                            <div><span style={{"color":"#1aa351"}}>$</span>{lamboFundAmount}</div>
-                        </div>
-                        <div className="valouter">
-                            <div>
-                                DAILYFUND
-                            </div>
-                            <div><span style={{"color":"#1aa351"}}>$</span>{dailyFundAmount}</div>
-                        </div>
-
-                </div>
-                <div className="logo">
-                    <img src="images/logon.svg" alt="sports" />
-                </div>
-                <div className="nav-left">
-                    { (active && account) ? <TwoTicket tickets={tickets} />:"" }
-                    
-                    <div className="afterlog">
-                        <button className={(active && account)? "btn-main btn-transparent" : "btn-main btn-black m-0"} onClick={!(active && account) ? connectAccount : () => {}}>
-                            <img src="images/mt.svg" className="meta" />
-                            { (active && account) ? <div>{shorter(account)}<div>{(ticketAmount * 100 / TOTAL_SUPPLY).toFixed(8)}%</div></div>: 'Connect'}
-                        </button>
-                        <div className="arrowanimated">
-                            <img src="images/up-arrow.png" alt="arrow" />
-                            <div className="text">
-                            THAT’S YOUR <br /> CHANCE AT <br /> WINNING
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <i className={playing ?"volbtn fas fa-volume-mute":"volbtn fas fa-volume-up"} onClick={toggle}></i>   
+  return (
+      <div className="spinwallet">
+       
+        <div className="wallet">
+            <div className="wallet-inner">
+                <button className={(active && account)? "btn-main btn-transparent" : "btn-main btn-black m-0"} onClick={!(active && account) ? connectAccount : () => {}} style={{backgroundColor:"transparent"}}>
+                    { (active && account) ? <div><h5>Your Wallet</h5>{account}</div>: 'Connect'}
+                </button>
+                {/* <div>
+                    <h5>Your Wallet</h5>
+                    0xbc3e03e0c277227066fea34d7e95d31bc424dad7
+                </div> */}
+                <img src="images/mt.svg" alt="Meta" />
             </div>
-        </nav>
-    );
+        </div>
+        <div className="luckybx">
+            <Luckybx/>
+            <Luckybx/>
+            <Luckybx/>
+            <Luckybx/>
+            <Luckybx/>
+            <Luckybx/>
+            <Luckybx/>
+            <Luckybx/>
+            <Luckybx/>
+        </div>
+        <div className="ticketouter">{ (active && account) ? <TwoTicket tickets={tickets} />:"" }</div>
+    </div>
+  );
 }
 
 
-export default Topnav;
+export default SpinnWallet;
