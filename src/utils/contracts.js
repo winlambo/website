@@ -7,11 +7,22 @@ import tokens from './tokens'
 export async function getTicketInfo(chainId, account, provider) {
     const winlamboContract = getContractObj('WinLambo', chainId, provider)
     try {
-        const tickets = await winlamboContract.lamboTickets(account);
+        const tickets = await winlamboContract.lamboTickets(account)
         return tickets
     } catch (e) {
         console.error(e)
         return null
+    }
+}
+
+export async function getLamboRandomNumber(chainId, provider) {
+    const lamboRandomContract = getContractObj('LamboRandomNumber', chainId, provider)
+    try {
+        const winningnumber = await lamboRandomContract.lamboRandomResult()
+        return winningnumber
+    } catch (e) {
+        console.error(e)
+        return BigNumber.from(0)
     }
 }
 

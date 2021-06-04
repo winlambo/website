@@ -6,11 +6,12 @@ import { injectedConnector } from '../../../utils/connectors';
 import { useEagerConnect } from '../../../hooks/useEagerConnect';
 import { useInactiveListener } from '../../../hooks/useInactiveListener';
 import { getContractObj, shorter, TOTAL_SUPPLY } from '../../../utils';
-import { getDailyFund, getLamboFund, getTicketInfo, getViolaPrice } from '../../../utils/contracts';
+import { getDailyFund, getLamboFund, getTicketInfo, getViolaPrice, getLamboRandomNumber } from '../../../utils/contracts';
 
 
 
-const Topnav: React.FC = () => {   
+
+const Topnav: React.FC = () => {
     const context = useWeb3React<Web3Provider>()
     const {connector, library, chainId, account, activate, deactivate, active, error } = context
 
@@ -37,6 +38,16 @@ const Topnav: React.FC = () => {
     const [lamboFundAmount, setLamboFundAmount] = useState(0);
     const [dailyFundAmount, setDailyFundAmount] = useState(0);
     const [ticketAmount, setTicketAmount] = useState(0);
+
+    const [winningNumber, setWinningNumber] = useState('')
+    // useEffect(() => {
+    //     getLamboRandomNumber(chainId, library?.getSigner()).then((result) => {
+    //         console.log(result.toString())
+    //     }).catch(e => {
+    //         console.error(e)
+    //     })
+    // }, [chainId, library])
+
     useEffect(() => {
         getViolaPrice(chainId, library?.getSigner()).then((violaPrice) => {
             setNativeTokenPrice(violaPrice)

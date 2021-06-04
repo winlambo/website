@@ -1,17 +1,18 @@
 
 import React from 'react';
 
-const arr= [0,1,2,3,4,5,6,7,8,9]
-const Luckybx: React.FC = () => {
+export interface LuckybxProps {
+    value?: string
+}
+const Luckybx: React.FC<LuckybxProps> = ({value}) => {
     return (
         <>
             <div className="lckybxinnr">
-                <div className="lckybxinnr">0</div>
+                <div className="lckybxinnr">{value}</div>
             </div>
         </>
     );
 }
-
 
 export default Luckybx;
             

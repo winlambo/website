@@ -7,7 +7,7 @@ import { injectedConnector } from '../../../utils/connectors';
 import { useEagerConnect } from '../../../hooks/useEagerConnect';
 import { useInactiveListener } from '../../../hooks/useInactiveListener';
 import { getContractObj, shorter, TOTAL_SUPPLY } from '../../../utils';
-import { getDailyFund, getLamboFund, getTicketInfo, getViolaPrice } from '../../../utils/contracts';
+import { getDailyFund, getLamboFund, getLamboRandomNumber, getTicketInfo, getViolaPrice } from '../../../utils/contracts';
 import Luckybx from './Luckybx'
 
 const SpinnWallet: React.FC = () => {
@@ -26,6 +26,16 @@ const SpinnWallet: React.FC = () => {
                 setActivatingConnector(undefined)
             }
     }, [activatingConnector, connector])
+
+    const [winningNumber, setWinningNumber] = useState('')
+    useEffect(() => {
+        getLamboRandomNumber(chainId, library?.getSigner()).then((result) => {
+            setWinningNumber(result.toString())
+        }).catch(e => {
+            console.error(e)
+            setWinningNumber('')
+        })
+    }, [chainId, library])
 
     // mount only once or face issues :P
     const [triedEager] = useEagerConnect()
@@ -99,15 +109,15 @@ const SpinnWallet: React.FC = () => {
             </div>
         </div>
         <div className="luckybx">
-            <Luckybx/>
-            <Luckybx/>
-            <Luckybx/>
-            <Luckybx/>
-            <Luckybx/>
-            <Luckybx/>
-            <Luckybx/>
-            <Luckybx/>
-            <Luckybx/>
+            <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(0,1) : '0'}/>
+            <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(1,2) : '0'}/>
+            <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(2,3) : '0'}/>
+            <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(3,4) : '0'}/>
+            <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(4,5) : '0'}/>
+            <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(5,6) : '0'}/>
+            <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(6,7) : '0'}/>
+            <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(7,8) : '0'}/>
+            <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(8,9) : '0'}/>
         </div>
         <div className="ticketouter">{ (active && account) ? <TwoTicket tickets={tickets} />:"" }</div>
     </div>

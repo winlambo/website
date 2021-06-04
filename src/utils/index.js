@@ -3,6 +3,7 @@ import axios from 'axios';
 import WinLamboABI from '../contracts/WinLambo.json'
 import MulticallABI from '../contracts/Multicall.json'
 import ERC20ABI from '../contracts/erc20.json'
+import LamboRandomNumberABI from '../contracts/LamboRandomNumber.json'
 import tokens from './tokens'
 
 
@@ -20,7 +21,11 @@ export const CONTRACTS_BY_NETWORK = {
     Multicall: {
       address: '0x1ee38d535d541c55c9dae27b12edf090c608e6fb',
       abi: MulticallABI
-    }
+    },
+    LamboRandomNumber: {
+      address: '0x19edc0c1821d49C855d7D60d57001C4431E00Ca9',
+      abi: LamboRandomNumberABI
+    },
   },
   [Networks.Testnet]: {
     WinLambo: {
@@ -30,7 +35,11 @@ export const CONTRACTS_BY_NETWORK = {
     Multicall: {
       address: '0x67ADCB4dF3931b0C5Da724058ADC2174a9844412',
       abi: MulticallABI
-    } 
+    },
+    LamboRandomNumber: {
+      address: '',
+      abi: LamboRandomNumberABI
+    },
   },
 }
 
