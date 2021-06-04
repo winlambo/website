@@ -6,11 +6,15 @@ import TwoTicket from '../Menu/TwoTicket'
 import { injectedConnector } from '../../../utils/connectors';
 import { useEagerConnect } from '../../../hooks/useEagerConnect';
 import { useInactiveListener } from '../../../hooks/useInactiveListener';
-import { getContractObj, shorter, TOTAL_SUPPLY } from '../../../utils';
-import { getDailyFund, getLamboFund, getLamboRandomNumber, getTicketInfo, getViolaPrice } from '../../../utils/contracts';
+import { getContractObj} from '../../../utils';
+import { getDailyFund, getLamboFund, getTicketInfo, getViolaPrice } from '../../../utils/contracts';
 import Luckybx from './Luckybx'
 
-const SpinnWallet: React.FC = () => {
+export interface SpinWalletProps {
+    winningNumber: string
+}
+
+const SpinnWallet: React.FC<SpinWalletProps> = ({winningNumber}) => {
     const context = useWeb3React<Web3Provider>()
     const {connector, library, chainId, account, activate, deactivate, active, error } = context
 
@@ -27,15 +31,7 @@ const SpinnWallet: React.FC = () => {
             }
     }, [activatingConnector, connector])
 
-    const [winningNumber, setWinningNumber] = useState('')
-    useEffect(() => {
-        getLamboRandomNumber(chainId, library?.getSigner()).then((result) => {
-            setWinningNumber(result.toString())
-        }).catch(e => {
-            console.error(e)
-            setWinningNumber('')
-        })
-    }, [chainId, library])
+    
 
     // mount only once or face issues :P
     const [triedEager] = useEagerConnect()
@@ -109,7 +105,7 @@ const SpinnWallet: React.FC = () => {
             </div>
         </div>
         <div className="luckybx">
-            <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(0,1) : '0'}/>
+            <Luckybx value={winningNumber.length > 8 ? winningNumber?.slice(0,1) : '0'}/>
             <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(1,2) : '0'}/>
             <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(2,3) : '0'}/>
             <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(3,4) : '0'}/>

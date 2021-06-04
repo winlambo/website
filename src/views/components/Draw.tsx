@@ -1,10 +1,16 @@
-import React, { useState, useRef ,createRef} from 'react'
+import React, { useState, useRef ,createRef, useEffect} from 'react'
+import { Web3Provider } from '@ethersproject/providers'
 import Lose from './Popup/Loss'
 import Winmodal from './Popup/Win'
 import Countdown from "react-countdown";
 import SpinnWallet from './Draw/SpinnWallet'
+import { useWeb3React } from '@web3-react/core';
+import { getLamboRandomNumber, getWinningNumber, isWinner } from '../../utils/contracts';
 const Completionist = () => <span>CountDown completed!!!</span>;
 const Draw: React.FC = () => {
+
+    const context = useWeb3React<Web3Provider>()
+    const {connector, library, chainId, account, activate, deactivate, active, error } = context
 
     const losRef = useRef(null);
     const winRef = useRef(null);
@@ -16,6 +22,30 @@ const Draw: React.FC = () => {
         // @ts-ignore
         winRef.current.openModal();
     }
+
+    const [winningNumber, setWinningNumber] = useState('')
+    useEffect(() => {
+        getLamboRandomNumber(chainId, library?.getSigner()).then((result) => {
+            getWinningNumber(result, chainId, library?.getSigner()).then((winningNumber) => {
+                setWinningNumber(winningNumber?.toString())
+                isWinner(winningNumber,chainId, account, library?.getSigner()).then((isWon) => {
+                    if (isWon) {
+                        winmodal()
+                    } else {
+                        lossmodal()
+                    }
+                })
+            }).catch(e => {
+                console.error(e)
+                setWinningNumber('')
+            })
+            
+        }).catch(e => {
+            console.error(e)
+            setWinningNumber('')
+        })
+    }, [account, chainId, library])    
+
     return (
         <section className="bg-black lamb-draw">
             
@@ -26,7 +56,7 @@ const Draw: React.FC = () => {
                 <div className="header">
                     <div className="lg1">
                         <img src="images/logow.png" alt="Logo" className="wlogo" />
-                        <button className="btn-main btn-white" onClick={winmodal}>Check on Chainlink</button>
+                        <button className="btn-main btn-white" >Check on Chainlink</button>
                     </div>
                     <h1>THE LAMBO DRAW</h1>
                     <div className="date">
@@ -37,9 +67,9 @@ const Draw: React.FC = () => {
                     </div>
                 </div>
                 <div className="info">
-                    <SpinnWallet/>
+                    <SpinnWallet winningNumber={winningNumber}/>
                     <h6 className="mt-4">We would LOVE it if you tweet this win! Help us pump out the next Lambo! Click the button below to see a suggested tweet.</h6>
-                    <button className="btn-main btn-white"  onClick={lossmodal}><i className="fab fa-twitter"></i> TWITTER FOR LAMBO</button>
+                    <button className="btn-main btn-white"  ><i className="fab fa-twitter"></i> TWITTER FOR LAMBO</button>
                     <div className="asterisk">
                         *DO NOT transfer/buy/sell any WINLAMBO tokens in the meantime. Your tokens are your tickets and moving them around could
                         alter your ticket range. We need to verify that your ticket matches the winning ticket.

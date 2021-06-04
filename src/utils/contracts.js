@@ -101,3 +101,49 @@ export async function getDailyFund(chainId, provider) {
     }
 }
 
+export async function isWinner(winningNumber, chainId, account, provider) {
+    const winlamboContract = getContractObj('WinLambo', chainId, provider)
+    try {
+        const isWon = await winlamboContract.isLamboWinner(account, winningNumber)
+        return isWon
+    } catch (e) {
+        console.error(e)
+        return false
+    }
+}
+
+export async function getWinningNumber (rawNumber, chainId, provider) {
+    const randomNumberResult = rawNumber.toString()
+    const zeroAddress = '0x0000000000000000000000000000000000000000'
+    const winlamboContract = getContractObj('WinLambo', chainId, provider)
+    try {
+        let start = 0
+        let winningNumberLength = 9
+        let winningNumber = ''
+        let zeroAddressWon = true
+        while (randomNumberResult.slice(start, start + 1) == "0") {
+            start += 1;
+            if (start > randomNumberResult.length - winningNumberLength) {
+                return ''
+            }
+        }
+
+        while (zeroAddressWon) {
+            winningNumber = randomNumberResult.slice(start, start + winningNumberLength)
+            zeroAddressWon = await winlamboContract.isLamboWinner(zeroAddress, winningNumber)
+            
+            start += winningNumberLength
+            if (start + winningNumberLength > randomNumberResult.length) break
+        }
+
+        if (zeroAddressWon) {
+            return ''
+        } else {
+            return winningNumber
+        }
+    } catch (e) {
+        console.error(e)
+        return ''
+    }
+}
+
