@@ -105,15 +105,14 @@ const SpinnWallet: React.FC<SpinWalletProps> = ({winningNumber}) => {
             </div>
         </div>
         <div className="luckybx">
-            <Luckybx value={winningNumber.length > 8 ? winningNumber?.slice(0,1) : '0'}/>
-            <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(1,2) : '0'}/>
-            <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(2,3) : '0'}/>
-            <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(3,4) : '0'}/>
-            <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(4,5) : '0'}/>
-            <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(5,6) : '0'}/>
-            <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(6,7) : '0'}/>
-            <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(7,8) : '0'}/>
-            <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(8,9) : '0'}/>
+            <Luckybx value={winningNumber.length > 8 ? winningNumber?.slice(0,1) : 'L'}/>
+            <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(1,2) : 'O'}/>
+            <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(2,3) : 'A'}/>
+            <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(3,4) : 'D'}/>
+            <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(4,5) : 'I'}/>
+            <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(6,7) : 'N'}/>
+            <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(7,8) : 'G'}/>
+            <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(8,9) : '-'}/>
         </div>
         <div className="ticketouter">{ (active && account) ? <TwoTicket tickets={tickets} />:"" }</div>
     </div>

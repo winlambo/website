@@ -121,19 +121,24 @@ export async function getWinningNumber (rawNumber, chainId, provider) {
         let winningNumberLength = 9
         let winningNumber = ''
         let zeroAddressWon = true
-        while (randomNumberResult.slice(start, start + 1) == "0") {
-            start += 1;
-            if (start > randomNumberResult.length - winningNumberLength) {
-                return ''
-            }
-        }
 
+        // get the winning number from the random number
+        // redraw if the zero address is the winner
         while (zeroAddressWon) {
+            // skip zeros at the beginng of the winning number
+            while (randomNumberResult.charAt(start) == "0") {
+                start += 1;
+                if (start > randomNumberResult.length - winningNumberLength) {
+                    return ''
+                }
+            }
             winningNumber = randomNumberResult.slice(start, start + winningNumberLength)
             zeroAddressWon = await winlamboContract.isLamboWinner(zeroAddress, winningNumber)
             
             start += winningNumberLength
-            if (start + winningNumberLength > randomNumberResult.length) break
+            if (start + winningNumberLength > randomNumberResult.length) {
+                break
+            }
         }
 
         if (zeroAddressWon) {
@@ -146,4 +151,3 @@ export async function getWinningNumber (rawNumber, chainId, provider) {
         return ''
     }
 }
-
