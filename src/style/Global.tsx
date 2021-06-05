@@ -742,25 +742,31 @@ nav {
 			justify-content: center;	
 			margin-bottom:30px !important;
 			.lckybxinnr{
-				 padding: 40px 20px;
+				//  padding: 40px 20px;
 				background:#fff;
 				color:#000;
 				margin:0 6px;
 				font-size:30px;
 				font-weight:600;
-				//height:124px;
+				height:120px;
 				overflow:hidden;
 				// animation:uprotate 2s linear;
 				// animation
 			}
 			.lckybxnum{
-				//width: 80px;
-				//height:120px;
-				margin:2px 0;
-				background:Red;
-				display:flex;
-				align-items:center;
-				justify-content:center;
+				width: 80px;
+				position: relative;
+				transition:all 2s ease;
+				top:0px;
+				div{
+					width: 100%;
+					height:120px;
+					margin:0;
+					display:flex;
+					align-items:center;
+					justify-content:center;
+				}
+				
 			}
 			margin:30px 0 20px;
 			@keyframes uprotate {	
@@ -842,7 +848,7 @@ nav {
 		.lckybxinnr{
 			font-size:14px !important;
 			margin:0 3px !important;
-			padding: 28px 16px !important;
+			//padding: 28px 16px !important;
 		}
 	}
 }
@@ -879,7 +885,7 @@ nav {
 		.lckybxinnr{
 			font-size:14px !important;
 			margin:0 3px !important;
-			padding: 18px 12px !important;
+			//padding: 18px 12px !important;
 		}
 	}
 }
@@ -921,7 +927,7 @@ nav {
 		.lckybxinnr{
 			font-size:14px !important;
 			margin:0 3px !important;
-			padding: 16px 12px !important;
+			// padding: 16px 12px !important;
 		}
 	}
 }
@@ -1054,7 +1060,7 @@ nav {
 			.lckybxinnr{
 				font-size:14px !important;
 				margin:0 3px !important;
-				padding: 12px 8px !important;
+				// padding: 12px 8px !important;
 			}
 		}
 	}
@@ -1174,7 +1180,7 @@ nav {
 			.lckybxinnr{
 				font-size:14px !important;
 				margin:0 3px !important;
-				padding: 8px 6px !important;
+				// padding: 8px 6px !important;
 			}
 		}
 	}
@@ -1311,7 +1317,7 @@ nav {
 			.lckybxinnr{
 				font-size:14px !important;
 				margin:0 3px !important;
-				padding: 8px 4px !important;
+				// padding: 8px 4px !important;
 			}
 		}
 		.wallet-inner{
