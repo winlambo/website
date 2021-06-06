@@ -316,9 +316,7 @@ nav {
 	justify-content: space-between;
 	margin: 16px 0;
 	position:relative;
-
-
-}
+ }
 
 .logo {
 	//height: 40px;
@@ -392,6 +390,21 @@ nav {
 	display: flex;
 	justify-content: space-between;
 	align-items: center
+}
+.nav-right {
+	display:flex;
+	justify-content:space-between;
+	width:calc(50% - 100px);
+	.valouter{
+		display:flex;
+		flex-direction:column;
+		&:nth-child(2){
+			margin:0 20px;
+		}
+	}
+	div{
+		font-weight:700;
+	}
 }
 
 .ticketrotatorouter{
