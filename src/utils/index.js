@@ -23,7 +23,7 @@ export const CONTRACTS_BY_NETWORK = {
       abi: MulticallABI
     },
     LamboRandomNumber: {
-      address: '0x19edc0c1821d49C855d7D60d57001C4431E00Ca9',
+      address: '0x7Bd9bC770685874a91DAe27D709742D5025D6348',
       abi: LamboRandomNumberABI
     },
   },

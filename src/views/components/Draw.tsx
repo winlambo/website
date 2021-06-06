@@ -12,8 +12,21 @@ const Draw: React.FC = () => {
     const context = useWeb3React<Web3Provider>()
     const {connector, library, chainId, account, activate, deactivate, active, error } = context
 
-    const losRef = useRef(null);
-    const winRef = useRef(null);
+    const startTime = new Date()
+    startTime.setUTCHours(16)
+    startTime.setUTCMinutes(0)
+    startTime.setUTCSeconds(0)
+    startTime.setUTCMilliseconds(0)
+
+    const endTime = new Date()
+    startTime.setUTCHours(16)
+    startTime.setUTCMinutes(10)
+    startTime.setUTCSeconds(0)
+    startTime.setUTCMilliseconds(0)
+
+
+    const losRef = useRef(null)
+    const winRef = useRef(null)
       function lossmodal(){
           // @ts-ignore
           losRef.current.openModal();
@@ -25,6 +38,8 @@ const Draw: React.FC = () => {
 
     const [winningNumber, setWinningNumber] = useState('')
     useEffect(() => {
+        const curTime = new Date()
+        if (curTime < startTime || curTime > endTime) return
         getLamboRandomNumber(chainId, library?.getSigner()).then((result) => {
             getWinningNumber(result, chainId, library?.getSigner()).then((winningNumber) => {
                 setWinningNumber(winningNumber?.toString())

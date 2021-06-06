@@ -45,7 +45,6 @@ export async function getViolaPrice(chainId, provider) {
         let tokenPriceBUSD;
         if (quoteTokenSymbol === QuoteToken.BNB) {
             const bnbToBusd = await getBnbToBusdPrice(chainId, provider)
-            console.info(bnbToBusd.toNumber())
             tokenPriceBUSD = bnbToBusd.mul(tokenPriceVSQuote)
         } else {
             tokenPriceBUSD = tokenPriceVSQuote
