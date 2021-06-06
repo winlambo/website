@@ -56,7 +56,7 @@ const Draw: React.FC = () => {
                 <div className="header">
                     <div className="lg1">
                         <img src="images/logow.png" alt="Logo" className="wlogo" />
-                        <a className="btn-main btn-white" href="https://bscscan.com/address/0x7Bd9bC770685874a91DAe27D709742D5025D6348#readContract">Verify on BscScan!</a>
+                        <a className="btn-main btn-white" href="https://bscscan.com/address/0x7Bd9bC770685874a91DAe27D709742D5025D6348#readContract"  target="blank">Verify on BscScan!</a>
                     </div>
                     <h1>THE LAMBO DRAW</h1>
                     <div className="date">
