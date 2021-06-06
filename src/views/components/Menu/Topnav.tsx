@@ -118,8 +118,7 @@ const Topnav: React.FC = () => {
         <nav className="navcontainer">
             <div className="nav-main">
                 {/* <img src="images/logo.png" className="logo" /> */}
-                <div className="nav-right">
-                 
+                <div className="nav-right">                 
                         <div className="valouter">
                             <div>
                                 WINLAMBO

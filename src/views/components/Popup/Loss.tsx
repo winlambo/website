@@ -40,9 +40,9 @@ const Lose= forwardRef((props, ref) => {
             contentLabel="Modal"
         >
             <div className="lossmodal">
-                <h1>No Luck This Time</h1>
+                <h1>Better Luck Next Time!</h1>
                 <div className="infoouter">
-                We have an ongoing Twitter contest for 1000 WINLAMBO tokens to 5 lucky winners! Help us find the winner by tweeting! Click the button below to see a suggested tweet.
+                Thank you for playing! There's an ongoing Twitter contest for 1000 WINLAMBO tokens to 50 lucky winners! To enter, you must help us find the winner of the Lambo by sharing on Twitter! You can see a suggested tweet on the next screen!
                 </div>
                 <a className="btn-main btn-white mx-auto mt-3" onClick={closeModal}>Close</a>
             </div>

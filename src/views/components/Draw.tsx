@@ -71,7 +71,7 @@ const Draw: React.FC = () => {
                 <div className="header">
                     <div className="lg1">
                         <img src="images/logow.png" alt="Logo" className="wlogo" />
-                        <button className="btn-main btn-white" >Check on Chainlink</button>
+                        <a className="btn-main btn-white" href="https://bscscan.com/address/0x7Bd9bC770685874a91DAe27D709742D5025D6348#readContract"  target="blank">Verify on BscScan!</a>
                     </div>
                     <h1>THE LAMBO DRAW</h1>
                     <div className="date">
@@ -83,12 +83,8 @@ const Draw: React.FC = () => {
                 </div>
                 <div className="info">
                     <SpinnWallet winningNumber={winningNumber}/>
-                    <h6 className="mt-4">We would LOVE it if you tweet this win! Help us pump out the next Lambo! Click the button below to see a suggested tweet.</h6>
-                    <button className="btn-main btn-white"  ><i className="fab fa-twitter"></i> TWITTER FOR LAMBO</button>
-                    <div className="asterisk">
-                        *DO NOT transfer/buy/sell any WINLAMBO tokens in the meantime. Your tokens are your tickets and moving them around could
-                        alter your ticket range. We need to verify that your ticket matches the winning ticket.
-                    </div>
+                    <h6 className="mt-4">Help us find the Lambo winner! There is an ongoing Twitter contest for 1000 WINLAMBO tokens to 50 lucky winners! <br/>To enter, you must help us find the winner of the Lambo by sharing on Twitter! You can see a suggested tweet by clicking the button below!</h6>
+                    <a className="btn-main btn-white"  href="http://twitter.com/intent/tweet?text=Who%27s%20the%20lucky%20winner!%3F%20%40winlambos%20is%20about%20to%20send%20out%20210%2C000%20BUSD%20to%20the%20winner%20of%20today%27s%20event!%20%0A%20%0ACheck%20https%3A%2F%2Fwinlambo.fund%2F%20to%20see%20if%20you%20won!%20%0ART%20this%20if%20you%20won!%20%23bsc%20%23winlambo%20%23binance%20%40cz_binance%20%20%0A%20%0AI%27m%20still%20eligible%20to%20win%20future%20events%20since%20I%20%23HODL%20%23WINLAMBO!" target="blank"><i className="fab fa-twitter"></i>TWEET TO WIN!</a>
                 </div>
                 <img src="images/lambo2.png" className="drawcar" alt="lambo" />
             </div>
