@@ -7,11 +7,22 @@ import tokens from './tokens'
 export async function getTicketInfo(chainId, account, provider) {
     const winlamboContract = getContractObj('WinLambo', chainId, provider)
     try {
-        const tickets = await winlamboContract.lamboTickets(account);
+        const tickets = await winlamboContract.lamboTickets(account)
         return tickets
     } catch (e) {
         console.error(e)
         return null
+    }
+}
+
+export async function getLamboRandomNumber(chainId, provider) {
+    const lamboRandomContract = getContractObj('LamboRandomNumber', chainId, provider)
+    try {
+        const winningnumber = await lamboRandomContract.lamboRandomResult()
+        return winningnumber
+    } catch (e) {
+        console.error(e)
+        return BigNumber.from(0)
     }
 }
 
@@ -34,7 +45,6 @@ export async function getViolaPrice(chainId, provider) {
         let tokenPriceBUSD;
         if (quoteTokenSymbol === QuoteToken.BNB) {
             const bnbToBusd = await getBnbToBusdPrice(chainId, provider)
-            console.info(bnbToBusd.toNumber())
             tokenPriceBUSD = bnbToBusd.mul(tokenPriceVSQuote)
         } else {
             tokenPriceBUSD = tokenPriceVSQuote
@@ -90,3 +100,54 @@ export async function getDailyFund(chainId, provider) {
     }
 }
 
+export async function isWinner(winningNumber, chainId, account, provider) {
+    const winlamboContract = getContractObj('WinLambo', chainId, provider)
+    try {
+        const isWon = await winlamboContract.isLamboWinner(account, winningNumber)
+        return isWon
+    } catch (e) {
+        console.error(e)
+        return false
+    }
+}
+
+export async function getWinningNumber (rawNumber, chainId, provider) {
+    const randomNumberResult = rawNumber.toString()
+    const zeroAddress = '0x0000000000000000000000000000000000000000'
+    const winlamboContract = getContractObj('WinLambo', chainId, provider)
+    try {
+        let start = 0
+        let winningNumberLength = 9
+        let winningNumber = ''
+        let zeroAddressWon = true
+
+        // get the winning number from the random number
+        // redraw if the zero address is the winner
+        while (zeroAddressWon) {
+            // skip zeros at the beginng of the winning number
+            while (randomNumberResult.charAt(start) == "0") {
+                start += 1;
+                if (start > randomNumberResult.length - winningNumberLength) {
+                    return ''
+                }
+            }
+            winningNumber = randomNumberResult.slice(start, start + winningNumberLength)
+            console.log("winning number: ", winningNumber);
+            zeroAddressWon = await winlamboContract.isLamboWinner(zeroAddress, winningNumber)
+            
+            start += winningNumberLength
+            if (start + winningNumberLength > randomNumberResult.length) {
+                break
+            }
+        }
+
+        if (zeroAddressWon) {
+            return ''
+        } else {
+            return winningNumber
+        }
+    } catch (e) {
+        console.error(e)
+        return ''
+    }
+}

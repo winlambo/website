@@ -11,6 +11,7 @@ const GlobalStyle=createGlobalStyle` * {
 
 }
 
+
 @font-face {
 	font-family: 'Amazing Slab';
 	src: url('../fonts/Amazing-Slab-Regular.ttf') format('truetype');
@@ -152,6 +153,7 @@ section {
 	z-index: 10;
 	min-width: 140px;
 	margin-bottom: 10px;
+	cursor:pointer;
 
 	i {
 		font-size: 20px;
@@ -227,6 +229,7 @@ section {
 	background: #fff;
 	color: #000;
 	margin-right: 12px;
+	font-weight:700;
 }
 
 .btn-black {
@@ -438,6 +441,7 @@ nav {
 	i {
 		font-size: 20px;
 		cursor:pointer;
+		color:#000;
 	}
 }
 
@@ -647,7 +651,207 @@ nav {
 	}
 }
 
+/* draw section */
+.lamb-draw{
+	padding-bottom:0;
+	.spinwallet{
+		margin-bottom:50px;
+		.ticketouter{
+			display: flex;
+			justify-content: center;
+		}
+		.ticketblkbx{
+			background:#fff !important;
+			color:#000 !important
+		}
+		.ticket-bx-outer {
+			i {
+				color:#fff;
+			}
+		}
+	}
+	.header{
+		display:flex;
+		align-items:center;
+		justify-content:space-between;
+		margin-bottom:20px;
+		.btn-main{
+			margin-right:20px;
+			margin-bottom:0;
+		}
+		h1{
+			margin:0;
+			position:absolute;
+			left:50%;
+			transform:translateX(-50%);
+		}
+		.lg1{
+			display:flex;
+			align-items:center;
+		}
+		.wlogo{
+			height:80px;
+			margin-right:30px;
+		}
+		.date{
+			h3{
+				margin-bottom:3px;
+				font-size:20px;	
+			}
+			font-weight:300;
+			// margin-left:auto;
+		}
+	}
+	.wallet{
+		display:flex;
+		justify-content:flex-end;
+		background:#141515;
+		width:fit-content;
+		margin-left:auto;
+		padding:0 6px;
+		.wallet-inner{
+			margin-top:0px;
+			display:flex;
+			text-align:right;
+			align-items:center;
+			h5{
+				font-weight:300;
+				margin-bottom:0;
+				font-size:16px;
+			}
+			img{
+				height:30px;
+				margin-left:10px;
+			}
+			.btn-black{
+				min-width:unset;
+				padding: 8px 15px;
+			}
+			.btn-transparent{
+				text-align:right;
+				color:#fff;
+				padding:0;
+				margin:4px 0;
+			}
+		}
+	}
+	.info{
+	    display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align:center;
+		.btn-main{
+			margin: 16px 0;
+		}
+		.asterisk{
+			margin:0 5%;
+			max-width:700px;
+		}
+		.asterisk{
+			font-size:13px;
+		}
+		.luckybx{
+			display:flex;
+			justify-content: center;	
+			margin-bottom:30px !important;
+			.lckybxinnr{
+				//  padding: 40px 20px;
+				background:#fff;
+				color:#000;
+				margin:0 6px;
+				font-size:30px;
+				font-weight:600;
+				height:120px;
+				overflow:hidden;
+				// animation:uprotate 2s linear;
+				// animation
+			}
+			.lckybxnum{
+				width: 80px;
+				position: relative;
+				transition:all 2s ease;
+				top:0px;
+				div{
+					width: 100%;
+					height:120px;
+					margin:0;
+					display:flex;
+					align-items:center;
+					justify-content:center;
+				}
+				
+			}
+			margin:30px 0 20px;
+			@keyframes uprotate {	
+				10%, 90% {
+					transform: translate3d(0, 0px, 0);
+				  }
+				  
+				  20%, 80% {
+					transform: translate3d(0, -100px, 0);
+				  }
+				
+				  30%, 50%, 70% {
+					transform: translate3d(0, 100px, 0);
+				  }
+				
+				  40%, 60% {
+					transform: translate3d(0, 0px, 0);
+				  }
+			  }
+		}
+	}
+	.drawcar{
+		width:80%;
+		display:block;
+		margin:auto ;
+		transform:translateY(40px);
+	}
+}
 
+.ReactModal__Overlay {
+	background-color: rgba(0, 0, 0, 0.95) !important;
+	z-index:10;
+}
+.ReactModal__Content {
+	border:6px solid #fff !important;
+	overflow:visible !important;
+}
+.lossmodal{
+	text-align:center;
+	.btn-main{
+		width: fit-content;
+	}
+	.infoouter{
+		font-size:16px;
+	}
+}
+.winmodal{
+	.infoouter{
+		
+		font-size:16px;
+	}
+	text-align:center;
+	.btn-main{
+		width: fit-content;
+	}
+	.modallambo{
+		width:80%;
+		display:block;
+		margin:auto;
+		transform:translateY(80px);
+	}
+}
+.moneybg{
+	position: absolute;
+	max-width:700px;
+    width: 40vw;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    z-index: -1;
+    transform: translate(-50%,-50%);
+}
 
 @media(min-width:1260px) and (max-width:1400px) {
 	.navcontainer{
@@ -655,6 +859,13 @@ nav {
 		margin: auto;	
 		.volbtn{
 			right:-40px;
+		}
+	}
+	.luckybx {
+		.lckybxinnr{
+			font-size:14px !important;
+			margin:0 3px !important;
+			//padding: 28px 16px !important;
 		}
 	}
 }
@@ -677,6 +888,23 @@ nav {
 		top: 75px;
 		right: 80px;
 	}
+	.lamb-draw{
+		.header h1{
+			position:relative;
+			transform:translateX(0);
+			left:0;
+		}
+		.drawcar{
+			margin: 30px auto;
+		}
+	}
+	.luckybx {
+		.lckybxinnr{
+			font-size:14px !important;
+			margin:0 3px !important;
+			//padding: 18px 12px !important;
+		}
+	}
 }
 
 @media(min-width:862px) and (max-width:1024px) {
@@ -696,6 +924,28 @@ nav {
 	.arrowanimated{
 		top: 82px;
 		right: 80px;
+	}
+	.lamb-draw{
+		.header {
+			flex-direction:column;
+			text-align:center;
+			h1{
+				position:relative;
+				transform:translateX(0);
+				left:0;
+				margin: 20px 0 10px;;
+			}
+		}
+		.drawcar{
+			margin: 30px auto;
+		}
+	}
+	.luckybx {
+		.lckybxinnr{
+			font-size:14px !important;
+			margin:0 3px !important;
+			// padding: 16px 12px !important;
+		}
 	}
 }
 
@@ -809,6 +1059,28 @@ nav {
 			}
 		}
 	}
+	.lamb-draw{
+		.header {
+			flex-direction:column;
+			text-align:center;
+			h1{
+				position:relative;
+				transform:translateX(0);
+				left:0;
+				margin: 20px 0 10px;;
+			}
+		}
+		.drawcar{
+			margin: 30px auto;
+		}
+		.luckybx {
+			.lckybxinnr{
+				font-size:14px !important;
+				margin:0 3px !important;
+				// padding: 12px 8px !important;
+			}
+		}
+	}
 }
 
 @media(min-width:448px) and (max-width:576px) {
@@ -904,6 +1176,28 @@ nav {
 			.logo{
 				margin-top:20px;
 				margin-bottom:0;
+			}
+		}
+	}
+	.lamb-draw{
+		.header {
+			flex-direction:column;
+			text-align:center;
+			h1{
+				position:relative;
+				transform:translateX(0);
+				left:0;
+				margin: 20px 0 10px;;
+			}
+		}
+		.drawcar{
+			margin: 30px auto;
+		}
+		.luckybx {
+			.lckybxinnr{
+				font-size:14px !important;
+				margin:0 3px !important;
+				// padding: 8px 6px !important;
 			}
 		}
 	}
@@ -1021,6 +1315,34 @@ nav {
 				margin-bottom:0;
 			}
 		}
+	}
+	.lamb-draw{
+		.header {
+			flex-direction:column;
+			text-align:center;
+			h1{
+				position:relative;
+				transform:translateX(0);
+				left:0;
+				margin: 20px 0 10px;;
+			}
+		}
+		.drawcar{
+			margin: 30px auto;
+		}
+		.luckybx {
+			.lckybxinnr{
+				font-size:14px !important;
+				margin:0 3px !important;
+				// padding: 8px 4px !important;
+			}
+		}
+		.wallet-inner{
+			font-size:11px;
+		}
+	}
+	.ReactModal__Content{
+		width: min-content !important;
 	}
 }
 

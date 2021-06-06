@@ -35,13 +35,13 @@ const Ticket: React.FC<TicketListProps> = ({tickets}) => {
     <div className="ticket-bx">
       <div>{amount} tickets</div>
       <div className="ticket-bx-outer">
-        <i className="fa fa-angle-left" aria-hidden="true" onClick={backward} style={{color: count == 0?"gray":"black"}}></i>
+        <i className="fa fa-angle-left" aria-hidden="true" onClick={backward} style={{color: count == 0?"gray":""}}></i>
         <div className="ticketrotatorouter">
           <div className="ticketrotator" style={{width:60*totaltickets+'px',left:left+'px'}}>
           { TicketlistArr}
           </div>
         </div>
-        <i className="fa fa-angle-right" aria-hidden="true" onClick={forward}style={{color: count == totaltickets?"gray":"black"}}></i>
+        <i className="fa fa-angle-right" aria-hidden="true" onClick={forward}style={{color: count == totaltickets?"gray":""}}></i>
       </div>
     </div>
   );
