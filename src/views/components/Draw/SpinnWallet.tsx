@@ -110,8 +110,9 @@ const SpinnWallet: React.FC<SpinWalletProps> = ({winningNumber}) => {
             <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(2,3) : 'A'}/>
             <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(3,4) : 'D'}/>
             <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(4,5) : 'I'}/>
-            <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(6,7) : 'N'}/>
-            <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(7,8) : 'G'}/>
+            <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(5,6) : 'N'}/>
+            <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(6,7) : 'G'}/>
+            <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(7,8) : '-'}/>
             <Luckybx value={winningNumber.length > 8 ? winningNumber.slice(8,9) : '-'}/>
         </div>
         <div className="ticketouter">{ (active && account) ? <TwoTicket tickets={tickets} />:"" }</div>
