@@ -71,7 +71,7 @@ const Top: React.FC = () => {
                               let result = results[i];
                               if (!result.value) continue
                               let value = BigNumber.from(result.value);
-                                
+                                 
                                 // initialize the balance of an unseen sender
                                 // or increase it by the transaction value
                                 if (balances.get(result.from) === undefined) {
@@ -100,7 +100,7 @@ const Top: React.FC = () => {
                             }
                             // remove all excluded addresses
                             for (let i=0; i< EXCLUDE_LIST.length; i++) {
-                                balances.delete(EXCLUDE_LIST[i])
+                                balances.delete(EXCLUDE_LIST[i].toLowerCase())
                             }
             
                             const descBalances = Array.from(balances).sort((a, b) => {
