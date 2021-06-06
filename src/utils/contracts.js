@@ -132,6 +132,7 @@ export async function getWinningNumber (rawNumber, chainId, provider) {
                 }
             }
             winningNumber = randomNumberResult.slice(start, start + winningNumberLength)
+            console.log("winning number: ", winningNumber);
             zeroAddressWon = await winlamboContract.isLamboWinner(zeroAddress, winningNumber)
             
             start += winningNumberLength

@@ -6,7 +6,7 @@ import Countdown from "react-countdown";
 import SpinnWallet from './Draw/SpinnWallet'
 import { useWeb3React } from '@web3-react/core';
 import { getLamboRandomNumber, getWinningNumber, isWinner } from '../../utils/contracts';
-const Completionist = () => <span>CountDown completed!!!</span>;
+const Completionist = () => <span>Refresh your page!</span>;
 const Draw: React.FC = () => {
 
     const context = useWeb3React<Web3Provider>()
@@ -14,15 +14,15 @@ const Draw: React.FC = () => {
 
     const startTime = new Date()
     startTime.setUTCHours(16)
-    startTime.setUTCMinutes(0)
+    startTime.setUTCMinutes(10)
     startTime.setUTCSeconds(0)
     startTime.setUTCMilliseconds(0)
 
     const endTime = new Date()
-    startTime.setUTCHours(16)
-    startTime.setUTCMinutes(10)
-    startTime.setUTCSeconds(0)
-    startTime.setUTCMilliseconds(0)
+    endTime.setUTCHours(23)
+    endTime.setUTCMinutes(59)
+    endTime.setUTCSeconds(0)
+    endTime.setUTCMilliseconds(0)
 
 
     const losRef = useRef(null)
@@ -76,7 +76,7 @@ const Draw: React.FC = () => {
                     <h1>THE LAMBO DRAW</h1>
                     <div className="date">
                         <h3>June 6, 2021</h3>
-                        <Countdown date={Date.now() + 128*24*500000}>
+                        <Countdown date={startTime}>
                             <Completionist />
                         </Countdown>
                     </div>
