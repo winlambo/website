@@ -822,10 +822,14 @@ nav {
 	.btn-main{
 		width: fit-content;
 	}
+	.infoouter{
+		font-size:16px;
+	}
 }
 .winmodal{
 	.infoouter{
-		font-weight:300;
+		
+		font-size:16px;
 	}
 	text-align:center;
 	.btn-main{

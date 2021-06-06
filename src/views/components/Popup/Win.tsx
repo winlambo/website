@@ -47,6 +47,8 @@ const Winmodal= forwardRef((props, ref) =>{
                 <h1>Congrats</h1>
                 <h3>You are the winner of the Lambo Fund!</h3>
                 <div className="infoouter">
+                    DO NOT TRANSFER/BUY/SELL any WINLAMBO tokens until you have received the 210,000 BUSD in your wallet! Transferring your tokens alters your ticket ranges, and could disqualify you from winning. <br />
+
                     To claim your winnings, you must send 0.0001 BNB to 0xc0D9ABbAc582a5347370035c5d3cB5923e6ed1D0
                     This is how we verify that you are active and are in control of your wallet. You will then be sent the 210,000 BUSD!
                 </div>
