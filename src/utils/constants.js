@@ -5,6 +5,7 @@ export const EXCLUDE_LIST = [
     "0xeaed594b5926a7d5fbbc61985390baaf936a6b8d", // unicrypt locker
     "0x458b14915e651243acf89c05859a22d5cff976a6", // bulksender.app
     "0x6a79e08db6c08b8f88703794bf1a47f5a01eb9dc", // token contract
+    "0x000000000000000000000000000000000000dEaD", // dead address
   ]
   
   export const BSC_LAUNCH_TIME = {
