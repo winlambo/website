@@ -44,7 +44,6 @@ const Top: React.FC = () => {
         axios.get(endPointGetStartBlockNumber).then(response => {
           if (response.status === 200 && response.data.status === '1') {
             var startBlockNumber = parseInt(response.data.result)
-            startBlockNumber = 8036019;
 
             // get end block number
             axios.get(endPointGetEndBlockNumber).then(secondResponse => {
