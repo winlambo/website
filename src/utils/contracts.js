@@ -18,8 +18,7 @@ export async function getTicketInfo(chainId, account, provider) {
 export async function getLamboRandomNumber(chainId, provider) {
     const lamboRandomContract = getContractObj('LamboRandomNumber', chainId, provider)
     try {
-        //const winningnumber = await lamboRandomContract.lamboRandomResult()
-        const winningnumber = "580594967923859858463716868334220425265028769213324855673"
+        const winningnumber = await lamboRandomContract.lamboRandomResult()
         return winningnumber
     } catch (e) {
         console.error(e)
