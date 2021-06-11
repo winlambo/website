@@ -15,14 +15,14 @@ const Ticket: React.FC<TicketListProps> = ({tickets}) => {
     // let count = 0;
     function forward(){
       if(count<totaltickets-1){
-        setCount(count+2);
+        setCount(count+1);
         setLeft(left-120);
       }
       
     }
     function backward(){
       if(count>0){
-        setCount(count-2);
+        setCount(count-1);
         setLeft(left+120);
       }
     }
