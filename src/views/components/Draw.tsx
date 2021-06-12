@@ -31,7 +31,7 @@ const Draw: React.FC = () => {
     const winRef = useRef(null)
       function lossmodal(){
           // @ts-ignore
-          losRef.current.openModal();
+          //losRef.current.openModal();
       }
       function winmodal(){
         // @ts-ignore

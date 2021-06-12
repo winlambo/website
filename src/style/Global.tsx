@@ -853,6 +853,27 @@ nav {
     transform: translate(-50%,-50%);
 }
 
+
+// cookie
+.cookie{
+	position:fixed;
+	bottom:0;
+	width:100%;
+	left:0;
+	right:0;
+	z-index:100;
+	background:#000;
+	border-top:1.5px solid #fff;
+	padding: 20px 80px;
+	display:flex;
+	button{
+		border:none;
+		outline:none;
+		padding: 6px 16px;
+		margin-left:12px;
+	}
+}
+
 @media(min-width:1260px) and (max-width:1400px) {
 	.navcontainer{
 		width: 90vw;
@@ -945,6 +966,16 @@ nav {
 			font-size:14px !important;
 			margin:0 3px !important;
 			// padding: 16px 12px !important;
+		}
+	}
+	.cookie{
+		flex-direction:column;
+		align-items:center;
+		button{
+			margin-left:0;
+			margin-top:16px;
+			max-width:200px;
+			padding: 8px 36px;
 		}
 	}
 }
@@ -1081,6 +1112,16 @@ nav {
 			}
 		}
 	}
+	.cookie{
+		flex-direction:column;
+		align-items:center;
+		button{
+			margin-left:0;
+			margin-top:16px;
+			max-width:200px;
+			padding: 8px 36px;
+		}
+	}
 }
 
 @media(min-width:448px) and (max-width:576px) {
@@ -1199,6 +1240,16 @@ nav {
 				margin:0 3px !important;
 				// padding: 8px 6px !important;
 			}
+		}
+	}
+	.cookie{
+		flex-direction:column;
+		align-items:center;
+		button{
+			margin-left:0;
+			margin-top:16px;
+			max-width:200px;
+			padding: 8px 36px;
 		}
 	}
 }
@@ -1343,6 +1394,16 @@ nav {
 	}
 	.ReactModal__Content{
 		width: min-content !important;
+	}
+	.cookie{
+		flex-direction:column;
+		align-items:center;
+		button{
+			margin-left:0;
+			margin-top:16px;
+			max-width:200px;
+			padding: 8px 36px;
+		}
 	}
 }
 
