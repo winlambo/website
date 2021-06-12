@@ -120,10 +120,13 @@ export async function getWinningNumber (rawNumber, chainId, provider) {
         let winningNumberLength = 9
         let winningNumber = ''
         let zeroAddressWon = true
+        let ticketNotMintedYet = true
+        var ticketCounter = undefined;
 
         // get the winning number from the random number
         // redraw if the zero address is the winner
-        while (zeroAddressWon) {
+        // redraw if the winning ticket hasn't been minted yet
+        while (zeroAddressWon || ticketNotMintedYet) {
             // skip zeros at the beginng of the winning number
             while (randomNumberResult.charAt(start) == "0") {
                 start += 1;
@@ -132,9 +135,17 @@ export async function getWinningNumber (rawNumber, chainId, provider) {
                 }
             }
             winningNumber = randomNumberResult.slice(start, start + winningNumberLength)
-            console.log("winning number: ", winningNumber);
+
+            // determine if the winning number belongs to the zero address
             zeroAddressWon = await winlamboContract.isLamboWinner(zeroAddress, winningNumber)
+
+            // determine if the winning number ticket hasn't been minted yet
+            ticketCounter = await winlamboContract.ticketCounter();
+            winningNumber = parseInt(winningNumber);
+            ticketCounter = parseInt(ticketCounter);
+            ticketNotMintedYet = ticketCounter <= winningNumber;
             
+            // advance through the winning numbers
             start += winningNumberLength
             if (start + winningNumberLength > randomNumberResult.length) {
                 break
