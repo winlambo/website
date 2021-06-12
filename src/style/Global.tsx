@@ -866,11 +866,13 @@ nav {
 	border-top:1.5px solid #fff;
 	padding: 20px 80px;
 	display:flex;
+	align-items:center;
+	transistion:all 0.5s ease;
 	button{
 		border:none;
 		outline:none;
-		padding: 6px 16px;
-		margin-left:12px;
+		padding: 6px 50px;
+		margin-left:30px;
 	}
 }
 
@@ -1402,7 +1404,7 @@ nav {
 			margin-left:0;
 			margin-top:16px;
 			max-width:200px;
-			padding: 8px 36px;
+			padding: 8px 60px;
 		}
 	}
 }
