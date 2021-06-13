@@ -6,12 +6,13 @@ import Countdown from "react-countdown";
 import SpinnWallet from './Draw/SpinnWallet'
 import { useWeb3React } from '@web3-react/core';
 import { getLamboRandomNumber, getWinningNumber, isWinner } from '../../utils/contracts';
-const Completionist = () => <span>Refresh your page!</span>;
+const Completionist = () => <span></span>;//<span>Refresh your page!</span>;
 const Draw: React.FC = () => {
 
     const context = useWeb3React<Web3Provider>()
     const {connector, library, chainId, account, activate, deactivate, active, error } = context
 
+    /*
     const startTime = new Date()
     startTime.setUTCHours(16)
     startTime.setUTCMinutes(10)
@@ -23,13 +24,14 @@ const Draw: React.FC = () => {
     endTime.setUTCMinutes(59)
     endTime.setUTCSeconds(0)
     endTime.setUTCMilliseconds(0)
+    */
 
 
     const losRef = useRef(null)
     const winRef = useRef(null)
       function lossmodal(){
           // @ts-ignore
-          losRef.current.openModal();
+          //losRef.current.openModal();
       }
       function winmodal(){
         // @ts-ignore
@@ -38,8 +40,8 @@ const Draw: React.FC = () => {
 
     const [winningNumber, setWinningNumber] = useState('')
     useEffect(() => {
-        const curTime = new Date()
-        if (curTime < startTime || curTime > endTime) return
+        //const curTime = new Date()
+        //if (curTime < startTime || curTime > endTime) return
         getLamboRandomNumber(chainId, library?.getSigner()).then((result) => {
             getWinningNumber(result, chainId, library?.getSigner()).then((winningNumber) => {
                 setWinningNumber(winningNumber?.toString())
@@ -76,7 +78,7 @@ const Draw: React.FC = () => {
                     <h1>THE LAMBO DRAW</h1>
                     <div className="date">
                         <h3>June 6, 2021</h3>
-                        <Countdown date={startTime}>
+                        <Countdown date="">
                             <Completionist />
                         </Countdown>
                     </div>

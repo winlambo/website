@@ -5,6 +5,7 @@ import Volume from './components/Volume'
 import Top from './components/Top'
 import Draw from './components/Draw'
 import Footer from './components/Menu/Footer'
+import Cookie from './components/Cookie'
 
 const Home: React.FC = () => {
     return (
@@ -14,6 +15,7 @@ const Home: React.FC = () => {
             <Top />
             <Draw/>
             <Footer />
+            <Cookie/>
         </>
     );
 }
