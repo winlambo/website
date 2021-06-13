@@ -141,7 +141,7 @@ const Top: React.FC = () => {
     return (
         <section className="bg-white top-sec">
             <div className="container">
-                <h1>Top <span id="val">100</span> Active Traders</h1>
+                <h1>Today's Top <span id="val">100</span> Active Traders</h1>
                 <div className="toptable">
                     <div className="row rowhead">
                         <div className="cl1">
