@@ -862,7 +862,7 @@ nav {
 	left:0;
 	right:0;
 	z-index:100;
-	background:#000;
+	background-color: rgb(255, 51, 118);
 	border-top:1.5px solid #fff;
 	padding: 20px 80px;
 	display:flex;
@@ -1107,10 +1107,13 @@ nav {
 			margin: 30px auto;
 		}
 		.luckybx {
+			.lckybxnum{
+				width:50px !important;
+			}
 			.lckybxinnr{
 				font-size:14px !important;
 				margin:0 3px !important;
-				// padding: 12px 8px !important;
+				// padding: 8px 4px !important;
 			}
 		}
 	}
@@ -1237,10 +1240,13 @@ nav {
 			margin: 30px auto;
 		}
 		.luckybx {
+			.lckybxnum{
+				width:38px !important;
+			}
 			.lckybxinnr{
 				font-size:14px !important;
 				margin:0 3px !important;
-				// padding: 8px 6px !important;
+				// padding: 8px 4px !important;
 			}
 		}
 	}
@@ -1384,6 +1390,9 @@ nav {
 			margin: 30px auto;
 		}
 		.luckybx {
+			.lckybxnum{
+				width:28px !important;
+			}
 			.lckybxinnr{
 				font-size:14px !important;
 				margin:0 3px !important;
