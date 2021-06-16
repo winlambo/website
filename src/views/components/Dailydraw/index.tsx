@@ -67,7 +67,7 @@ const Dailydraw: React.FC = () => {
             </div>
           </div>
         </div>
-        <Ticketholder heading={"Your Lambo Holder Tickets"}/>
+        <Ticketholder heading={"Your Lambo Holder Tickets"} />
 
         <img src="images/lambo3.png" className="drawcar" alt="lambo" />
       </div>

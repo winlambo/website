@@ -9,28 +9,6 @@ import { getContractObj, shorter } from '../../../utils';
 import { getTicketInfo } from '../../../utils/contracts';
 
 const Footer: React.FC = () => {
-  
-  
-  // for bg audio start
-  // const [audio] = useState(new Audio('/musicbg.mp3'));
-  // const [playing, setPlaying] = useState(true);
-
-  // const toggle = () => setPlaying(!playing);
-
-  // useEffect(() => {
-  //     playing ? audio.play() : audio.pause();
-  //   },
-  //   [playing]
-  // );
-
-  // useEffect(() => {
-  //   audio.addEventListener('ended', () => setPlaying(false));
-  //   return () => {
-  //     audio.removeEventListener('ended', () => setPlaying(false));
-  //   };
-  // }, []);
-  // bg audio ended
-
 
 
   const context = useWeb3React<Web3Provider>()
