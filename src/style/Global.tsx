@@ -1138,7 +1138,7 @@ margin:20px 0
 	left:0;
 	right:0;
 	z-index:100;
-	background:#000;
+	background-color: rgb(255, 51, 118);
 	border-top:1.5px solid #fff;
 	padding: 20px 80px;
 	display:flex;
