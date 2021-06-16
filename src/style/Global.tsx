@@ -860,6 +860,7 @@ nav {
 		.wincol{
 			margin: 0 20px;
 			.winningname{
+				margin-top:5px;
 				text-align:left;
 				width: 100%;
 				padding-left:15px;

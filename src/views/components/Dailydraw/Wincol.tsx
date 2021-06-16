@@ -28,12 +28,12 @@ const Wincol: React.FC<WincolProps> = ({rank,amount,winningticket}) => {
                     <div className="rank" style={{background:rankcolor}}>{rank}</div>
                     0xa6b38ad3155533yxe4074e
                 </div>
-                <div className="winningname" style={{opacity:winningticket?1:0}}>Winning Ticket #{winningticket}</div>
-                <Spinbox color={"green"}/>
-                <Spinbox/>
-                <Spinbox/>
-                <Spinbox/>
-                <Spinbox/>
+                {/* <div className="winningname" style={{opacity:winningticket?1:0}}>Winning Ticket #{winningticket}</div> */}
+                <Spinbox color={"green"}  winningticket={1}/>
+                <Spinbox  winningticket={1}/>
+                <Spinbox  winningticket={1}/>
+                <Spinbox  winningticket={1}/>
+                <Spinbox  winningticket={1}/>
             </div>
         </div>
     );

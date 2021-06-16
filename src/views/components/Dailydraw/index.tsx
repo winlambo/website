@@ -41,8 +41,8 @@ const Dailydraw: React.FC = () => {
           </div>
         </div>
         <div className="wintickets">
-          <Wincol rank={1} winningticket={1} amount={12000} />
-          <Wincol rank={2} winningticket={2} amount={7000} />
+          <Wincol rank={1} amount={12000} />
+          <Wincol rank={2} amount={7000} />
           <Wincol rank={3} amount={2000} />
         </div>
         <Ticketholder heading={"Your Daily Volume Tickets"} />
