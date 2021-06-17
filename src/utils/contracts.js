@@ -11,7 +11,7 @@ export async function getTicketInfo(chainId, account, provider) {
         return tickets
     } catch (e) {
         console.error(e)
-        return null
+        return []
     }
 }
 
@@ -23,6 +23,20 @@ export async function getLamboRandomNumber(chainId, provider) {
     } catch (e) {
         console.error(e)
         return BigNumber.from(0)
+    }
+}
+
+
+export async function getRandomNumbers(chainId, provider) {
+    const n = 10
+    const lamboRandomContract = getContractObj('LamboRandomNumber', chainId, provider)
+    try {
+        const potRandomResult = await lamboRandomContract.potRandomResult()
+        const expandRandomResult = await lamboRandomContract.expand(potRandomResult, n)
+        return expandRandomResult
+    } catch (e) {
+        console.error(e)
+        return []
     }
 }
 
@@ -100,6 +114,23 @@ export async function getDailyFund(chainId, provider) {
     }
 }
 
+export async function getDailyVolumeTicketsByAccount(account, chainId, provider) {
+    const winlamboContract = getContractObj('WinLambo', chainId, provider)
+    try {
+        const lowerRange = await winlamboContract.potTickets(account, 0)
+        const upperRange = await winlamboContract.potTickets(account, 1)
+        const ticket = []
+        ticket.push(lowerRange)
+        ticket.push(upperRange)
+        const tickets = []
+        tickets.push(ticket)
+        return tickets
+    } catch (e) {
+        console.error(e)
+        return []
+    }
+}
+
 export async function isWinner(winningNumber, chainId, account, provider) {
     const winlamboContract = getContractObj('WinLambo', chainId, provider)
     try {
@@ -109,6 +140,50 @@ export async function isWinner(winningNumber, chainId, account, provider) {
         console.error(e)
         return false
     }
+}
+
+export async function isCurrentDay(chainId, provider) {
+    const lamboRandomContract = getContractObj('LamboRandomNumber', chainId, provider)
+    try {
+        const requestCount = await lamboRandomContract.potRequestCount()
+        const recentReqId = await lamboRandomContract.potRequestHistory(requestCount.sub(BigNumber.from(1)))
+        const resultTimestamp = await lamboRandomContract.potResultTimestamps(recentReqId)
+        const lastTimestamp = resultTimestamp.toNumber()
+
+        const currentTime = new Date();
+        const baseTime = new Date();
+        baseTime.setUTCHours(16);
+        baseTime.setUTCMinutes(0);
+        baseTime.setUTCSeconds(0);
+        baseTime.setUTCMilliseconds(0);        
+
+        if (currentTime.getTime() > baseTime.getTime()) {
+            return lastTimestamp > baseTime ? true : false
+        } else {
+            return true
+        }
+    } catch (e) {
+        console.error(e)
+        return false
+    }
+}
+
+export async function getTop3PotTicketMembers(chainId, provider) {
+    const winlamboContract = getContractObj('WinLambo', chainId, provider)
+    try {
+        const potTicketsMember1 = await winlamboContract.potTicketsMembers(0)
+        const potTicketsMember2 = await winlamboContract.potTicketsMembers(1)
+        const potTicketsMember3 = await winlamboContract.potTicketsMembers(2)
+        const potTicketMembers = []
+        potTicketMembers.push(potTicketsMember1)
+        potTicketMembers.push(potTicketsMember2)
+        potTicketMembers.push(potTicketsMember3)
+        return potTicketMembers;
+
+    } catch (e) {
+        console.error(e)
+        return []
+    } 
 }
 
 export async function getWinningNumber (rawNumber, chainId, provider) {
@@ -161,4 +236,117 @@ export async function getWinningNumber (rawNumber, chainId, provider) {
         console.error(e)
         return ''
     }
+}
+
+export async function get14WinningNumber (randomNumbers, chainId, provider) {
+
+    if (randomNumbers.length !== 2) return []
+
+    const retWinningNumbers = []
+    const winlamboContract = getContractObj('WinLambo', chainId, provider)
+
+    for (let idx = 0; idx < randomNumbers.length; idx++) {
+        const rawNumber = randomNumbers[idx]
+        const randomNumberResult = rawNumber.toString()
+        const zeroAddress = '0x0000000000000000000000000000000000000000'
+
+        try {
+            let start = 0
+            let winningNumberLength = 9
+            let winningNumber = ''
+            let counter = 1
+    
+            while (start + winningNumberLength <= randomNumberResult.length) {
+
+                if (counter > 7) break;
+                // skip zeros at the beginng of the winning number
+                while (randomNumberResult.charAt(start) == "0") {
+                    start += 1;
+                    if (start > randomNumberResult.length - winningNumberLength) {
+                        break;
+                    }
+                }
+                winningNumber = randomNumberResult.slice(start, start + winningNumberLength)
+                let winner = await winlamboContract.potWinner(winningNumber)
+                retWinningNumbers.push(parseInt(winningNumber))
+    
+                // advance through the winning numbers
+                start += winningNumberLength
+                counter += 1
+            }
+        } catch (e) {
+            console.error(e)
+        }
+    }
+    return retWinningNumbers
+}
+
+export async function get4LuckyHolders (randomNumbers, chainId, provider) {
+
+    if (randomNumbers.length === 0) return []
+
+    const retLuckyWinningNumbers = []
+    const winlamboContract = getContractObj('WinLambo', chainId, provider)
+    let ticketCounter = await winlamboContract.ticketCounter();
+
+    for (let idx = 0; idx < randomNumbers.length; idx++) {
+        const rawNumber = randomNumbers[idx]
+        const randomNumberResult = rawNumber.toString()
+        const zeroAddress = '0x0000000000000000000000000000000000000000'
+        try {
+            let start = 0
+            let winningNumberLength = 9
+            let winningNumber = ''
+            let zeroAddressWon = true
+            let ticketNotMintedYet = true
+    
+            // get the winning number from the random number
+            // redraw if the zero address is the winner
+            // redraw if the winning ticket hasn't been minted yet
+            while (zeroAddressWon || ticketNotMintedYet) {
+                // skip zeros at the beginng of the winning number
+                while (randomNumberResult.charAt(start) == "0") {
+                    start += 1;
+                    if (start > randomNumberResult.length - winningNumberLength) {
+                        ticketNotMintedYet = false
+                        break
+                    }
+                }
+                if (!ticketNotMintedYet) break
+
+                winningNumber = randomNumberResult.slice(start, start + winningNumberLength)
+    
+                // determine if the winning number belongs to the zero address
+                zeroAddressWon = await winlamboContract.isLamboWinner(zeroAddress, winningNumber)
+    
+                // determine if the winning number ticket hasn't been minted yet
+                
+                winningNumber = parseInt(winningNumber);
+                ticketCounter = parseInt(ticketCounter);
+                ticketNotMintedYet = ticketCounter <= winningNumber;
+                
+                // advance through the winning numbers
+                start += winningNumberLength
+                if (start + winningNumberLength > randomNumberResult.length) {
+                    break
+                }
+            }
+
+            if (winningNumber < 100000001 || winningNumber > 999999999) {
+                console.log("Reached end of random number and no winning ticket was found. Next...")
+                continue
+            } else {
+                retLuckyWinningNumbers.push(winningNumber)
+            }
+
+            if (retLuckyWinningNumbers.length === 4) break
+    
+        } catch (e) {
+            console.error(e)
+            continue
+        }
+    }
+
+    return retLuckyWinningNumbers
+
 }

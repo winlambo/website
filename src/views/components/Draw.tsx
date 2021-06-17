@@ -5,43 +5,34 @@ import Winmodal from './Popup/Win'
 import Countdown from "react-countdown";
 import SpinnWallet from './Draw/SpinnWallet'
 import { useWeb3React } from '@web3-react/core';
-import { getLamboRandomNumber, getWinningNumber, isWinner } from '../../utils/contracts';
+import { getLamboRandomNumber, getTop3PotTicketMembers, getWinningNumber, isCurrentDay, isWinner } from '../../utils/contracts';
+import PrepareJackpot from './Popup/PrepareJackpot';
 const Completionist = () => <span></span>;//<span>Refresh your page!</span>;
 const Draw: React.FC = () => {
 
     const context = useWeb3React<Web3Provider>()
     const {connector, library, chainId, account, activate, deactivate, active, error } = context
 
-    /*
-    const startTime = new Date()
-    startTime.setUTCHours(16)
-    startTime.setUTCMinutes(10)
-    startTime.setUTCSeconds(0)
-    startTime.setUTCMilliseconds(0)
-
-    const endTime = new Date()
-    endTime.setUTCHours(23)
-    endTime.setUTCMinutes(59)
-    endTime.setUTCSeconds(0)
-    endTime.setUTCMilliseconds(0)
-    */
-
-
     const losRef = useRef(null)
     const winRef = useRef(null)
-      function lossmodal(){
+    const prepareJackpotRef = useRef(null)
+    function lossmodal(){
           // @ts-ignore
           //losRef.current.openModal();
-      }
-      function winmodal(){
+    }
+    function winmodal(){
         // @ts-ignore
         winRef.current.openModal();
     }
 
+    function prepareJackpotModal() {
+        // @ts-ignore
+        prepareJackpotRef.current.openModal();
+    }
+
     const [winningNumber, setWinningNumber] = useState('')
     useEffect(() => {
-        //const curTime = new Date()
-        //if (curTime < startTime || curTime > endTime) return
+
         getLamboRandomNumber(chainId, library?.getSigner()).then((result) => {
             getWinningNumber(result, chainId, library?.getSigner()).then((winningNumber) => {
                 setWinningNumber(winningNumber?.toString())
@@ -61,6 +52,16 @@ const Draw: React.FC = () => {
             console.error(e)
             setWinningNumber('')
         })
+        if (account && chainId && library) {
+            isCurrentDay(chainId, library?.getSigner()).then((flag) => {
+                if (!flag) {
+                    prepareJackpotModal()
+                }
+            }).catch(e => {
+                console.log(e)
+            })        
+        }
+
     }, [account, chainId, library])    
 
     return (
@@ -68,6 +69,7 @@ const Draw: React.FC = () => {
             
             <Lose ref={losRef}/>
             <Winmodal ref={winRef}/>
+            <PrepareJackpot ref={prepareJackpotRef}/>
             <div className="container">
                 
                 <div className="header">
