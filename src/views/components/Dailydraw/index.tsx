@@ -14,7 +14,7 @@ import {
   getTicketInfo,
   getTop3PotTicketMembers,
 } from "../../../utils/contracts";
-const Completionist = () => <span></span>; //<span>Refresh your page!</span>;
+const Completionist = () => <span></span>; 
 const Dailydraw: React.FC = () => {
   const context = useWeb3React<Web3Provider>();
   const {
@@ -27,7 +27,8 @@ const Dailydraw: React.FC = () => {
     active,
     error,
   } = context;
-  const [winningNumber, setWinningNumber] = useState("");
+  const [winningNumbers, setWinningNumbers] = useState<any>([]);
+  const [accountWinNumber, setAccountWinningNumber] = useState(0);
   const [topTicketMembers, setTopTicketMembers] = useState<any>([]);
   const [dailyVolumeTickets, setDailyVolumeTickets] = useState<any>([]);
   const [holderTickets, setHolderTickets] = useState<any>([]);
@@ -73,12 +74,15 @@ const Dailydraw: React.FC = () => {
     getRandomNumbers(chainId, library?.getSigner())
       .then((randomNumbers) => {
         get14WinningNumber(
+          account,
           randomNumbers.slice(0, 2),
           chainId,
           library?.getSigner()
         )
-          .then((winningNumbers) => {
-            console.log("14 Winning = ", winningNumbers);
+          .then((winNumbers) => {
+            console.log("14 Winning = ", winNumbers.totalWinNumbers);
+            setWinningNumbers(winNumbers.totalWinNumbers)
+            setAccountWinningNumber(winNumbers.accountWinNumber)
           })
           .catch((e) => {
             console.log(e);
@@ -133,17 +137,9 @@ const Dailydraw: React.FC = () => {
           </div>
           <div className="colheader">
             <Wincol
-              rank={1}
-              amount={Math.floor(dailyJackpotAmount * 15) / 100}
+              items={winningNumbers}
+              winningticket={accountWinNumber}
             />
-            {/* <Wincol
-              rank={2}
-              amount={Math.floor(dailyJackpotAmount * 10) / 100}
-            />
-            <Wincol
-              rank={3}
-              amount={Math.floor(dailyJackpotAmount * 5) / 100}
-            /> */}
           </div>
         </div>
         <Ticketholder
