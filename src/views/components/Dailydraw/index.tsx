@@ -3,6 +3,7 @@ import { Web3Provider } from "@ethersproject/providers";
 import Countdown from "react-countdown";
 import Wincol from "./Wincol";
 import Ticketholder from "./Ticketholder";
+import Rankheader from "./Rankheader";
 import { useWeb3React } from "@web3-react/core";
 import {
   get14WinningNumber,
@@ -27,60 +28,74 @@ const Dailydraw: React.FC = () => {
     error,
   } = context;
   const [winningNumber, setWinningNumber] = useState("");
-  const [topTicketMembers, setTopTicketMembers] = useState<any>([])
-  const [dailyVolumeTickets, setDailyVolumeTickets] = useState<any>([])
-  const [holderTickets, setHolderTickets] = useState<any>([])
-  const [dailyJackpotAmount, setDailyJackpotAmount] = useState(0)
-  const [luckyHolders, setLuckyHolders] = useState<any>([])
+  const [topTicketMembers, setTopTicketMembers] = useState<any>([]);
+  const [dailyVolumeTickets, setDailyVolumeTickets] = useState<any>([]);
+  const [holderTickets, setHolderTickets] = useState<any>([]);
+  const [dailyJackpotAmount, setDailyJackpotAmount] = useState(0);
+  const [luckyHolders, setLuckyHolders] = useState<any>([]);
 
   useEffect(() => {
-    getTop3PotTicketMembers(chainId, library?.getSigner()).then((members) => {
-        setTopTicketMembers(members)
-    }).catch(e => {
-        console.log(e)
-        setTopTicketMembers([])
-    })
-    
-    getDailyFund(chainId, library?.getSigner()).then((busdAmount) => {
-      setDailyJackpotAmount(busdAmount * 5 /100)
-    }).catch(e => {
-      console.log(e)
-    })
+    getTop3PotTicketMembers(chainId, library?.getSigner())
+      .then((members) => {
+        setTopTicketMembers(members);
+      })
+      .catch((e) => {
+        console.log(e);
+        setTopTicketMembers([]);
+      });
+
+    getDailyFund(chainId, library?.getSigner())
+      .then((busdAmount) => {
+        setDailyJackpotAmount((busdAmount * 5) / 100);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
 
     if (!!account && !!library) {
-      getDailyVolumeTicketsByAccount(account, chainId, library?.getSigner()).then((tickets) => {
-          setDailyVolumeTickets(tickets)
-      }).catch(e => {
-        console.log(e)
-      })
+      getDailyVolumeTicketsByAccount(account, chainId, library?.getSigner())
+        .then((tickets) => {
+          setDailyVolumeTickets(tickets);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
 
-      getTicketInfo(chainId, account, library?.getSigner()).then((tickets) => {
-        if (tickets)
-          setHolderTickets(tickets)
-      }).catch(e => {
-        console.log(e)
-      })
+      getTicketInfo(chainId, account, library?.getSigner())
+        .then((tickets) => {
+          if (tickets) setHolderTickets(tickets);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     }
 
-    getRandomNumbers(chainId, library?.getSigner()).then((randomNumbers) => {
+    getRandomNumbers(chainId, library?.getSigner())
+      .then((randomNumbers) => {
+        get14WinningNumber(
+          randomNumbers.slice(0, 2),
+          chainId,
+          library?.getSigner()
+        )
+          .then((winningNumbers) => {
+            console.log("14 Winning = ", winningNumbers);
+          })
+          .catch((e) => {
+            console.log(e);
+          });
 
-      get14WinningNumber(randomNumbers.slice(0, 2), chainId, library?.getSigner()).then((winningNumbers) => {
-          console.log('14 Winning = ', winningNumbers)
-      }).catch (e => {
-        console.log(e)
+        get4LuckyHolders(randomNumbers.slice(2), chainId, library?.getSigner())
+          .then((holders) => {
+            setLuckyHolders(holders);
+          })
+          .catch((e) => {
+            console.log(e);
+          });
       })
-
-      get4LuckyHolders(randomNumbers.slice(2), chainId, library?.getSigner()).then((holders) => {
-          setLuckyHolders(holders)
-      }).catch(e => {
-        console.log(e)
-      })
-
-    }).catch (e => {
-      console.log(e)
-    })
-
-  }, [account, chainId, library])
+      .catch((e) => {
+        console.log(e);
+      });
+  }, [account, chainId, library]);
 
   return (
     <section className="daily-draw">
@@ -99,11 +114,42 @@ const Dailydraw: React.FC = () => {
           </div>
         </div>
         <div className="wintickets">
-          <Wincol rank={1} amount={Math.floor(dailyJackpotAmount * 15) / 100} address={topTicketMembers.length > 0 ? topTicketMembers[0] : '0x'} />
-          <Wincol rank={2} amount={Math.floor(dailyJackpotAmount * 10) / 100} address={topTicketMembers.length > 1 ? topTicketMembers[1] : '0x'} />
-          <Wincol rank={3} amount={Math.floor(dailyJackpotAmount * 5) / 100} address={topTicketMembers.length > 2 ? topTicketMembers[2] : '0x'} />
+          <div className="rankheader">
+            <Rankheader
+              rank={1}
+              amount={Math.floor(dailyJackpotAmount * 15) / 100}
+              address={topTicketMembers.length > 0 ? topTicketMembers[0] : "0x"}
+            />
+            <Rankheader
+              rank={2}
+              amount={Math.floor(dailyJackpotAmount * 10) / 100}
+              address={topTicketMembers.length > 0 ? topTicketMembers[1] : "0x"}
+            />
+            <Rankheader
+              rank={3}
+              amount={Math.floor(dailyJackpotAmount * 3) / 100}
+              address={topTicketMembers.length > 0 ? topTicketMembers[2] : "0x"}
+            />
+          </div>
+          <div className="colheader">
+            <Wincol
+              rank={1}
+              amount={Math.floor(dailyJackpotAmount * 15) / 100}
+            />
+            <Wincol
+              rank={2}
+              amount={Math.floor(dailyJackpotAmount * 10) / 100}
+            />
+            <Wincol
+              rank={3}
+              amount={Math.floor(dailyJackpotAmount * 5) / 100}
+            />
+          </div>
         </div>
-        <Ticketholder heading={"Your Daily Volume Tickets"} tickets={dailyVolumeTickets} />
+        <Ticketholder
+          heading={"Your Daily Volume Tickets"}
+          tickets={dailyVolumeTickets}
+        />
         <div className="luckyholderouter">
           <h3>Lucky Holders</h3>
           <div className="luckyholder">
@@ -125,7 +171,10 @@ const Dailydraw: React.FC = () => {
             </div>
           </div>
         </div>
-        <Ticketholder heading={"Your Lambo Holder Tickets"} tickets={holderTickets} />
+        <Ticketholder
+          heading={"Your Lambo Holder Tickets"}
+          tickets={holderTickets}
+        />
 
         <img src="images/lambo3.png" className="drawcar" alt="lambo" />
       </div>

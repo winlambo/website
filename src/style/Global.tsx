@@ -854,9 +854,26 @@ nav {
 	.wintickets{
 		display:flex;
 		justify-content:space-between;
-		@media screen and (max-width:800px) {
-			flex-direction:column;
+		flex-direction:column;
+		
+		.rankheader{
+			display:flex;
+			justify-content:space-between;
+			.wincol{
+				width: 100%;
+			}
+			.header{
+				margin-bottom:0
+			}
 		}
+		.colheader{
+			display:flex;
+			justify-content:space-between;
+			.wincol{
+				width: 100%;
+			}
+		}
+		
 		.wincol{
 			margin: 0 20px;
 			.winningname{
@@ -956,6 +973,23 @@ nav {
 				height:44px;
 			}
 			
+		}
+		@media screen and (max-width:800px) {
+			.rankheader, .colheader 
+			{
+				flex-direction:column;
+				text-align:center;
+			}
+			.rankheader{
+				.wincol{
+					width: auto
+				}
+			}
+		}
+		@media screen and (max-width:500px) {
+			.wincol{
+				margin:0
+			}
 		}
 	}
 

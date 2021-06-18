@@ -5,10 +5,11 @@ export interface WincolProps {
     rank?: number
     amount?: number
     winningticket?:number
+    address?:string
 }
 
 
-const Wincol: React.FC<WincolProps> = ({rank,amount,winningticket}) => {
+const Rankheader: React.FC<WincolProps> = ({rank,amount,winningticket, address}) => {
     let rankcolor;
     if(rank == 1)
         rankcolor ="#e4d272"
@@ -19,17 +20,19 @@ const Wincol: React.FC<WincolProps> = ({rank,amount,winningticket}) => {
     return (
         <div className="wincol">
             <div className="header">
-               
-                {/* <div className="winningname" style={{opacity:winningticket?1:0}}>Winning Ticket #{winningticket}</div> */}
-                <Spinbox color={"green"}  winningticket={1}/>
-                <Spinbox  winningticket={1}/>
-                <Spinbox  winningticket={1}/>
-                <Spinbox winningticket={1}/>
-                <Spinbox winningticket={1}/>
+                <div className="coloredval">{amount}$
+                    <div className="coloredbg">
+                    {amount}$
+                    </div>
+                </div>
+                <div className="headerinr">
+                    <div className="rank" style={{background:rankcolor}}>{rank}</div>
+                    {address}
+                </div>
             </div>
         </div>
     );
 }
 
-export default Wincol;
+export default Rankheader;
             
