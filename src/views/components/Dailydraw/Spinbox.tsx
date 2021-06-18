@@ -8,7 +8,7 @@ export interface SpinbxProp {
 
 const Spinbox: React.FC<SpinbxProp> = ({ color, winningticket }) => {
   return (
-    <>
+    <div className=" col-md-4" >
       <div className="winningname" style={{ opacity: winningticket ? 1 : 0 }}>
         Winning Ticket #{winningticket}
       </div>
@@ -23,7 +23,7 @@ const Spinbox: React.FC<SpinbxProp> = ({ color, winningticket }) => {
         <div className="spin">0</div>
         <div className="spin">0</div>
       </div>
-    </>
+    </div>
   );
 };
 

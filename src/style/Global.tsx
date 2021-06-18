@@ -883,6 +883,9 @@ nav {
 				padding-left:15px;
 				font-weight:300;
 			}
+			.winningnamebxouter{
+				width:30%;
+			}
 			.coloredval{
 				font-size: 24px;
 				background: linear-gradient(to right, #976717, #e5d575, #936517);
@@ -913,7 +916,8 @@ nav {
 			}
 		}
 		.header{
-			flex-direction:column;
+			// flex-direction:column;
+			flex-flow: wrap;
 		}
 		.headerinr{
 			background:#000;
@@ -941,6 +945,7 @@ nav {
 		.spinouter{
 			display:flex;
 			margin:0 10px;
+			justify-content: center;
 			&.green{
 				.spin{
 					background:#9dea09;

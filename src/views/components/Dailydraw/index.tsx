@@ -136,14 +136,14 @@ const Dailydraw: React.FC = () => {
               rank={1}
               amount={Math.floor(dailyJackpotAmount * 15) / 100}
             />
-            <Wincol
+            {/* <Wincol
               rank={2}
               amount={Math.floor(dailyJackpotAmount * 10) / 100}
             />
             <Wincol
               rank={3}
               amount={Math.floor(dailyJackpotAmount * 5) / 100}
-            />
+            /> */}
           </div>
         </div>
         <Ticketholder
