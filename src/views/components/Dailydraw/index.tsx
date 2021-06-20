@@ -131,7 +131,7 @@ const Dailydraw: React.FC = () => {
             />
             <Rankheader
               rank={3}
-              amount={Math.floor(dailyJackpotAmount * 3) / 100}
+              amount={Math.floor(dailyJackpotAmount * 5) / 100}
               address={topTicketMembers.length > 0 ? topTicketMembers[2] : "0x"}
             />
           </div>
