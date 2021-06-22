@@ -1,28 +1,68 @@
 import React, { useEffect, useState } from "react";
 import { keyframes } from "styled-components";
+import Spinrotate from "./Spinrotate";
 
 export interface SpinbxProp {
   color?: string;
   winningticket?: number;
-  spinNumbers:string;
+  goldenamount?: string;
+  spinNumbers: string;
 }
 
-const Spinbox: React.FC<SpinbxProp> = ({ color, winningticket, spinNumbers }) => {
+const Spinbox: React.FC<SpinbxProp> = ({
+  color,
+  winningticket,
+  spinNumbers,
+  goldenamount,
+}) => {
+  const [spinNumberhook, setspinNumberhook] = useState("");
+  const [opacity, setopacity] = useState(0);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setspinNumberhook(spinNumbers);
+      setopacity(1);
+      // @ts-ignore
+    }, winningticket * 900);
+    return () => clearTimeout(timer);
+  }, []);
   return (
-    <div className=" col-md-4" >
-      <div className="winningname" style={{ opacity: winningticket ? 1 : 0 }}>
+    // @ts-ignore
+    <div className=" col-md-4" style={{ opacity: opacity }}>
+      <div className="winningname">
         Winning Ticket #{winningticket}
+        <div className="coloredval">
+          {goldenamount}
+          <div className="coloredbg">{goldenamount}</div>
+        </div>
       </div>
-      <div className={`spinouter ${color}`}>
-        <div className="spin">{spinNumbers?.length > 0 ? spinNumbers[0] : '0'}</div>
-        <div className="spin">{spinNumbers?.length > 1 ? spinNumbers[1] : '0'}</div>
-        <div className="spin">{spinNumbers?.length > 2 ? spinNumbers[2] : '0'}</div>
-        <div className="spin">{spinNumbers?.length > 3 ? spinNumbers[3] : '0'}</div>
-        <div className="spin">{spinNumbers?.length > 4 ? spinNumbers[4] : '0'}</div>
-        <div className="spin">{spinNumbers?.length > 5 ? spinNumbers[5] : '0'}</div>
-        <div className="spin">{spinNumbers?.length > 6 ? spinNumbers[6] : '0'}</div>
-        <div className="spin">{spinNumbers?.length > 7 ? spinNumbers[7] : '0'}</div>
-        <div className="spin">{spinNumbers?.length > 8 ? spinNumbers[8] : '0'}</div>
+      <div className={`spinouter luckybx ${color}`}>
+        <Spinrotate
+          value={spinNumberhook.length > 8 ? spinNumberhook?.slice(0, 1) : "L"}
+        />
+        <Spinrotate
+          value={spinNumberhook.length > 8 ? spinNumberhook.slice(1, 2) : "O"}
+        />
+        <Spinrotate
+          value={spinNumberhook.length > 8 ? spinNumberhook.slice(2, 3) : "A"}
+        />
+        <Spinrotate
+          value={spinNumberhook.length > 8 ? spinNumberhook.slice(3, 4) : "D"}
+        />
+        <Spinrotate
+          value={spinNumberhook.length > 8 ? spinNumberhook.slice(4, 5) : "I"}
+        />
+        <Spinrotate
+          value={spinNumberhook.length > 8 ? spinNumberhook.slice(5, 6) : "N"}
+        />
+        <Spinrotate
+          value={spinNumberhook.length > 8 ? spinNumberhook.slice(6, 7) : "G"}
+        />
+        <Spinrotate
+          value={spinNumberhook.length > 8 ? spinNumberhook.slice(7, 8) : "-"}
+        />
+        <Spinrotate
+          value={spinNumberhook.length > 8 ? spinNumberhook.slice(8, 9) : "-"}
+        />
       </div>
     </div>
   );

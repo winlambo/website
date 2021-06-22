@@ -7,14 +7,11 @@ import TwoTicket from "../Menu/TwoTicket";
 import { injectedConnector } from "../../../utils/connectors";
 import { useEagerConnect } from "../../../hooks/useEagerConnect";
 import { useInactiveListener } from "../../../hooks/useInactiveListener";
-import Luckybx from "./Luckybx";
-
 
 export interface TicketholderProp {
   heading?: string;
   tickets: BigNumber[][];
 }
-
 
 const Ticketholder: React.FC<TicketholderProp> = ({ heading, tickets }) => {
   const context = useWeb3React<Web3Provider>();

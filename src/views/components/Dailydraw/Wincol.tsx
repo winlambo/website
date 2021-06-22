@@ -11,9 +11,13 @@ const Wincol: React.FC<WincolProps> = ({items,winningticket}) => {
     return (
         <div className="wincol">
             <div className="row">
-                {items?.map((item, index) => (
-                    <Spinbox key={index} winningticket={index + 1} color={index + 1 === winningticket ? "green" : ""} spinNumbers={item.toString()}/>    
-                ))}
+                {items?.map((item, index) => {
+                   setTimeout(function(){
+                    // alert("Sup!"); 
+               }, index*2000);
+                   return  <Spinbox key={index} winningticket={index + 1} goldenamount={"$" + (20*index).toString()} color={index + 1 === winningticket ? "green" : ""} spinNumbers={item.toString()}/> 
+                    
+                })}
             </div>
         </div>
     );
