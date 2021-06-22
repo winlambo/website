@@ -120,6 +120,8 @@ export async function getDailyVolumeTicketsByAccount(account, chainId, provider)
         const lowerRange = await winlamboContract.potTickets(account, 0)
         const upperRange = await winlamboContract.potTickets(account, 1)
         const ticket = []
+        if (lowerRange.eq(upperRange)) return []
+
         ticket.push(lowerRange)
         ticket.push(upperRange)
         const tickets = []
