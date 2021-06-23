@@ -102,7 +102,7 @@ const Dailydraw: React.FC = () => {
   }, [account, chainId, library]);
 
   return (
-    <section className="daily-draw">
+    <section className="daily-draw" id="daily-draw">
       <div className="container">
         <div className="header">
           <div className="lg1">

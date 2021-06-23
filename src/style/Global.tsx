@@ -800,12 +800,18 @@ const GlobalStyle = createGlobalStyle`
   
   .daily-draw {
 	color: #000;
-  
+	position: relative;
 	.container {
 	  position: relative;
 	  @media screen and (max-width: 992px) {
 		max-width: unset;
 	  }
+	}
+	.ReactModal__Overlay {
+		position: absolute !important;
+	}
+	.lossmodal{
+		color:#fff
 	}
 	.header {
 	  display: flex;

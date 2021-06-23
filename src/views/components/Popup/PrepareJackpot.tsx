@@ -18,7 +18,7 @@ const customStyles = {
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
 const { forwardRef, useRef, useImperativeHandle } = React;
 const PrepareJackpot= forwardRef((props, ref) => {
-    const [modalIsOpen, setIsOpen] = React.useState(false);
+    const [modalIsOpen, setIsOpen] = React.useState(true);
     useImperativeHandle(ref, () => ({
         openModal: () => {
             setIsOpen(true)
@@ -32,12 +32,15 @@ const PrepareJackpot= forwardRef((props, ref) => {
         setIsOpen(false);
     }
     return (
+        
         <Modal
             isOpen={modalIsOpen}
             onAfterOpen={afterOpenModal}
             onRequestClose={closeModal}
             style={customStyles}
             contentLabel="Modal"
+            // @ts-ignore
+            parentSelector={() => document.querySelector('.daily-draw')}
         >
             <div className="lossmodal">
                 <h1>Not Started Yet</h1>
