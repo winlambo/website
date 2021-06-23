@@ -18,7 +18,7 @@ const customStyles = {
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
 const { forwardRef, useRef, useImperativeHandle } = React;
 const PrepareJackpot= forwardRef((props, ref) => {
-    const [modalIsOpen, setIsOpen] = React.useState(true);
+    const [modalIsOpen, setIsOpen] = React.useState(false);
     useImperativeHandle(ref, () => ({
         openModal: () => {
             setIsOpen(true)

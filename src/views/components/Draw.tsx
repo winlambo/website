@@ -30,6 +30,11 @@ const Draw: React.FC = () => {
         prepareJackpotRef.current.openModal();
     }
 
+    function closeJackpotModal() {
+        // @ts-ignore
+        prepareJackpotRef.current.closeModal();
+    }    
+
     const [winningNumber, setWinningNumber] = useState('')
     useEffect(() => {
 
@@ -53,13 +58,29 @@ const Draw: React.FC = () => {
             setWinningNumber('')
         })
         if (account && chainId && library) {
-            isCurrentDay(chainId, library?.getSigner()).then((flag) => {
-                if (!flag) {
-                    prepareJackpotModal()
-                }
-            }).catch(e => {
-                console.log(e)
-            })        
+
+
+            const hangTightTimer = setInterval(function(){
+                const currentTime = new Date();
+                const hangTightTime = new Date();
+                hangTightTime.setUTCHours(15);
+                hangTightTime.setUTCMinutes(59);
+                hangTightTime.setUTCSeconds(0);
+                hangTightTime.setUTCMilliseconds(0);
+                if (currentTime >= hangTightTime) {
+                    isCurrentDay(chainId, library?.getSigner()).then((flag) => {
+                            if (!flag) {
+                                prepareJackpotModal()
+                            } else {
+                                closeJackpotModal()
+                                clearInterval(hangTightTimer)
+                            }
+                        }).catch(e => {
+                            console.log(e)
+                        })        
+                    }
+            }, 10000)
+
         }
 
     }, [account, chainId, library])    

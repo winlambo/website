@@ -152,18 +152,13 @@ export async function isCurrentDay(chainId, provider) {
         const resultTimestamp = await lamboRandomContract.potResultTimestamps(recentReqId)
         const lastTimestamp = resultTimestamp.toNumber()
 
-        const currentTime = new Date();
         const baseTime = new Date();
         baseTime.setUTCHours(16);
         baseTime.setUTCMinutes(0);
         baseTime.setUTCSeconds(0);
-        baseTime.setUTCMilliseconds(0);        
-
-        if (currentTime.getTime() > baseTime.getTime()) {
-            return lastTimestamp > baseTime ? true : false
-        } else {
-            return true
-        }
+        baseTime.setUTCMilliseconds(0);
+        
+        return lastTimestamp * 1000 > baseTime ? true : false
     } catch (e) {
         console.error(e)
         return false
