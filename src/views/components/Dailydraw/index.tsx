@@ -56,7 +56,6 @@ const Dailydraw: React.FC = () => {
     if (!!account && !!library) {
       getDailyVolumeTicketsByAccount(account, chainId, library?.getSigner())
         .then((tickets) => {
-          console.log('tickets == ', tickets)
           setDailyVolumeTickets(tickets);
         })
         .catch((e) => {
@@ -123,22 +122,26 @@ const Dailydraw: React.FC = () => {
               rank={1}
               amount={Math.floor(dailyJackpotAmount * 15) / 100}
               address={topTicketMembers.length > 0 ? topTicketMembers[0] : "0x"}
+              selfaddress={account ? account : "0x00"}
             />
             <Rankheader
               rank={2}
               amount={Math.floor(dailyJackpotAmount * 10) / 100}
               address={topTicketMembers.length > 0 ? topTicketMembers[1] : "0x"}
+              selfaddress={account ? account : "0x00"}
             />
             <Rankheader
               rank={3}
               amount={Math.floor(dailyJackpotAmount * 5) / 100}
               address={topTicketMembers.length > 0 ? topTicketMembers[2] : "0x"}
+              selfaddress={account ? account : "0x00"}
             />
           </div>
           <div className="colheader">
             <Wincol
               items={winningNumbers}
               winningticket={accountWinNumber}
+              winningAmount={Math.floor(dailyJackpotAmount * 5) / 100}
             />
           </div>
         </div>

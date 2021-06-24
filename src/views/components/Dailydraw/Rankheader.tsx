@@ -6,10 +6,11 @@ export interface WincolProps {
     amount?: number
     winningticket?:number
     address?:string
+    selfaddress?:string
 }
 
 
-const Rankheader: React.FC<WincolProps> = ({rank,amount,winningticket, address}) => {
+const Rankheader: React.FC<WincolProps> = ({rank,amount,winningticket, address, selfaddress}) => {
     let rankcolor;
     if(rank == 1)
         rankcolor ="#e4d272"

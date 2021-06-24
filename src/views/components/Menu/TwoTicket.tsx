@@ -33,7 +33,7 @@ const Ticket: React.FC<TicketListProps> = ({tickets}) => {
   return (
 
     <div className="ticket-bx">
-      <div>{amount} tickets</div>
+      <div>{ amount === 0 ? "No" : amount } tickets</div>
       <div className="ticket-bx-outer">
         <i className="fa fa-angle-left" aria-hidden="true" onClick={backward} style={{color: count == 0?"gray":""}}></i>
         <div className="ticketrotatorouter">

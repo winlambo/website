@@ -80,7 +80,6 @@ const Draw: React.FC = () => {
                         })        
                     }
             }, 10000)
-
         }
 
     }, [account, chainId, library])    
