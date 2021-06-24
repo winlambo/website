@@ -546,6 +546,9 @@ const GlobalStyle = createGlobalStyle`
 	  min-height: 28px;
 	  border-top: 2px solid #dfe5e5;
 	  padding: 16px 0;
+	  &.green {
+		background: #9dea09;
+	  }
 	}
   
 	.rowhead {
@@ -917,6 +920,9 @@ const GlobalStyle = createGlobalStyle`
 			justify-content: center;
 		  }
 		}
+		&.green {
+			background: #9dea09;
+		  }
 		.winningnamebxouter {
 		  width: 30%;
 		}
@@ -969,6 +975,9 @@ const GlobalStyle = createGlobalStyle`
 		  justify-content: center;
 		  font-size: 12px;
 		}
+		&.green {
+			background: #9dea09;
+		  }
 	  }
 	  .spinouter {
 		display: flex;

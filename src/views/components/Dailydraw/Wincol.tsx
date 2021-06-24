@@ -9,8 +9,7 @@ export interface WincolProps {
 
 
 const Wincol: React.FC<WincolProps> = ({items,winningticket,winningAmount}) => {
-    console.log('items = ', items)
-    console.log('winningTicket = ', winningticket)
+
     const displayWinAmount = winningAmount ? winningAmount.toString() : "0"
     return (
         <div className="wincol">

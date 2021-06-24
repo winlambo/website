@@ -1,4 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber';
+import { useWeb3React } from '@web3-react/core';
+import { Web3Provider } from '@ethersproject/providers'
 import axios from 'axios';
 import { ethers } from 'ethers';
 import React, { useEffect, useMemo, useState } from 'react';
@@ -14,6 +16,8 @@ const Top: React.FC = () => {
 
     const [topAccounts, setTopAccounts] = useState<ITopAccount[]>([])
     const [topAccountsAPI, setTopAccountsAPI] = useState('')
+
+    const {account} = useWeb3React<Web3Provider>()
 
     // set the start time to 16:00 UTC in local time
     const startTime = new Date();
@@ -129,7 +133,7 @@ const Top: React.FC = () => {
         let imgIdx = i + 1
         var sno = i < 3 ? (<img src={'images/' + imgIdx + '.png'} />) : (imgIdx);
 
-        var temp = (<div className="row" key={i}>
+        var temp = (<div className={topAccounts[i].address === account ? "row green" : "row"} key={i}>
             <div className="cl1">
                 <div className="sno">{sno}</div>
                 <div className="addrs">{topAccounts[i].address}</div>
