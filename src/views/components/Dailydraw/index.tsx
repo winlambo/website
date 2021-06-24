@@ -152,7 +152,7 @@ const Dailydraw: React.FC = () => {
         <div className="luckyholderouter">
           <h3>Lucky Holders</h3>
           <div className="luckyholder">
-            <div className="luckyholderbx ">
+            <div className="luckyholderbx green">
               <div>{luckyHolders.length > 0 ? luckyHolders[0] : 0}</div>
               <div className="coloredval">$25</div>
             </div>

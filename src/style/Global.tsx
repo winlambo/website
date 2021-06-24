@@ -804,7 +804,7 @@ const GlobalStyle = createGlobalStyle`
 	.container {
 	  position: relative;
 	  @media screen and (max-width: 992px) {
-		max-width: unset;
+		max-width: unset;                                                                     
 	  }
 	}
 	.ReactModal__Overlay {
@@ -855,6 +855,13 @@ const GlobalStyle = createGlobalStyle`
 	  display: flex;
 	  justify-content: space-between;
 	  flex-direction: column;
+	  .luckybx{
+		&.green {
+			.lckybxinnr  {
+			  background: #9dea09;
+			}
+		  }
+	  }
 	  .lckybxinnr {
 		background: #000;
 		color: #fff;
@@ -967,11 +974,7 @@ const GlobalStyle = createGlobalStyle`
 		display: flex;
 		margin: 0 10px;
 		justify-content: center;
-		&.green {
-		  .spin {
-			background: #9dea09;
-		  }
-		}
+		
 	  }
 	  .spin {
 		background: #000;
@@ -1069,6 +1072,9 @@ const GlobalStyle = createGlobalStyle`
 		@media screen and (max-width: 992px) {
 		  min-width: unset;
 		}
+		&.green {
+			background: #9dea09;
+		  }
 	  }
 	  &:after {
 		position: absolute;

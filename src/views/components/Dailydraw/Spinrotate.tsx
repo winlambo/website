@@ -8,7 +8,7 @@ export interface SpinrotateProps {
 const Spinrotate: React.FC<SpinrotateProps> = ({ value }) => {
   return (
     <>
-      <div className="lckybxinnr">
+      <div className="lckybxinnr ">
         {
           //@ts-ignore
           <div className="lckybxnum" style={{ top: `-${400 + 40 * value}px` }}>
