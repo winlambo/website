@@ -87,9 +87,9 @@ const Dailydraw: React.FC = () => {
             console.log(e);
           });
 
-        get4LuckyHolders(randomNumbers.slice(2), chainId, library?.getSigner())
+        get4LuckyHolders(account, randomNumbers.slice(2), chainId, library?.getSigner())
           .then((holders) => {
-            setLuckyHolders(holders);
+            setLuckyHolders(holders.luckyWinNumber);
           })
           .catch((e) => {
             console.log(e);
