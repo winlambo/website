@@ -5,7 +5,7 @@ import axios from 'axios';
 import { ethers } from 'ethers';
 import React, { useEffect, useMemo, useState } from 'react';
 import { BSC_LAUNCH_TIME, EXCLUDE_LIST, TOKEN_DECIMALS,  } from '../../utils/constants';
-import { getLamboRandomNumber } from '../../utils/contracts';
+import { getAccountBalance, getLamboRandomNumber } from '../../utils/contracts';
 
 interface ITopAccount {
     address: any,
@@ -16,6 +16,8 @@ const Top: React.FC = () => {
 
     const [topAccounts, setTopAccounts] = useState<ITopAccount[]>([])
     const [topAccountsAPI, setTopAccountsAPI] = useState('')
+    const [rankNumber, setRankNumber] = useState(-1)
+    const [winlamboAmount, setWinlamboAmount] = useState('')
 
     const {account} = useWeb3React<Web3Provider>()
 
@@ -42,6 +44,14 @@ const Top: React.FC = () => {
     const endPointGetStartBlockNumber = 'https://api.bscscan.com/api?module=block&action=getblocknobytime&timestamp=' + baseTimeOfStart +'&closest=before&apiKey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
     const endPointGetEndBlockNumber = 'https://api.bscscan.com/api?module=block&action=getblocknobytime&timestamp=' + baseTimeOfCurrent +'&closest=before&apiKey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
 
+    useEffect(() => {
+        getAccountBalance(account).then(balance => {
+            console.log('account balance = ', balance)
+            setWinlamboAmount(balance.toString())
+        }).catch(e => {
+            setWinlamboAmount('0')
+        })
+    },[account])
   
     useEffect(() => {
         // get start block number
@@ -60,7 +70,9 @@ const Top: React.FC = () => {
               } 
             })    
           } 
-        })    
+        })
+        
+
       
         if (topAccountsAPI) { 
             setTimeout(function(){
@@ -68,6 +80,7 @@ const Top: React.FC = () => {
                     console.info(response)
                     if (response.status === 200) {
                         const holderList = response.data.result
+                        
                         if (holderList) {
                             let balances = new Map()
                              let results = holderList;
@@ -110,10 +123,19 @@ const Top: React.FC = () => {
                             const descBalances = Array.from(balances).sort((a, b) => {
                                 return b[1].gt(a[1]) ? 1 : -1;
                             })
-                            const topCount = descBalances.length > 100 ? 100 : descBalances.length
+                            console.log('descBalances = ', descBalances.length)
+                            let topCount = 0
                             const topHolders = []
-                            for (let i = 0; i < topCount; i++) {
-                                topHolders.push({address: descBalances[i][0], amount: (+ethers.utils.formatUnits(descBalances[i][1], TOKEN_DECIMALS)).toFixed(2)})
+                            for (let i = 0; i < descBalances.length; i++) {
+                                if (topCount < 100) {
+                                    topHolders.push({address: descBalances[i][0], amount: (+ethers.utils.formatUnits(descBalances[i][1], TOKEN_DECIMALS)).toFixed(2)})
+                                }
+                                
+                                if (descBalances[i][0] === account) {
+                                    setRankNumber(i + 1)
+                                    setWinlamboAmount((+ethers.utils.formatUnits(descBalances[i][1], TOKEN_DECIMALS)).toFixed(2))
+                                }
+                                topCount++
                             }
                             
                             if (topHolders.length > 0) {
@@ -125,7 +147,7 @@ const Top: React.FC = () => {
             }, 10000)
 
         }
-    }, [topAccountsAPI])
+    }, [topAccountsAPI, account, winlamboAmount])
     
     
     const Ranklist = []
@@ -141,7 +163,21 @@ const Top: React.FC = () => {
             <div className="cl2">{topAccounts[i].amount}</div>
         </div>);
         Ranklist.push(temp)
+
+        if (i === topAccounts.length - 1) {
+            imgIdx = rankNumber
+            temp = (<div className={"row"} key={rankNumber}>
+                <div className="cl1">
+                        <div className="sno">{imgIdx}</div>
+                        <div className="addrs">{account}</div>
+                 </div>
+                    <div className="cl2">{winlamboAmount}</div>
+                </div>);
+            Ranklist.push(temp)
+        }
     }
+
+
     return (
         <section className="bg-white top-sec">
             <div className="container">

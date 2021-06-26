@@ -14,6 +14,8 @@ import {
   getTicketInfo,
   getTop3PotTicketMembers,
 } from "../../../utils/contracts";
+import axios from "axios";
+import { BigNumber } from "ethers";
 const Completionist = () => <span></span>; 
 const Dailydraw: React.FC = () => {
   const context = useWeb3React<Web3Provider>();
@@ -35,6 +37,38 @@ const Dailydraw: React.FC = () => {
   const [dailyJackpotAmount, setDailyJackpotAmount] = useState(0);
   const [luckyHolders, setLuckyHolders] = useState<any>([]);
 
+  const startTime = new Date();
+  startTime.setUTCHours(16);
+  startTime.setUTCMinutes(0);
+  startTime.setUTCSeconds(0);
+  startTime.setUTCMilliseconds(0);
+  
+  // the end time is now
+  const endTime = new Date();
+  if (startTime >= endTime) {
+      startTime.setDate(startTime.getDate() - 1);
+  }
+
+  const baseTimeOfStart = Date.parse(startTime.toString()) / 1000
+  const endPointGetStartBlockNumber = 'https://api.bscscan.com/api?module=block&action=getblocknobytime&timestamp=' + baseTimeOfStart +'&closest=before&apiKey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
+
+  useEffect(() => {
+
+    // Get StartBlock of 16:00 UTC
+    axios.get(endPointGetStartBlockNumber).then(response => { 
+      if (response.status === 200 && response.data.status === '1') {
+        var startBlockNumber = parseInt(response.data.result)
+        const endpointBalance = 'https://api.bscscan.com/api?module=account&action=tokenbalancehistory&contractaddress=0xe9e7cea3dedca5984780bafc599bd69add087d56&address=0xb61ed72a55ff87a2b731e8d247555c1ee499a56a&blockno=' + startBlockNumber + '&apikey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
+
+        axios.get(endpointBalance).then(response => {
+          const busdAmountBigNum = BigNumber.from(response.data.result).mul(BigNumber.from(10).pow(2)).div(BigNumber.from(10).pow(18))
+          const busdAmountNumber = busdAmountBigNum.toNumber() / 1e2
+          setDailyJackpotAmount((busdAmountNumber * 5) / 100);
+        })
+      }
+    })
+  }, [endPointGetStartBlockNumber, account])
+
   useEffect(() => {
     getTop3PotTicketMembers(chainId, library?.getSigner())
       .then((members) => {
@@ -43,14 +77,6 @@ const Dailydraw: React.FC = () => {
       .catch((e) => {
         console.log(e);
         setTopTicketMembers([]);
-      });
-
-    getDailyFund(chainId, library?.getSigner())
-      .then((busdAmount) => {
-        setDailyJackpotAmount((busdAmount * 5) / 100);
-      })
-      .catch((e) => {
-        console.log(e);
       });
 
     if (!!account && !!library) {

@@ -15,6 +15,17 @@ export async function getTicketInfo(chainId, account, provider) {
     }
 }
 
+export async function getAccountBalance(chainId, account, provider) {
+    const winlamboContract = getContractObj('WinLambo', chainId, provider)
+    try {
+        const balance = await winlamboContract.balanceOf(account)
+        return balance
+    } catch (e) {
+        console.error(e)
+        return []
+    }
+}
+
 export async function getLamboRandomNumber(chainId, provider) {
     const lamboRandomContract = getContractObj('LamboRandomNumber', chainId, provider)
     try {
