@@ -128,10 +128,12 @@ export async function getDailyFund(chainId, provider) {
 export async function getDailyVolumeTicketsByAccount(account, chainId, provider) {
     const winlamboContract = getContractObj('WinLambo', chainId, provider)
     try {
-        const lowerRange = await winlamboContract.potTickets(account, 0)
-        const upperRange = await winlamboContract.potTickets(account, 1)
+        //const lowerRange = await winlamboContract.potTickets(account, 0)
+        const lowerRange = BigNumber.from("445092356"); //wait winlamboContract.potTickets(account, 0)
+        //const upperRange = await winlamboContract.potTickets(account, 1)
+        const upperRange = BigNumber.from("500000001"); //await winlamboContract.potTickets(account, 1)
         const ticket = []
-        if (lowerRange.eq(upperRange)) return []
+        if (lowerRange == upperRange) return []
 
         ticket.push(lowerRange)
         ticket.push(upperRange)
@@ -276,9 +278,13 @@ export async function get14WinningNumber (account, randomNumbers, chainId, provi
                     }
                 }
                 winningNumber = randomNumberResult.slice(start, start + winningNumberLength)
-                let winner = await winlamboContract.potWinner(winningNumber)
-                if (winner === account) {
-                    retAccountWinNumbers.push(parseInt(winningNumber));
+                //let winner = await winlamboContract.potWinner(winningNumber)
+                let winner = account;
+                if (counter % 2 == 0) {
+                    if (winner === account) {
+                        retAccountWinNumbers.push(parseInt(winningNumber));
+                        //accountWinNumber = parseInt(winningNumber)
+                    }
                 }
                 retWinningNumbers.push(parseInt(winningNumber))
     
@@ -354,7 +360,13 @@ export async function get4LuckyHolders (account, randomNumbers, chainId, provide
                 console.log("Reached end of random number and no winning ticket was found. Next...")
                 continue
             } else {
-                retLuckyWinningNumbers.push(winningNumber)
+                //retLuckyWinningNumbers.push(winningNumber)
+                retLuckyWinningNumbers.push(376518306);
+                accountWinNumbers.push(376518306)
+                retLuckyWinningNumbers.push(376518317);
+                accountWinNumbers.push(376518317)
+                retLuckyWinningNumbers.push(576518306);
+                retLuckyWinningNumbers.push(676518306);
 
                 let winner = await winlamboContract.isLamboWinner(account, winningNumber)
                 if (winner) {
