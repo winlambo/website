@@ -3,7 +3,7 @@ import { keyframes } from "styled-components";
 import Spinbox from './Spinbox'
 export interface WincolProps {
     items?:number[],
-    winningticket?:number
+    winningticket?:number[],
     winningAmount?:number
 }
 
@@ -17,7 +17,7 @@ const Wincol: React.FC<WincolProps> = ({items,winningticket,winningAmount}) => {
                 {items?.map((item, index) => {
                    setTimeout(function(){
                }, index*2000);
-                   return  <Spinbox key={index} winningticket={index + 1} goldenamount={"$" + displayWinAmount} color={item === winningticket ? "green" : ""} spinNumbers={item.toString()}/> 
+                   return  <Spinbox key={index} winningticket={index + 1} goldenamount={"$" + displayWinAmount} color={winningticket?.includes(item) ? "green" : ""} spinNumbers={item.toString()}/> 
                 })}
             </div>
         </div>

@@ -248,10 +248,10 @@ export async function getWinningNumber (rawNumber, chainId, provider) {
 
 export async function get14WinningNumber (account, randomNumbers, chainId, provider) {
 
-    if (randomNumbers.length !== 2) return { totalWinNumbers : [], accountWinNumber: 0}
+    if (randomNumbers.length !== 2) return { totalWinNumbers : [], accountWinNumbers: []}
 
     const retWinningNumbers = []
-    let accountWinNumber = 0
+    const retAccountWinNumbers = []
     const winlamboContract = getContractObj('WinLambo', chainId, provider)
 
     for (let idx = 0; idx < randomNumbers.length; idx++) {
@@ -278,7 +278,7 @@ export async function get14WinningNumber (account, randomNumbers, chainId, provi
                 winningNumber = randomNumberResult.slice(start, start + winningNumberLength)
                 let winner = await winlamboContract.potWinner(winningNumber)
                 if (winner === account) {
-                    accountWinNumber = parseInt(winningNumber)
+                    retAccountWinNumbers.push(parseInt(winningNumber));
                 }
                 retWinningNumbers.push(parseInt(winningNumber))
     
@@ -292,21 +292,21 @@ export async function get14WinningNumber (account, randomNumbers, chainId, provi
     }
     return {
         totalWinNumbers: retWinningNumbers,
-        accountWinNumber: accountWinNumber
+        accountWinNumbers: retAccountWinNumbers
     }
 }
 
 export async function get4LuckyHolders (account, randomNumbers, chainId, provider) {
 
     if (randomNumbers.length === 0) return {
-        luckyWinNumber : 0,
-        accountWinNumber : 0
+        luckyWinNumber : [],
+        accountLuckyHolders : []
     }
 
     const retLuckyWinningNumbers = []
+    const accountWinNumbers = []
     const winlamboContract = getContractObj('WinLambo', chainId, provider)
     let ticketCounter = await winlamboContract.ticketCounter();
-    let accountWinNumber = 0
 
     for (let idx = 0; idx < randomNumbers.length; idx++) {
         const rawNumber = randomNumbers[idx]
@@ -334,17 +334,12 @@ export async function get4LuckyHolders (account, randomNumbers, chainId, provide
                 if (!ticketNotMintedYet) break
 
                 winningNumber = randomNumberResult.slice(start, start + winningNumberLength)
-                let winner = await winlamboContract.potWinner(winningNumber)
-                if (winner === account) {
-                    accountWinNumber = winningNumber
-                }
+                winningNumber = parseInt(winningNumber);
     
                 // determine if the winning number belongs to the zero address
                 zeroAddressWon = await winlamboContract.isLamboWinner(zeroAddress, winningNumber)
     
                 // determine if the winning number ticket hasn't been minted yet
-                
-                winningNumber = parseInt(winningNumber);
                 ticketCounter = parseInt(ticketCounter);
                 ticketNotMintedYet = ticketCounter <= winningNumber;
                 
@@ -360,8 +355,13 @@ export async function get4LuckyHolders (account, randomNumbers, chainId, provide
                 continue
             } else {
                 retLuckyWinningNumbers.push(winningNumber)
-            }
 
+                let winner = await winlamboContract.isLamboWinner(account, winningNumber)
+                if (winner) {
+                    accountWinNumbers.push(winningNumber)
+                }
+            }
+            
             if (retLuckyWinningNumbers.length === 4) break
     
         } catch (e) {
@@ -370,9 +370,10 @@ export async function get4LuckyHolders (account, randomNumbers, chainId, provide
         }
     }
 
+
     return {
         luckyWinNumber : retLuckyWinningNumbers,
-        accountWinNumber : accountWinNumber
+        accountLuckyHolders : accountWinNumbers
     }
 
 }
