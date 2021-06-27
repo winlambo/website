@@ -188,7 +188,7 @@ const Top: React.FC = () => {
                             <div className="sno">No</div>
                             <div>Address</div>
                         </div>
-                        <div className="cl2">Amount</div>
+                        <div className="cl2">WINLAMBO Traded</div>
                     </div>
                     {Ranklist}
                 </div>
