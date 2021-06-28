@@ -30,12 +30,13 @@ const Dailydraw: React.FC = () => {
     error,
   } = context;
   const [winningNumbers, setWinningNumbers] = useState<any>([]);
-  const [accountWinNumber, setAccountWinningNumber] = useState(0);
+  const [accountWinNumbers, setAccountWinningNumber] = useState<any>([]);
   const [topTicketMembers, setTopTicketMembers] = useState<any>([]);
   const [dailyVolumeTickets, setDailyVolumeTickets] = useState<any>([]);
   const [holderTickets, setHolderTickets] = useState<any>([]);
   const [dailyJackpotAmount, setDailyJackpotAmount] = useState(0);
   const [luckyHolders, setLuckyHolders] = useState<any>([]);
+  const [accountLuckyHolders, setAccountLuckyHolders] = useState<any>([]);
 
   const startTime = new Date();
   startTime.setUTCHours(16);
@@ -107,7 +108,7 @@ const Dailydraw: React.FC = () => {
         )
           .then((winNumbers) => {
             setWinningNumbers(winNumbers.totalWinNumbers)
-            setAccountWinningNumber(winNumbers.accountWinNumber)
+            setAccountWinningNumber(winNumbers.accountWinNumbers)
           })
           .catch((e) => {
             console.log(e);
@@ -116,6 +117,7 @@ const Dailydraw: React.FC = () => {
         get4LuckyHolders(account, randomNumbers.slice(2), chainId, library?.getSigner())
           .then((holders) => {
             setLuckyHolders(holders.luckyWinNumber);
+            setAccountLuckyHolders(holders.accountLuckyHolders);
           })
           .catch((e) => {
             console.log(e);
@@ -166,7 +168,7 @@ const Dailydraw: React.FC = () => {
           <div className="colheader">
             <Wincol
               items={winningNumbers}
-              winningticket={accountWinNumber}
+              winningticket={accountWinNumbers}
               winningAmount={Math.floor(dailyJackpotAmount * 5) / 100}
             />
           </div>
@@ -178,19 +180,19 @@ const Dailydraw: React.FC = () => {
         <div className="luckyholderouter">
           <h3>Lucky Holders</h3>
           <div className="luckyholder">
-            <div className= { accountWinNumber === luckyHolders[0] ? "luckyholderbx green" : "luckyholderbx" }>
+            <div className= { accountLuckyHolders?.includes(luckyHolders[0]) ? "luckyholderbx green" : "luckyholderbx" }>
               <div>{luckyHolders.length > 0 ? luckyHolders[0] : 0}</div>
               <div className="coloredval">$25</div>
             </div>
-            <div className={ accountWinNumber === luckyHolders[1] ? "luckyholderbx green" : "luckyholderbx" }>
+            <div className={ accountLuckyHolders?.includes(luckyHolders[1]) ? "luckyholderbx green" : "luckyholderbx" }>
               <div>{luckyHolders.length > 1 ? luckyHolders[1] : 0}</div>
               <div className="coloredval">$25</div>
             </div>
-            <div className={ accountWinNumber === luckyHolders[2] ? "luckyholderbx green" : "luckyholderbx" }>
+            <div className={ accountLuckyHolders?.includes(luckyHolders[2]) ? "luckyholderbx green" : "luckyholderbx" }>
               <div>{luckyHolders.length > 2 ? luckyHolders[2] : 0}</div>
               <div className="coloredval">$25</div>
             </div>
-            <div className={ accountWinNumber === luckyHolders[3] ? "luckyholderbx green" : "luckyholderbx" }>
+            <div className={ accountLuckyHolders?.includes(luckyHolders[3]) ? "luckyholderbx green" : "luckyholderbx" }>
               <div>{luckyHolders.length > 3 ? luckyHolders[3] : 0}</div>
               <div className="coloredval">$25</div>
             </div>
