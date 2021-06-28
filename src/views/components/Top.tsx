@@ -164,14 +164,14 @@ const Top: React.FC = () => {
         </div>);
         Ranklist.push(temp)
 
-        if (i === topAccounts.length - 1) {
+        if (i === topAccounts.length - 1 && account) {
             imgIdx = rankNumber
             temp = (<div className={"row"} key={rankNumber}>
                 <div className="cl1">
                         <div className="sno">{imgIdx}</div>
                         <div className="addrs">{account}</div>
                  </div>
-                    <div className="cl2">{winlamboAmount}</div>
+                    <div className="cl2">{ rankNumber === -1? 0 : winlamboAmount}</div>
                 </div>);
             Ranklist.push(temp)
         }
