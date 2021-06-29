@@ -12,7 +12,17 @@ const Wincol: React.FC<WincolProps> = ({
   winningticket,
   winningAmount,
 }) => {
+  const [opacity, setopacity] = useState(0);
+
   const displayWinAmount = winningAmount ? winningAmount.toString() : "0";
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      // @ts-ignore
+      setopacity(1);
+      // random timrout for airdrop info
+    }, 17 * 900);
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <div className="wincol">
       <div className="row">
@@ -28,11 +38,13 @@ const Wincol: React.FC<WincolProps> = ({
             />
           );
         })}
-        <div className="col-md-4">
+        <div className="col-md-4" style={{ opacity: opacity }}>
           <div className="coloredinfo">
             <div className="coloredval">
-            Congrats! You will be airdropped your winnings!
-              <div className="coloredbg">Congrats! You will be airdropped your winnings!</div>
+              Congrats! You will be airdropped your winnings!
+              <div className="coloredbg">
+                Congrats! You will be airdropped your winnings!
+              </div>
             </div>
           </div>
         </div>
