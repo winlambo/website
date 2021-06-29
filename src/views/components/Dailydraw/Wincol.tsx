@@ -15,6 +15,14 @@ const Wincol: React.FC<WincolProps> = ({
   const [opacity, setopacity] = useState(0);
 
   const displayWinAmount = winningAmount ? winningAmount.toString() : "0";
+  const [isWin, setIsWin] = useState(false)
+
+  items?.map((item, index) => {
+    if (winningticket?.includes(item)) {
+      setIsWin(true)
+    }
+  })
+
   useEffect(() => {
     const timer = setTimeout(() => {
       // @ts-ignore
@@ -38,16 +46,19 @@ const Wincol: React.FC<WincolProps> = ({
             />
           );
         })}
-        <div className="col-md-4" style={{ opacity: opacity }}>
-          <div className="coloredinfo">
-            <div className="coloredval">
-              Congrats! You will be airdropped your winnings!
-              <div className="coloredbg">
+
+        {!isWin ? (
+            <div className="col-md-4" style={{ opacity: opacity }}>
+            <div className="coloredinfo">
+              <div className="coloredval">
                 Congrats! You will be airdropped your winnings!
+                <div className="coloredbg">
+                  Congrats! You will be airdropped your winnings!
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        ) : null}
       </div>
     </div>
   );
