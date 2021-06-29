@@ -17,10 +17,12 @@ const Spinbox: React.FC<SpinbxProp> = ({
 }) => {
   const [spinNumberhook, setspinNumberhook] = useState("");
   const [opacity, setopacity] = useState(0);
+  const [wincolor, setwincolor] = useState("");
   useEffect(() => {
     const timer = setTimeout(() => {
       setspinNumberhook(spinNumbers);
       setopacity(1);
+      setwincolor(wincolor)
       // @ts-ignore
     }, winningticket * 900);
     return () => clearTimeout(timer);
@@ -35,7 +37,7 @@ const Spinbox: React.FC<SpinbxProp> = ({
           <div className="coloredbg">{goldenamount}</div>
         </div>
       </div>
-      <div className={`spinouter luckybx ${color}`}>
+      <div className={`spinouter luckybx ${wincolor}`}>
         <Spinrotate
           value={spinNumberhook.length > 8 ? spinNumberhook?.slice(0, 1) : "L"}
         />
