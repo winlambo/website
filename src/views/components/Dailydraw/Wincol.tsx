@@ -47,7 +47,7 @@ const Wincol: React.FC<WincolProps> = ({
           );
         })}
 
-        {!isWin ? (
+        {isWin ? (
             <div className="col-md-4" style={{ opacity: opacity }}>
             <div className="coloredinfo">
               <div className="coloredval">
