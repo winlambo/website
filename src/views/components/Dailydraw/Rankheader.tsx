@@ -22,7 +22,7 @@ const Rankheader: React.FC<WincolProps> = ({rank,amount,winningticket, address, 
         <div className="wincol">
             <div className="header">
                 <div className="coloredvalouter">
-                    <div className="coloredval">{amount}$
+                    <div className="coloredval">${amount}
                         <div className="coloredbg">
                         {amount}$
                         </div>
