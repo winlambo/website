@@ -37,7 +37,7 @@ const Spinbox: React.FC<SpinbxProp> = ({
           <div className="coloredbg">{goldenamount}</div>
         </div>
       </div>
-      <div className={`spinouter luckybx ${wincolor}`}>
+      <div className={`spinouter luckybx ${color}`}>
         <Spinrotate
           value={spinNumberhook.length > 8 ? spinNumberhook?.slice(0, 1) : "L"}
         />
