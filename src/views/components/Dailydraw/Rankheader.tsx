@@ -21,11 +21,14 @@ const Rankheader: React.FC<WincolProps> = ({rank,amount,winningticket, address, 
     return (
         <div className="wincol">
             <div className="header">
-                <div className="coloredval">{amount}$
-                    <div className="coloredbg">
-                    {amount}$
+                <div className="coloredvalouter">
+                    <div className="coloredval">${amount}
+                        <div className="coloredbg">
+                        {amount}$
+                        </div>
                     </div>
                 </div>
+                
                 <div className={address === selfaddress ? "headerinr green" : "headerinr"}>
                     <div className="rank" style={{background:rankcolor}}>{rank}</div>
                     {address}

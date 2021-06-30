@@ -401,6 +401,9 @@ const GlobalStyle = createGlobalStyle`
 	  font-weight: 700;
 	}
   }
+  .coloredvalouter{
+	  z-index:2
+  }
   
   .ticketrotatorouter {
 	display: flex;
@@ -815,6 +818,20 @@ const GlobalStyle = createGlobalStyle`
 	}
 	.lossmodal{
 		color:#fff
+	}
+	.coloredinfo{
+		position: relative;
+		top: 50%;
+		transform: translateY(-50%);
+		.coloredval{
+			text-align:center;
+			width:100% !important;
+			font-size:20px !important;
+			text-transform:uppercase
+		}
+		.coloredbg{
+			width:100%;
+		}
 	}
 	.header {
 	  display: flex;

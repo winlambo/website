@@ -164,17 +164,17 @@ const Top: React.FC = () => {
         </div>);
         Ranklist.push(temp)
 
-        if (i === topAccounts.length - 1) {
-            imgIdx = rankNumber
-            temp = (<div className={"row"} key={rankNumber}>
-                <div className="cl1">
-                        <div className="sno">{imgIdx}</div>
-                        <div className="addrs">{account}</div>
-                 </div>
-                    <div className="cl2">{winlamboAmount}</div>
-                </div>);
-            Ranklist.push(temp)
-        }
+        // if (i === topAccounts.length - 1 && account) {
+        //     imgIdx = rankNumber
+        //     temp = (<div className={"row"} key={rankNumber}>
+        //         <div className="cl1">
+        //                 <div className="sno">{imgIdx}</div>
+        //                 <div className="addrs">{account}</div>
+        //          </div>
+        //             <div className="cl2">{ rankNumber === -1? 0 : winlamboAmount}</div>
+        //         </div>);
+        //     Ranklist.push(temp)
+        // }
     }
 
 
@@ -183,13 +183,22 @@ const Top: React.FC = () => {
             <div className="container">
                 <h1>Today's Top <span id="val">100</span> Active Traders</h1>
                 <div className="toptable">
+                {rankNumber === -1 ? (
+                        <div className={"row rowhead"} key={rankNumber}>
+                            <div className="cl1">
+                                    <div className="addrs">{account}</div>
+                            </div>
+                            <div className="cl2">{ 0 }</div>
+                        </div>                        
+                    ) : null}                    
                     <div className="row rowhead">
                         <div className="cl1">
                             <div className="sno">No</div>
                             <div>Address</div>
                         </div>
-                        <div className="cl2">Amount</div>
+                        <div className="cl2">WINLAMBO Traded</div>
                     </div>
+
                     {Ranklist}
                 </div>
             </div>
