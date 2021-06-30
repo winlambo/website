@@ -5,23 +5,18 @@ export interface WincolProps {
   items?: number[];
   winningticket?: number[];
   winningAmount?: number;
+  isWin: boolean;
 }
 
 const Wincol: React.FC<WincolProps> = ({
   items,
   winningticket,
   winningAmount,
+  isWin
 }) => {
   const [opacity, setopacity] = useState(0);
 
   const displayWinAmount = winningAmount ? winningAmount.toString() : "0";
-  const [isWin, setIsWin] = useState(false)
-
-  items?.map((item, index) => {
-    if (winningticket?.includes(item)) {
-      setIsWin(true)
-    }
-  })
 
   useEffect(() => {
     const timer = setTimeout(() => {
