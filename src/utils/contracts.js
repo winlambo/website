@@ -296,9 +296,17 @@ export async function get14WinningNumber (account, randomNumbers, chainId, provi
             console.error(e)
         }
     }
+    let isWin = false
+    for (let idx = 0; idx < retWinningNumbers.length; idx++) {
+        if (retAccountWinNumbers.includes(retWinningNumbers[idx])) {
+            isWin = true
+            break;
+        }
+    }    
     return {
         totalWinNumbers: retWinningNumbers,
-        accountWinNumbers: retAccountWinNumbers
+        accountWinNumbers: retAccountWinNumbers,
+        isWin:isWin
     }
 }
 

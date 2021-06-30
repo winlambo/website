@@ -37,6 +37,7 @@ const Dailydraw: React.FC = () => {
   const [dailyJackpotAmount, setDailyJackpotAmount] = useState(0);
   const [luckyHolders, setLuckyHolders] = useState<any>([]);
   const [accountLuckyHolders, setAccountLuckyHolders] = useState<any>([]);
+  const [isWin, setIsWin] = useState(false)
 
   const startTime = new Date();
   startTime.setUTCHours(16);
@@ -109,6 +110,11 @@ const Dailydraw: React.FC = () => {
           .then((winNumbers) => {
             setWinningNumbers(winNumbers.totalWinNumbers)
             setAccountWinningNumber(winNumbers.accountWinNumbers)
+            if (winNumbers.isWin) {
+              setIsWin(true)
+            } else {
+              setIsWin(false)
+            }
           })
           .catch((e) => {
             console.log(e);
@@ -170,6 +176,7 @@ const Dailydraw: React.FC = () => {
               items={winningNumbers}
               winningticket={accountWinNumbers}
               winningAmount={Math.floor(dailyJackpotAmount * 5) / 100}
+              isWin={isWin}
             />
           </div>
         </div>
