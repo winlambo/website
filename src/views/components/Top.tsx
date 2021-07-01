@@ -134,7 +134,7 @@ const Top: React.FC = () => {
                                 }
                                 topCount++;
                             }
-
+                            
                             if (topHolders.length > 0) {
                                 setTopAccounts(topHolders)
                             
@@ -143,7 +143,7 @@ const Top: React.FC = () => {
                                     if (topHolders[i].address === account) {
                                         setIsAccountTop100(true);
                                         break;
-                                    } 
+                                    }
                                 }
                             }
                         }
