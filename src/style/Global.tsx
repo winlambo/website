@@ -1102,7 +1102,8 @@ const GlobalStyle = createGlobalStyle`
 			background: #9dea09;
 			color:#000;
 			.coloredval{
-				background:#000;
+				background:transparent;
+				color:#000;
 				text-shadow:none
 			}
 		  }
