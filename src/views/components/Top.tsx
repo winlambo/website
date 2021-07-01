@@ -113,7 +113,7 @@ const Top: React.FC = () => {
                             for (let i=0; i< EXCLUDE_LIST.length; i++) {
                                 balances.delete(EXCLUDE_LIST[i].toLowerCase())
                             }
-            
+                             
                             // set the volume of the connected wallet to 0 if it does not exist
                             if (balances.get(account) === undefined) {
                                 setIsAccountTop100(false);
@@ -155,23 +155,8 @@ const Top: React.FC = () => {
     }, [topAccountsAPI, account])
     
 
+    // create table of top 100 volume
     const Ranklist = []
-    
-    // if the connected wallet is not part of the top 100 active traders, show
-    // its balance at the top of the sheet, and highlight it green
-    if (topAccounts.length > 0) {
-        if (!isAccountTop100) {
-            var temp = (<div className="row green" key="?">
-                <div className="cl1">
-                    <div className="sno">?</div>
-                    <div className="addrs">{account}</div>
-                </div>
-                <div className="cl2">{accountVolume}</div>
-            </div>);
-            Ranklist.push(temp)
-        }
-    }
-
     for (let i = 0; i < topAccounts.length; i++) {
         let imgIdx = i + 1
         var sno = i < 3 ? (<img src={'images/' + imgIdx + '.png'} />) : (imgIdx);
@@ -184,6 +169,21 @@ const Top: React.FC = () => {
             <div className="cl2">{topAccounts[i].amount}</div>
         </div>);
         Ranklist.push(temp)
+    }
+    
+    // if the connected wallet is not part of the top 100 active traders, show
+    // its balance at the top of the sheet, and highlight it green
+    if (topAccounts.length > 0) {
+        if (!isAccountTop100) {
+            var temp = (<div className="row green" key="?">
+                <div className="cl1">
+                    <div className="sno">?</div>
+                    <div className="addrs">{account}</div>
+                </div>
+                <div className="cl2">{accountVolume}</div>
+            </div>);
+            Ranklist.unshift(temp)
+        }
     }
 
 
