@@ -76,7 +76,7 @@ const Top: React.FC = () => {
                         
                         if (holderList) {
                             let balances = new Map()
-                             let results = holderList;
+                            let results = holderList;
                             for (let i=0; i<results.length; i++) {
                               let result = results[i];
                               if (!result.value) continue
@@ -117,7 +117,7 @@ const Top: React.FC = () => {
                             // set the volume of the connected wallet to 0 if it does not exist
                             if (balances.get(account) === undefined) {
                                 setIsAccountTop100(false);
-                                setAccountVolume('0');
+                                setAccountVolume('0.00');
                             } else {
                                 setAccountVolume((+ethers.utils.formatUnits(balances.get(account), TOKEN_DECIMALS)).toFixed(2));
                             }
@@ -135,16 +135,16 @@ const Top: React.FC = () => {
                                 topCount++;
                             }
                             
-                            // determine whether connected wallet is in top 100 volume
-                            for (let i = 0; i < topHolders.length; i++ ) {
-                                if (topHolders[i].address === account) {
-                                    setIsAccountTop100(true);
-                                    break;
-                                } 
-                            }
-
                             if (topHolders.length > 0) {
                                 setTopAccounts(topHolders)
+                            
+                                // determine whether connected wallet is in top 100 volume
+                                for (let i = 0; i < topHolders.length; i++ ) {
+                                    if (topHolders[i].address === account) {
+                                        setIsAccountTop100(true);
+                                        break;
+                                    }
+                                }
                             }
                         }
                     }
