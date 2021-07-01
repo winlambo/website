@@ -144,7 +144,7 @@ const Dailydraw: React.FC = () => {
           </div>
 
           <div className="date">
-            <div>Daily at 16:00 UTC</div>
+            <div>{startTime.toUTCString()}</div>
             <Countdown date="">
               <Completionist />
             </Countdown>
