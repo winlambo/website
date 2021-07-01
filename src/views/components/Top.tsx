@@ -115,11 +115,12 @@ const Top: React.FC = () => {
                             }
                              
                             // set the volume of the connected wallet to 0 if it does not exist
-                            if (balances.get(account) === undefined) {
+                            var accountLower = account?.toLowerCase();
+                            if (balances.get(accountLower) === undefined) {
                                 setIsAccountTop100(false);
-                                setAccountVolume('0.00');
+                                setAccountVolume("0.00");
                             } else {
-                                setAccountVolume((+ethers.utils.formatUnits(balances.get(account), TOKEN_DECIMALS)).toFixed(2));
+                                setAccountVolume((+ethers.utils.formatUnits(balances.get(accountLower), TOKEN_DECIMALS)).toFixed(2));
                             }
 
                             const descBalances = Array.from(balances).sort((a, b) => {
@@ -140,7 +141,7 @@ const Top: React.FC = () => {
                             
                                 // determine whether connected wallet is in top 100 volume
                                 for (let i = 0; i < topHolders.length; i++ ) {
-                                    if (topHolders[i].address === account) {
+                                    if (topHolders[i].address === accountLower) {
                                         setIsAccountTop100(true);
                                         break;
                                     }
@@ -161,7 +162,7 @@ const Top: React.FC = () => {
         let imgIdx = i + 1
         var sno = i < 3 ? (<img src={'images/' + imgIdx + '.png'} />) : (imgIdx);
 
-        var temp = (<div className={topAccounts[i].address === account ? "row green" : "row"} key={i}>
+        var temp = (<div className={topAccounts[i].address === account?.toLowerCase() ? "row green" : "row"} key={i}>
             <div className="cl1">
                 <div className="sno">{sno}</div>
                 <div className="addrs">{topAccounts[i].address}</div>
