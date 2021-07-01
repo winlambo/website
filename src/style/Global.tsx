@@ -1100,6 +1100,11 @@ const GlobalStyle = createGlobalStyle`
 		}
 		&.green {
 			background: #9dea09;
+			color:#000;
+			.coloredval{
+				background:#000;
+				text-shadow:none
+			}
 		  }
 	  }
 	  &:after {

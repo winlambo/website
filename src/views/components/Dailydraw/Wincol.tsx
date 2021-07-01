@@ -23,7 +23,7 @@ const Wincol: React.FC<WincolProps> = ({
       // @ts-ignore
       setopacity(1);
       // random timrout for airdrop info
-    }, 17 * 900);
+    }, 14 * 1800);
     return () => clearTimeout(timer);
   }, []);
   return (
