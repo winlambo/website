@@ -17,7 +17,8 @@ const Top: React.FC = () => {
     const [topAccounts, setTopAccounts] = useState<ITopAccount[]>([])
     const [topAccountsAPI, setTopAccountsAPI] = useState('')
     const [rankNumber, setRankNumber] = useState(-1)
-    const [winlamboAmount, setWinlamboAmount] = useState('')
+    const [accountVolume, setAccountVolume] = useState('')
+    const [isAccountTop100, setIsAccountTop100] = useState<boolean>()
 
     const {account} = useWeb3React<Web3Provider>()
 
@@ -44,15 +45,7 @@ const Top: React.FC = () => {
     const endPointGetStartBlockNumber = 'https://api.bscscan.com/api?module=block&action=getblocknobytime&timestamp=' + baseTimeOfStart +'&closest=before&apiKey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
     const endPointGetEndBlockNumber = 'https://api.bscscan.com/api?module=block&action=getblocknobytime&timestamp=' + baseTimeOfCurrent +'&closest=before&apiKey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
 
-    useEffect(() => {
-        getAccountBalance(account).then(balance => {
-            console.log('account balance = ', balance)
-            setWinlamboAmount(balance.toString())
-        }).catch(e => {
-            setWinlamboAmount('0')
-        })
-    },[account])
-  
+
     useEffect(() => {
         // get start block number
         axios.get(endPointGetStartBlockNumber).then(response => {
@@ -115,11 +108,20 @@ const Top: React.FC = () => {
                                     balances.set(result.from, balances.get(result.from).sub(value));
                                 }
                             }
+
                             // remove all excluded addresses
                             for (let i=0; i< EXCLUDE_LIST.length; i++) {
                                 balances.delete(EXCLUDE_LIST[i].toLowerCase())
                             }
-            
+                             
+                            // set the volume of the connected wallet to 0 if it does not exist
+                            if (balances.get(account) === undefined) {
+                                setIsAccountTop100(false);
+                                setAccountVolume('0');
+                            } else {
+                                setAccountVolume((+ethers.utils.formatUnits(balances.get(account), TOKEN_DECIMALS)).toFixed(2));
+                            }
+
                             const descBalances = Array.from(balances).sort((a, b) => {
                                 return b[1].gt(a[1]) ? 1 : -1;
                             })
@@ -130,14 +132,17 @@ const Top: React.FC = () => {
                                 if (topCount < 100) {
                                     topHolders.push({address: descBalances[i][0], amount: (+ethers.utils.formatUnits(descBalances[i][1], TOKEN_DECIMALS)).toFixed(2)})
                                 }
-                                
-                                if (descBalances[i][0] === account) {
-                                    setRankNumber(i + 1)
-                                    setWinlamboAmount((+ethers.utils.formatUnits(descBalances[i][1], TOKEN_DECIMALS)).toFixed(2))
-                                }
-                                topCount++
+                                topCount++;
                             }
                             
+                            // determine whether connected wallet is in top 100 volume
+                            for (let i = 0; i < topHolders.length; i++ ) {
+                                if (topHolders[i].address === account) {
+                                    setIsAccountTop100(true);
+                                    break;
+                                } 
+                            }
+
                             if (topHolders.length > 0) {
                                 setTopAccounts(topHolders)
                             }
@@ -147,9 +152,10 @@ const Top: React.FC = () => {
             }, 10000)
 
         }
-    }, [topAccountsAPI, account, winlamboAmount])
+    }, [topAccountsAPI, account])
     
-    
+
+    // create table of top 100 volume
     const Ranklist = []
     for (let i = 0; i < topAccounts.length; i++) {
         let imgIdx = i + 1
@@ -163,18 +169,21 @@ const Top: React.FC = () => {
             <div className="cl2">{topAccounts[i].amount}</div>
         </div>);
         Ranklist.push(temp)
-
-        // if (i === topAccounts.length - 1 && account) {
-        //     imgIdx = rankNumber
-        //     temp = (<div className={"row"} key={rankNumber}>
-        //         <div className="cl1">
-        //                 <div className="sno">{imgIdx}</div>
-        //                 <div className="addrs">{account}</div>
-        //          </div>
-        //             <div className="cl2">{ rankNumber === -1? 0 : winlamboAmount}</div>
-        //         </div>);
-        //     Ranklist.push(temp)
-        // }
+    }
+    
+    // if the connected wallet is not part of the top 100 active traders, show
+    // its balance at the top of the sheet, and highlight it green
+    if (topAccounts.length > 0) {
+        if (!isAccountTop100) {
+            var temp = (<div className="row green" key="?">
+                <div className="cl1">
+                    <div className="sno">?</div>
+                    <div className="addrs">{account}</div>
+                </div>
+                <div className="cl2">{accountVolume}</div>
+            </div>);
+            Ranklist.unshift(temp)
+        }
     }
 
 
@@ -183,14 +192,6 @@ const Top: React.FC = () => {
             <div className="container">
                 <h1>Today's Top <span id="val">100</span> Active Traders</h1>
                 <div className="toptable">
-                {rankNumber === -1 ? (
-                        <div className={"row rowhead"} key={rankNumber}>
-                            <div className="cl1">
-                                    <div className="addrs">{account}</div>
-                            </div>
-                            <div className="cl2">{ 0 }</div>
-                        </div>                        
-                    ) : null}                    
                     <div className="row rowhead">
                         <div className="cl1">
                             <div className="sno">No</div>
