@@ -5,43 +5,39 @@ import Winmodal from './Popup/Win'
 import Countdown from "react-countdown";
 import SpinnWallet from './Draw/SpinnWallet'
 import { useWeb3React } from '@web3-react/core';
-import { getLamboRandomNumber, getWinningNumber, isWinner } from '../../utils/contracts';
+import { getLamboRandomNumber, getTop3PotTicketMembers, getWinningNumber, isCurrentDay, isWinner } from '../../utils/contracts';
+import PrepareJackpot from './Popup/PrepareJackpot';
 const Completionist = () => <span></span>;//<span>Refresh your page!</span>;
 const Draw: React.FC = () => {
 
     const context = useWeb3React<Web3Provider>()
     const {connector, library, chainId, account, activate, deactivate, active, error } = context
 
-    /*
-    const startTime = new Date()
-    startTime.setUTCHours(16)
-    startTime.setUTCMinutes(10)
-    startTime.setUTCSeconds(0)
-    startTime.setUTCMilliseconds(0)
-
-    const endTime = new Date()
-    endTime.setUTCHours(23)
-    endTime.setUTCMinutes(59)
-    endTime.setUTCSeconds(0)
-    endTime.setUTCMilliseconds(0)
-    */
-
-
     const losRef = useRef(null)
     const winRef = useRef(null)
-      function lossmodal(){
+    const prepareJackpotRef = useRef(null)
+    function lossmodal(){
           // @ts-ignore
           //losRef.current.openModal();
-      }
-      function winmodal(){
+    }
+    function winmodal(){
         // @ts-ignore
         winRef.current.openModal();
     }
 
+    function prepareJackpotModal() {
+        // @ts-ignore
+        prepareJackpotRef.current.openModal();
+    }
+
+    function closeJackpotModal() {
+        // @ts-ignore
+        prepareJackpotRef.current.closeModal();
+    }    
+
     const [winningNumber, setWinningNumber] = useState('')
     useEffect(() => {
-        //const curTime = new Date()
-        //if (curTime < startTime || curTime > endTime) return
+
         getLamboRandomNumber(chainId, library?.getSigner()).then((result) => {
             getWinningNumber(result, chainId, library?.getSigner()).then((winningNumber) => {
                 setWinningNumber(winningNumber?.toString())
@@ -61,6 +57,31 @@ const Draw: React.FC = () => {
             console.error(e)
             setWinningNumber('')
         })
+        if (account && chainId && library) {
+
+
+            const hangTightTimer = setInterval(function(){
+                const currentTime = new Date();
+                const hangTightTime = new Date();
+                hangTightTime.setUTCHours(15);
+                hangTightTime.setUTCMinutes(59);
+                hangTightTime.setUTCSeconds(0);
+                hangTightTime.setUTCMilliseconds(0);
+                if (currentTime >= hangTightTime) {
+                    isCurrentDay(chainId, library?.getSigner()).then((flag) => {
+                            if (!flag) {
+                                prepareJackpotModal()
+                            } else {
+                                closeJackpotModal()
+                                clearInterval(hangTightTimer)
+                            }
+                        }).catch(e => {
+                            console.log(e)
+                        })        
+                    }
+            }, 10000)
+        }
+
     }, [account, chainId, library])    
 
     return (
@@ -68,6 +89,7 @@ const Draw: React.FC = () => {
             
             <Lose ref={losRef}/>
             <Winmodal ref={winRef}/>
+            <PrepareJackpot ref={prepareJackpotRef}/>
             <div className="container">
                 
                 <div className="header">
@@ -88,7 +110,7 @@ const Draw: React.FC = () => {
                     <h6 className="mt-4">Help us find the Lambo winner! There is an ongoing Twitter contest for 1000 WINLAMBO tokens to 50 lucky winners! <br/>To enter, you must help us find the winner of the Lambo by sharing on Twitter! You can see a suggested tweet by clicking the button below!</h6>
                     <a className="btn-main btn-white"  href="http://twitter.com/intent/tweet?text=Who%27s%20the%20lucky%20winner!%3F%20%40winlambos%20is%20about%20to%20send%20out%20210%2C000%20BUSD%20to%20the%20winner%20of%20today%27s%20event!%20%0A%20%0ACheck%20https%3A%2F%2Fwinlambo.fund%2F%20to%20see%20if%20you%20won!%20%0ART%20this%20if%20you%20won!%20%23bsc%20%23winlambo%20%23binance%20%40cz_binance%20%20%0A%20%0AI%27m%20still%20eligible%20to%20win%20future%20events%20since%20I%20%23HODL%20%23WINLAMBO!" target="blank"><i className="fab fa-twitter"></i>TWEET TO WIN!</a>
                 </div>
-                <img src="images/lambo2.png" className="drawcar" alt="lambo" />
+                {/* <img src="images/lambo2.png" className="drawcar" alt="lambo" /> */}
             </div>
         </section>
     );

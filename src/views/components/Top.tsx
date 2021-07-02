@@ -1,9 +1,11 @@
 import { BigNumber } from '@ethersproject/bignumber';
+import { useWeb3React } from '@web3-react/core';
+import { Web3Provider } from '@ethersproject/providers'
 import axios from 'axios';
 import { ethers } from 'ethers';
 import React, { useEffect, useMemo, useState } from 'react';
 import { BSC_LAUNCH_TIME, EXCLUDE_LIST, TOKEN_DECIMALS,  } from '../../utils/constants';
-import { getLamboRandomNumber } from '../../utils/contracts';
+import { getAccountBalance, getLamboRandomNumber } from '../../utils/contracts';
 
 interface ITopAccount {
     address: any,
@@ -14,6 +16,11 @@ const Top: React.FC = () => {
 
     const [topAccounts, setTopAccounts] = useState<ITopAccount[]>([])
     const [topAccountsAPI, setTopAccountsAPI] = useState('')
+    const [rankNumber, setRankNumber] = useState(-1)
+    const [accountVolume, setAccountVolume] = useState('')
+    const [isAccountTop100, setIsAccountTop100] = useState<boolean>()
+
+    const {account} = useWeb3React<Web3Provider>()
 
     // set the start time to 16:00 UTC in local time
     const startTime = new Date();
@@ -38,7 +45,7 @@ const Top: React.FC = () => {
     const endPointGetStartBlockNumber = 'https://api.bscscan.com/api?module=block&action=getblocknobytime&timestamp=' + baseTimeOfStart +'&closest=before&apiKey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
     const endPointGetEndBlockNumber = 'https://api.bscscan.com/api?module=block&action=getblocknobytime&timestamp=' + baseTimeOfCurrent +'&closest=before&apiKey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
 
-  
+
     useEffect(() => {
         // get start block number
         axios.get(endPointGetStartBlockNumber).then(response => {
@@ -56,7 +63,9 @@ const Top: React.FC = () => {
               } 
             })    
           } 
-        })    
+        })
+        
+
       
         if (topAccountsAPI) { 
             setTimeout(function(){
@@ -64,9 +73,10 @@ const Top: React.FC = () => {
                     console.info(response)
                     if (response.status === 200) {
                         const holderList = response.data.result
+                        
                         if (holderList) {
                             let balances = new Map()
-                             let results = holderList;
+                            let results = holderList;
                             for (let i=0; i<results.length; i++) {
                               let result = results[i];
                               if (!result.value) continue
@@ -98,22 +108,44 @@ const Top: React.FC = () => {
                                     balances.set(result.from, balances.get(result.from).sub(value));
                                 }
                             }
+
                             // remove all excluded addresses
                             for (let i=0; i< EXCLUDE_LIST.length; i++) {
                                 balances.delete(EXCLUDE_LIST[i].toLowerCase())
                             }
-            
+                             
+                            // set the volume of the connected wallet to 0 if it does not exist
+                            var accountLower = account?.toLowerCase();
+                            if (balances.get(accountLower) === undefined) {
+                                setIsAccountTop100(false);
+                                setAccountVolume("0.00");
+                            } else {
+                                setAccountVolume((+ethers.utils.formatUnits(balances.get(accountLower), TOKEN_DECIMALS)).toFixed(2));
+                            }
+
                             const descBalances = Array.from(balances).sort((a, b) => {
                                 return b[1].gt(a[1]) ? 1 : -1;
                             })
-                            const topCount = descBalances.length > 100 ? 100 : descBalances.length
+                            console.log('descBalances = ', descBalances.length)
+                            let topCount = 0
                             const topHolders = []
-                            for (let i = 0; i < topCount; i++) {
-                                topHolders.push({address: descBalances[i][0], amount: (+ethers.utils.formatUnits(descBalances[i][1], TOKEN_DECIMALS)).toFixed(2)})
+                            for (let i = 0; i < descBalances.length; i++) {
+                                if (topCount < 100) {
+                                    topHolders.push({address: descBalances[i][0], amount: (+ethers.utils.formatUnits(descBalances[i][1], TOKEN_DECIMALS)).toFixed(2)})
+                                }
+                                topCount++;
                             }
                             
                             if (topHolders.length > 0) {
                                 setTopAccounts(topHolders)
+                            
+                                // determine whether connected wallet is in top 100 volume
+                                for (let i = 0; i < topHolders.length; i++ ) {
+                                    if (topHolders[i].address === accountLower) {
+                                        setIsAccountTop100(true);
+                                        break;
+                                    }
+                                }
                             }
                         }
                     }
@@ -121,15 +153,16 @@ const Top: React.FC = () => {
             }, 10000)
 
         }
-    }, [topAccountsAPI])
+    }, [topAccountsAPI, account])
     
-    
+
+    // create table of top 100 volume
     const Ranklist = []
     for (let i = 0; i < topAccounts.length; i++) {
         let imgIdx = i + 1
         var sno = i < 3 ? (<img src={'images/' + imgIdx + '.png'} />) : (imgIdx);
 
-        var temp = (<div className="row" key={i}>
+        var temp = (<div className={topAccounts[i].address === account?.toLowerCase() ? "row green" : "row"} key={i}>
             <div className="cl1">
                 <div className="sno">{sno}</div>
                 <div className="addrs">{topAccounts[i].address}</div>
@@ -138,6 +171,23 @@ const Top: React.FC = () => {
         </div>);
         Ranklist.push(temp)
     }
+    
+    // if the connected wallet is not part of the top 100 active traders, show
+    // its balance at the top of the sheet, and highlight it green
+    if (topAccounts.length > 0) {
+        if (!isAccountTop100) {
+            var temp = (<div className="row green" key="?">
+                <div className="cl1">
+                    <div className="sno">?</div>
+                    <div className="addrs">{account}</div>
+                </div>
+                <div className="cl2">{accountVolume}</div>
+            </div>);
+            Ranklist.unshift(temp)
+        }
+    }
+
+
     return (
         <section className="bg-white top-sec">
             <div className="container">
@@ -148,8 +198,9 @@ const Top: React.FC = () => {
                             <div className="sno">No</div>
                             <div>Address</div>
                         </div>
-                        <div className="cl2">Amount</div>
+                        <div className="cl2">WINLAMBO Traded</div>
                     </div>
+
                     {Ranklist}
                 </div>
             </div>

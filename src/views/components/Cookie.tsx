@@ -5,8 +5,8 @@ const Cookie: React.FC = () => {
     return (
         <div className="cookie" style={{display:ishidden== true?"none":"flex"}}>
             <div>
-                 By interacting with this site and all other Winlambo affiliated platforms, you confirm that you have checked your local, state, and national gambling and giveaway laws to make sure you're allowed to participate.
-                 
+                I confirm that I have reviewed all applicable federal, state, provincial and local laws, regulations, ordinances and codes of my country ("Codes"), and my actions have not violated or otherwise not complied with the applicable Codes.
+                If a charge occurs, whether by me or by the Codes, which results in noncompliance of the Codes, I shall promptly notify WinLambo and cease actions that result in a violation or noncompliance of the Codes.
             </div>
             <button onClick={()=>setIshidden(true)}>Close</button>
         </div>

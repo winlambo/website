@@ -1,10 +1,8 @@
 import { Contract } from '@ethersproject/contracts'
-import axios from 'axios';
 import WinLamboABI from '../contracts/WinLambo.json'
 import MulticallABI from '../contracts/Multicall.json'
 import ERC20ABI from '../contracts/erc20.json'
 import LamboRandomNumberABI from '../contracts/LamboRandomNumber.json'
-import tokens from './tokens'
 
 
 export const Networks = {
