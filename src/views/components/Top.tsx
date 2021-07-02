@@ -189,7 +189,7 @@ const Top: React.FC = () => {
 
 
     return (
-        <section className="bg-white top-sec">
+        <section className="bg-black top-sec">
             <div className="container">
                 <h1>Today's Top <span id="val">100</span> Active Traders</h1>
                 <div className="toptable">
