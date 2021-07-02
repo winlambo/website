@@ -210,7 +210,7 @@ const Dailydraw: React.FC = () => {
           tickets={holderTickets}
         />
 
-        <img src="images/lambo3.png" className="drawcar" alt="lambo" />
+        {/* <img src="images/lambo3.png" className="drawcar" alt="lambo" /> */}
       </div>
     </section>
   );

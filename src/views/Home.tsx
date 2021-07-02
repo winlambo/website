@@ -12,10 +12,10 @@ const Home: React.FC = () => {
     return (
         <>
             <Mainwrapper />
-            <Volume />
+            {/* <Volume /> */}
             <Top />
-            <Draw/>
             <Dailydraw/>
+            <Draw/>
             <Footer />
             <Cookie/>
         </>
