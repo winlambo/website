@@ -42,7 +42,7 @@ const Top: React.FC = () => {
     const baseTimeOfCurrent = Date.parse(endTime.toString()) / 1000
 
     // build the API requests for the start and end blocks
-    const endPointGetStartBlockNumber = 'https://api.bscscan.com/api?module=block&action=getblocknobytime&timestamp=' + baseTimeOfStart +'&closest=before&apiKey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
+    const endPointGetStartBlockNumber = 'https://api.bscscan.com/api?module=block&action=getblocknobytime&timestamp=' + baseTimeOfStart +'&closest=after&apiKey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
     const endPointGetEndBlockNumber = 'https://api.bscscan.com/api?module=block&action=getblocknobytime&timestamp=' + baseTimeOfCurrent +'&closest=before&apiKey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
 
 
@@ -50,7 +50,8 @@ const Top: React.FC = () => {
         // get start block number
         axios.get(endPointGetStartBlockNumber).then(response => {
           if (response.status === 200 && response.data.status === '1') {
-            var startBlockNumber = parseInt(response.data.result)
+            var startBlockNumber = parseInt(response.data.result);
+            startBlockNumber += 1;
 
             // get end block number
             axios.get(endPointGetEndBlockNumber).then(secondResponse => {
