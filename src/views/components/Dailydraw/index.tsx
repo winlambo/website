@@ -52,7 +52,7 @@ const Dailydraw: React.FC = () => {
   }
 
   const baseTimeOfStart = Date.parse(startTime.toString()) / 1000
-  const endPointGetStartBlockNumber = 'https://api.bscscan.com/api?module=block&action=getblocknobytime&timestamp=' + baseTimeOfStart +'&closest=before&apiKey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
+  const endPointGetStartBlockNumber = 'https://api.bscscan.com/api?module=block&action=getblocknobytime&timestamp=' + baseTimeOfStart +'&closest=after&apiKey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
 
   useEffect(() => {
 
