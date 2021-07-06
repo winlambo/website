@@ -12,8 +12,8 @@ const Mechanics: React.FC = () => {
                             Your tickets are your tokens. The more tokens you have, the more tickets you have, and the higher the chance of winning! <br />
                             To learn more about the technicalities, read our Medium article below.
                             <div className="btn-outer">
-                                <a href="https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x6a79e08db6c08b8f88703794bf1a47f5a01eb9dc" className="btn-main btn-white">Buy Now<i className="fas fa-mouse-pointer"></i></a>
-                                <a href="https://winlambo.medium.com/" className="btn-main btn-white">Medium</a>
+                                <a href="https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x6a79e08db6c08b8f88703794bf1a47f5a01eb9dc" className="btn-main btn-white" target="_blank">Buy Now<i className="fas fa-mouse-pointer"></i></a>
+                                <a href="https://winlambo.medium.com/" className="btn-main btn-white" target="_blank">Medium</a>
                             </div>
                         </div>
                     </div>
