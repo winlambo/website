@@ -35,11 +35,11 @@ const Mainwrapper: React.FC = () => {
 
                             To learn more about the technicalities, read our Docs below.
                                 <div className="btn-outer">
-                                    <a href="https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x6a79e08db6c08b8f88703794bf1a47f5a01eb9dc" className="btn-main btn-black">Buy Now</a>
-                                    <a href="http://docs.winlambo.fund" className="btn-main btn-black">Docs</a>
-                                    <a href="https://winlambo.medium.com/" className="btn-main btn-black btn-auto"><i className="fab fa-medium-m"></i></a>
-                                    <a href="https://t.me/winlambo_official" className="btn-main btn-black btn-auto"><i className="fas fa-paper-plane"></i></a>
-                                    <a href="https://bscscan.com/token/0x6a79e08db6c08b8f88703794bf1a47f5a01eb9dc" className="btn-main btn-black btn-auto"><img src="images/bscscn.svg" /></a>
+                                    <a href="https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x6a79e08db6c08b8f88703794bf1a47f5a01eb9dc" className="btn-main btn-black" target="_blank">Buy Now</a>
+                                    <a href="http://docs.winlambo.fund" className="btn-main btn-black" target="_blank">Docs</a>
+                                    <a href="https://winlambo.medium.com/" className="btn-main btn-black btn-auto" target="_blank"><i className="fab fa-medium-m"></i></a>
+                                    <a href="https://t.me/winlambo_official" className="btn-main btn-black btn-auto" target="_blank"><i className="fas fa-paper-plane"></i></a>
+                                    <a href="https://bscscan.com/token/0x6a79e08db6c08b8f88703794bf1a47f5a01eb9dc" className="btn-main btn-black btn-auto" target="_blank"><img src="images/bscscn.svg" /></a>
                                 </div>
                             </div>
                         </div>
