@@ -2,23 +2,23 @@ import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers'
 import React, { useEffect, useRef, useState } from 'react';
 import TwoTicket from './TwoTicket'
-import { injectedConnector } from '../../../utils/connectors';
+import { injectedConnector, walletConnector } from '../../../utils/connectors';
 import { useEagerConnect } from '../../../hooks/useEagerConnect';
 import { useInactiveListener } from '../../../hooks/useInactiveListener';
 import { getContractObj, shorter, TOTAL_SUPPLY } from '../../../utils';
 import { getDailyFund, getLamboFund, getTicketInfo, getViolaPrice, getLamboRandomNumber, isCurrentDay } from '../../../utils/contracts';
 
-
+import Wallets from '../Popup/Wallets';
 
 
 const Topnav: React.FC = () => {
     const context = useWeb3React<Web3Provider>()
     const {connector, library, chainId, account, activate, deactivate, active, error } = context
+    const walletRef = useRef(null)
 
-
-    // connect injected Metamask
-    const connectAccount = () => {
-        activate(injectedConnector)
+    function walletModal(){
+        // @ts-ignore
+        walletRef.current.openModal();
     }
 
     // handle logic to recognize the connector currently being activated
@@ -112,6 +112,7 @@ const Topnav: React.FC = () => {
     
     return (
         <nav className="navcontainer">
+            <Wallets ref={walletRef} />
             <div className="nav-main">
                 {/* <img src="images/logo.png" className="logo" /> */}
                 <div className="nav-right">                 
@@ -142,9 +143,9 @@ const Topnav: React.FC = () => {
                     { (active && account) ? <TwoTicket tickets={tickets} />:"" }
                     
                     <div className="afterlog">
-                        <button className={(active && account)? "btn-main btn-transparent" : "btn-main btn-black m-0"} onClick={!(active && account) ? connectAccount : () => {}}>
-                            <img src="images/mt.svg" className="meta" />
-                            { (active && account) ? <div>{shorter(account)}<div>{(ticketAmount * 100 / TOTAL_SUPPLY).toFixed(8)}%</div></div>: 'Connect'}
+                        <button className={(active && account)? "btn-main btn-transparent" : "btn-main btn-black m-0"} onClick={!(active && account) ? walletModal : () => {}}>
+                            {/* <img src="images/mt.svg" className="meta" /> */} {console.log(active)}
+                            { (active && account) ? <div>{shorter(account)}<div>{(ticketAmount * 100 / TOTAL_SUPPLY).toFixed(8)}%</div></div>: 'Connect wallet'}
                         </button>
                         <div className="arrowanimated">
                             <img src="images/up-arrow.png" alt="arrow" />
