@@ -17,27 +17,9 @@ const customStyles = {
     }
 };
 
-const wallets = [
-    {
-        'name': 'MetaMask',
-        'icon': 'images/mt.svg',
-        'id': 'mt'
-    },
-    {
-        'name': 'WalletConnect',
-        'icon': 'images/walletconnect.svg',
-        'id': 'wc'
-    },
-    {
-        'name': 'TrustWallet',
-        'icon': 'images/trustwallet.svg',
-        'id': 'tw'
-    }
-];
-
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
 const { forwardRef, useRef, useImperativeHandle } = React;
-const Wallets= forwardRef((props, ref) => {
+const Account= forwardRef((props, ref) => {
     const context = useWeb3React<Web3Provider>()
     const {connector, library, chainId, account, activate, deactivate, active, error } = context
 
@@ -55,12 +37,10 @@ const Wallets= forwardRef((props, ref) => {
         setIsOpen(false);
     }
 
-    // connect injected Metamask and walletConnect
-    const connectAccount = (id: any) => {
-         if (id == 'mt') activate(injectedConnector);
-         if (id == 'wc') activate(walletConnector);
-         if (id == 'tw') activate(truewalletConnector);
-         console.log(id)
+    // disconnect connect injected Metamask and walletConnect
+    const disconnectAccount = (id: any) => {
+         deactivate()
+         closeModal();
     }
     return (
         <Modal
@@ -70,24 +50,14 @@ const Wallets= forwardRef((props, ref) => {
             style={customStyles}
             contentLabel="Modal"
         >
-            <div className="wallet-modal">
-                <h4>Connet to a wallet</h4>
-                <div className="wallet-body">
-                    {wallets.map((wallet, index) => {
-                        return (
-                            <div className="wallet-wrapper text-center" key={index} onClick={() => connectAccount(wallet.id)}>
-                                <div className="wallet-logo">
-                                    <img src={wallet.icon} className="meta" />
-                                </div>
-                                <div className="wallet-name">{wallet.name}</div>
-                            </div>
-                        )
-                    })}
-                </div>
+            <div className="account-logout">
+                <h3>Your Account</h3>
+                <div>{account}</div>
+                <a className="btn-main btn-black mx-auto mt-3" onClick={disconnectAccount}>Logout</a>
             </div>
 
         </Modal>
     )
 })
 
-export default Wallets
+export default Account

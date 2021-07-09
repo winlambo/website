@@ -2,23 +2,32 @@ import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers'
 import React, { useEffect, useRef, useState } from 'react';
 import TwoTicket from './TwoTicket'
-import { injectedConnector, walletConnector } from '../../../utils/connectors';
+
 import { useEagerConnect } from '../../../hooks/useEagerConnect';
 import { useInactiveListener } from '../../../hooks/useInactiveListener';
 import { getContractObj, shorter, TOTAL_SUPPLY } from '../../../utils';
 import { getDailyFund, getLamboFund, getTicketInfo, getViolaPrice, getLamboRandomNumber, isCurrentDay } from '../../../utils/contracts';
 
 import Wallets from '../Popup/Wallets';
+import Account from '../Popup/Account';
 
 
 const Topnav: React.FC = () => {
     const context = useWeb3React<Web3Provider>()
     const {connector, library, chainId, account, activate, deactivate, active, error } = context
-    const walletRef = useRef(null)
+    const walletRef = useRef(null);
+    const accountRef = useRef(null);
 
+    // show the list of wallets to connect
     function walletModal(){
         // @ts-ignore
         walletRef.current.openModal();
+    }
+
+    // show the account address and win chance, and logout button
+    function accountInfoModal() {
+        // @ts-ignore
+        accountRef.current.openModal();
     }
 
     // handle logic to recognize the connector currently being activated
@@ -113,6 +122,7 @@ const Topnav: React.FC = () => {
     return (
         <nav className="navcontainer">
             <Wallets ref={walletRef} />
+            <Account ref={accountRef} />
             <div className="nav-main">
                 {/* <img src="images/logo.png" className="logo" /> */}
                 <div className="nav-right">                 
@@ -143,16 +153,18 @@ const Topnav: React.FC = () => {
                     { (active && account) ? <TwoTicket tickets={tickets} />:"" }
                     
                     <div className="afterlog">
-                        <button className={(active && account)? "btn-main btn-transparent" : "btn-main btn-black m-0"} onClick={!(active && account) ? walletModal : () => {}}>
-                            {/* <img src="images/mt.svg" className="meta" /> */} {console.log(active)}
-                            { (active && account) ? <div>{shorter(account)}<div>{(ticketAmount * 100 / TOTAL_SUPPLY).toFixed(8)}%</div></div>: 'Connect wallet'}
+                        <button className={(active && account)? "btn-main btn-transparent" : "btn-main btn-black m-0"} onClick={!(active && account) ? walletModal : accountInfoModal}>
+                            {/* <img src="images/mt.svg" className="meta" /> */}
+                            { (active && account) ? <div className="account-info">{shorter(account)}<div className="chance">{(ticketAmount * 100 / TOTAL_SUPPLY).toFixed(8)}%</div></div>: 'Connect wallet'}
                         </button>
+                        {(active && account)?
                         <div className="arrowanimated">
                             <img src="images/up-arrow.png" alt="arrow" />
                             <div className="text">
                             THAT’S YOUR <br /> CHANCE AT <br /> WINNING
                             </div>
-                        </div>
+                            </div> : ""
+                        }
                     </div>
                 </div>
                 <i className={playing ?"volbtn fas fa-volume-mute":"volbtn fas fa-volume-up"} onClick={toggle}></i>   

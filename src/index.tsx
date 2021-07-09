@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import GlobalStyle from './style/Global'
-import './style/app.css'
 import Home from './views/Home'
 import { Web3ReactProvider } from '@web3-react/core'
 import { ExternalProvider, JsonRpcFetchFunc, Web3Provider } from '@ethersproject/providers'
