@@ -1,6 +1,6 @@
 import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers'
-import React from 'react'
+import React, { Ref } from 'react'
 import Modal from 'react-modal';
 import { injectedConnector, walletConnector, truewalletConnector } from '../../../utils/connectors';
 
@@ -17,11 +17,14 @@ const customStyles = {
     }
 };
 
+type IRef = {
+    openModal: () => void,
+}
+
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
-const { forwardRef, useRef, useImperativeHandle } = React;
-const Account= forwardRef((props, ref) => {
-    const context = useWeb3React<Web3Provider>()
-    const {connector, library, chainId, account, activate, deactivate, active, error } = context
+const { forwardRef, useImperativeHandle } = React;
+const InfoModal= forwardRef((props: {content: string}, ref: Ref<IRef>) => {
+    const {content} = props;
 
     const [modalIsOpen, setIsOpen] = React.useState(false);
     useImperativeHandle(ref, () => ({
@@ -37,11 +40,6 @@ const Account= forwardRef((props, ref) => {
         setIsOpen(false);
     }
 
-    // disconnect connect injected Metamask and walletConnect
-    const disconnectAccount = (id: any) => {
-         deactivate()
-         closeModal();
-    }
     return (
         <Modal
             isOpen={modalIsOpen}
@@ -51,14 +49,14 @@ const Account= forwardRef((props, ref) => {
             contentLabel="Modal"
             ariaHideApp={false}
         >
-            <div className="account-logout">
-                <h3>Your Account</h3>
-                <div>{account}</div>
-                <a className="btn-main btn-black mx-auto mt-3" onClick={disconnectAccount}>Logout</a>
+            <div className="info-section">
+                <h3>{content}</h3>
+                <div></div>
+                <a className="btn-main btn-black mx-auto mt-3" onClick={closeModal}>Close</a>
             </div>
 
         </Modal>
     )
 })
 
-export default Account
+export default InfoModal

@@ -679,6 +679,7 @@ const GlobalStyle = createGlobalStyle`
 	  h1 {
 		margin: 0;
 		position: absolute;
+		display: flex;
 		left: 50%;
 		transform: translateX(-50%);
 	  }
@@ -851,7 +852,7 @@ const GlobalStyle = createGlobalStyle`
 	  }
 	  .lg1 {
 		display: flex;
-		align-items: center;
+		
 	  }
 	  .wlogo {
 		height: 50px;
@@ -1312,6 +1313,7 @@ const GlobalStyle = createGlobalStyle`
 		left: 0;
 	  }
 	  .drawcar {
+		width: 100%;
 		margin: 30px auto;
 	  }
 	}
@@ -1354,6 +1356,7 @@ const GlobalStyle = createGlobalStyle`
 		}
 	  }
 	  .drawcar {
+		width: 100%;
 		margin: 30px auto;
 	  }
 	}
@@ -1498,6 +1501,7 @@ const GlobalStyle = createGlobalStyle`
 		}
 	  }
 	  .drawcar {
+		width: 100%;
 		margin: 30px auto;
 	  }
 	  .luckybx {
@@ -1634,6 +1638,7 @@ const GlobalStyle = createGlobalStyle`
 		}
 	  }
 	  .drawcar {
+		  width: 100%;
 		margin: 30px auto;
 	  }
 	  .luckybx {
@@ -1787,6 +1792,7 @@ const GlobalStyle = createGlobalStyle`
 		}
 	  }
 	  .drawcar {
+		  width: 100%;
 		margin: 30px auto;
 	  }
 	  .luckybx {
@@ -1822,7 +1828,7 @@ const GlobalStyle = createGlobalStyle`
 	padding: 10px 0;
     background-color: #80808069;
     margin: 20px 10px;
-    min-width: 300px;
+    min-width: 250px;
     display: flex;
     cursor: pointer;
     justify-content: space-between;
@@ -1876,5 +1882,17 @@ const GlobalStyle = createGlobalStyle`
 		height: 35px;
 	}
   } 
+  .info-section {
+	display: flex;
+    flex-direction: column;
+	h3 {
+		margin-top: 15px;
+	}
+	a {
+		border: 2px solid #fff;
+		border-radius: 10px;
+		height: 35px;
+	} 
+  }
 `;
 export default GlobalStyle;

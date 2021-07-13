@@ -38,6 +38,7 @@ const Lose= forwardRef((props, ref) => {
             onRequestClose={closeModal}
             style={customStyles}
             contentLabel="Modal"
+            ariaHideApp={false}
         >
             <div className="lossmodal">
                 <h1>Better Luck Next Time!</h1>

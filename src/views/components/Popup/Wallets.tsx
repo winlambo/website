@@ -69,6 +69,7 @@ const Wallets= forwardRef((props, ref) => {
             onRequestClose={closeModal}
             style={customStyles}
             contentLabel="Modal"
+            ariaHideApp={false}
         >
             <div className="wallet-modal">
                 <h4>Connet to a wallet</h4>

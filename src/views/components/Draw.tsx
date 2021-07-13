@@ -1,4 +1,4 @@
-import React, { useState, useRef ,createRef, useEffect} from 'react'
+import React, { useState, useRef , ElementRef, useEffect} from 'react'
 import { Web3Provider } from '@ethersproject/providers'
 import Lose from './Popup/Loss'
 import Winmodal from './Popup/Win'
@@ -7,6 +7,9 @@ import SpinnWallet from './Draw/SpinnWallet'
 import { useWeb3React } from '@web3-react/core';
 import { getLamboRandomNumber, getTop3PotTicketMembers, getWinningNumber, isCurrentDay, isWinner } from '../../utils/contracts';
 import PrepareJackpot from './Popup/PrepareJackpot';
+import { InfoIcon } from './Styled';
+import InfoModal from './Popup/InfoModal';
+
 const Completionist = () => <span></span>;//<span>Refresh your page!</span>;
 const Draw: React.FC = () => {
 
@@ -16,6 +19,16 @@ const Draw: React.FC = () => {
     const losRef = useRef(null)
     const winRef = useRef(null)
     const prepareJackpotRef = useRef(null)
+
+    
+    type IRef = ElementRef<typeof InfoModal>;
+    const infoModalRef = useRef<IRef>(null);
+
+    // show info modal
+    function infoModal() {
+        infoModalRef.current?.openModal();
+    }
+
     function lossmodal(){
           // @ts-ignore
           //losRef.current.openModal();
@@ -90,6 +103,7 @@ const Draw: React.FC = () => {
             <Lose ref={losRef}/>
             <Winmodal ref={winRef}/>
             <PrepareJackpot ref={prepareJackpotRef}/>
+            <InfoModal ref={infoModalRef} content="Lambo Draw: TBD" />
             <div className="container">
                 
                 <div className="header">
@@ -97,7 +111,7 @@ const Draw: React.FC = () => {
                         <img src="images/logow.png" alt="Logo" className="wlogo" />
                         <a className="btn-main btn-white" href="https://bscscan.com/address/0x7Bd9bC770685874a91DAe27D709742D5025D6348#readContract"  target="blank">Verify on BscScan!</a>
                     </div>
-                    <h1>THE LAMBO DRAW</h1>
+                    <h1>THE LAMBO DRAW <InfoIcon className="fas fa-info-circle" onClick={infoModal}></InfoIcon></h1>
                     <div className="date">
                         <h3>June 6, 2021</h3>
                         <Countdown date="">

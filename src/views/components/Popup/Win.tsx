@@ -42,6 +42,7 @@ const Winmodal= forwardRef((props, ref) =>{
             onRequestClose={closeModal}
             style={customStyles}
             contentLabel="Modal"
+            ariaHideApp={false}
         >
             <div className="winmodal">
                 <h1>Congrats</h1>
