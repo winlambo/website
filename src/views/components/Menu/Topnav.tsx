@@ -92,18 +92,18 @@ const Topnav: React.FC = () => {
                     
                     // caculate Liquid provider balance
                     let lpbalance = await getAccountBalance(chainId, LP_ADDRESS, library);
-                    lpbalance = lpbalance.mul(BigNumber.from(10).pow(8)).div(BigNumber.from(10).pow(18));
-                    const lpbal = lpbalance.toNumber() / 1e8
+                    lpbalance = lpbalance.div(BigNumber.from(10).pow(9));
+                    const lpbal = lpbalance.toNumber();
 
                     // get unicrypt locker balance
                     let ulbalance = await getAccountBalance(chainId, UL_ADDRESS, library);
-                    ulbalance = ulbalance.mul(BigNumber.from(10).pow(8)).div(BigNumber.from(10).pow(18));
-                    const ulbal = ulbalance.toNumber() / 1e8
+                    ulbalance = ulbalance.div(BigNumber.from(10).pow(9));
+                    const ulbal = ulbalance.toNumber();
 
                     // get burend balance
                     let burnbalance = await getAccountBalance(chainId, BURN_ADDRESS, library);
-                    burnbalance = burnbalance.mul(BigNumber.from(10).pow(8)).div(BigNumber.from(10).pow(18));
-                    const burnbal = burnbalance.toNumber() / 1e8;
+                    burnbalance = burnbalance.div(BigNumber.from(10).pow(9));
+                    const burnbal = burnbalance.toNumber();
 
                     // get the tickets hold by zero address
                     let zerotickets = await getTicketInfo(chainId, ZERO_ADDRESS, library);
