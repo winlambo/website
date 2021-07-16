@@ -59,6 +59,7 @@ const InfoModal= forwardRef((props: {content: string}, ref: Ref<IRef>) => {
     function closeModal() {
         setIsOpen(false);
     }
+
     let contentElement = undefined;
     if (content == 'top') {
         contentElement = <>
