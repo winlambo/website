@@ -679,6 +679,7 @@ const GlobalStyle = createGlobalStyle`
 	  h1 {
 		margin: 0;
 		position: absolute;
+		display: flex;
 		left: 50%;
 		transform: translateX(-50%);
 	  }
@@ -851,7 +852,7 @@ const GlobalStyle = createGlobalStyle`
 	  }
 	  .lg1 {
 		display: flex;
-		align-items: center;
+		
 	  }
 	  .wlogo {
 		height: 50px;
@@ -1187,7 +1188,7 @@ const GlobalStyle = createGlobalStyle`
 		  .btn-black {
 			min-width: unset;
 			padding: 8px 15px;
-			color: #000;
+			color: #fff;
 		  }
 		  .btn-transparent {
 			text-align: right;
@@ -1312,6 +1313,7 @@ const GlobalStyle = createGlobalStyle`
 		left: 0;
 	  }
 	  .drawcar {
+		width: 100%;
 		margin: 30px auto;
 	  }
 	}
@@ -1354,6 +1356,7 @@ const GlobalStyle = createGlobalStyle`
 		}
 	  }
 	  .drawcar {
+		width: 100%;
 		margin: 30px auto;
 	  }
 	}
@@ -1498,6 +1501,7 @@ const GlobalStyle = createGlobalStyle`
 		}
 	  }
 	  .drawcar {
+		width: 100%;
 		margin: 30px auto;
 	  }
 	  .luckybx {
@@ -1634,6 +1638,7 @@ const GlobalStyle = createGlobalStyle`
 		}
 	  }
 	  .drawcar {
+		  width: 100%;
 		margin: 30px auto;
 	  }
 	  .luckybx {
@@ -1787,6 +1792,7 @@ const GlobalStyle = createGlobalStyle`
 		}
 	  }
 	  .drawcar {
+		  width: 100%;
 		margin: 30px auto;
 	  }
 	  .luckybx {
@@ -1818,5 +1824,75 @@ const GlobalStyle = createGlobalStyle`
 	}
   }
   
+  .wallet-wrapper {
+	padding: 10px 0;
+    background-color: #80808069;
+    margin: 20px 10px;
+    min-width: 250px;
+    display: flex;
+    cursor: pointer;
+    justify-content: space-between;
+    border-radius: 4px;
+    padding: 10px 20px 10px 10px;
+    align-items: center;
+
+	&:hover {
+		transform: scale(1.06);
+		transition: transform 500ms ease-in-out 25ms;
+	}
+
+	.wallet-logo {
+		padding: 10px;
+		img {
+			height: 40px;
+			display: flex;
+		}
+	}
+	.wallet-name {
+		font-size: 20px;
+	}
+	.wallet-modal {
+		h4 {
+			font-size: 20px;
+			font-weight: bold;
+		}
+	}
+  }
+  .afterlog {
+	  .account-info {
+		  cursor: pointer;
+		  padding: 0 10px;
+		  border-radius: 3px;
+		  background: #000;
+		  color: #fff;
+		  .chance {
+			  color: rgb(26, 163, 81);
+		  }
+	  }
+  } 
+  .account-logout {
+	display: flex;
+    flex-direction: column;
+	div {
+		margin-top: 15px;
+	}
+	a {
+		border: 2px solid #fff;
+		border-radius: 10px;
+		height: 35px;
+	}
+  } 
+  .info-section {
+	display: flex;
+    flex-direction: column;
+	h3 {
+		margin-top: 15px;
+	}
+	a {
+		border: 2px solid #fff;
+		border-radius: 10px;
+		height: 35px;
+	} 
+  }
 `;
 export default GlobalStyle;
