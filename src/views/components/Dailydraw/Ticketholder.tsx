@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { keyframes } from "styled-components";
 import { useWeb3React } from "@web3-react/core";
 import { Web3Provider } from "@ethersproject/providers";
@@ -7,6 +7,7 @@ import TwoTicket from "../Menu/TwoTicket";
 import { injectedConnector } from "../../../utils/connectors";
 import { useEagerConnect } from "../../../hooks/useEagerConnect";
 import { useInactiveListener } from "../../../hooks/useInactiveListener";
+import Wallets from '../Popup/Wallets';
 
 export interface TicketholderProp {
   heading?: string;
@@ -26,10 +27,22 @@ const Ticketholder: React.FC<TicketholderProp> = ({ heading, tickets }) => {
     error,
   } = context;
 
-  // connect injected Metamask
-  const connectAccount = () => {
-    activate(injectedConnector);
-  };
+  const walletRef = useRef(null)
+
+  function walletModal(){
+    // @ts-ignore
+    walletRef.current.openModal();
+  }
+  useEffect(() => {
+    if (account && walletRef.current) {
+         // @ts-ignore
+        walletRef.current.closeModal();
+    }
+  }, [account]);
+  // // connect injected Metamask
+  // const connectAccount = () => {
+  //   activate(injectedConnector);
+  // };
 
   // handle logic to recognize the connector currently being activated
   const [activatingConnector, setActivatingConnector] = React.useState();
@@ -45,6 +58,7 @@ const Ticketholder: React.FC<TicketholderProp> = ({ heading, tickets }) => {
 
   return (
     <div className="ticketholder">
+      <Wallets ref={walletRef} />
       <div className="ticketheader">
         <h4>{heading}</h4>
         <div className="wallet">
@@ -55,8 +69,8 @@ const Ticketholder: React.FC<TicketholderProp> = ({ heading, tickets }) => {
                   ? "btn-main btn-transparent"
                   : "btn-main btn-black m-0"
               }
-              onClick={!(active && account) ? connectAccount : () => {}}
-              style={{ backgroundColor: "transparent" }}
+              onClick={!(active && account) ? walletModal : () => {}}
+              // style={{ backgroundColor: "transparent" }}
             >
               {active && account ? (
                 <div>
@@ -64,10 +78,10 @@ const Ticketholder: React.FC<TicketholderProp> = ({ heading, tickets }) => {
                   {account}
                 </div>
               ) : (
-                "Connect"
+                "Connect wallet"
               )}
             </button>
-            <img src="images/mt.svg" alt="Meta" />
+            {/* <img src="images/mt.svg" alt="Meta" /> */}
           </div>
         </div>
       </div>
