@@ -1,7 +1,7 @@
 
 import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers'
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import TwoTicket from '../Menu/TwoTicket'
 import { injectedConnector } from '../../../utils/connectors';
 import { useEagerConnect } from '../../../hooks/useEagerConnect';
@@ -9,6 +9,7 @@ import { useInactiveListener } from '../../../hooks/useInactiveListener';
 import { getContractObj} from '../../../utils';
 import { getDailyFund, getLamboFund, getTicketInfo, getViolaPrice } from '../../../utils/contracts';
 import Luckybx from './Luckybx'
+import Wallets from '../Popup/Wallets';
 
 export interface SpinWalletProps {
     winningNumber: string
@@ -18,10 +19,24 @@ const SpinnWallet: React.FC<SpinWalletProps> = ({winningNumber}) => {
     const context = useWeb3React<Web3Provider>()
     const {connector, library, chainId, account, activate, deactivate, active, error } = context
 
-    // connect injected Metamask
-    const connectAccount = () => {
-        activate(injectedConnector)
+    const walletRef = useRef(null)
+
+    function walletModal(){
+        // @ts-ignore
+        walletRef.current.openModal();
     }
+    useEffect(() => {
+        if (account && walletRef.current) {
+             // @ts-ignore
+            walletRef.current.closeModal();
+        }
+    }, [account]);
+
+
+    // // connect injected Metamask
+    // const connectAccount = () => {
+    //     activate(injectedConnector)
+    // }
 
     // handle logic to recognize the connector currently being activated
     const [activatingConnector, setActivatingConnector] = React.useState()
@@ -91,17 +106,17 @@ const SpinnWallet: React.FC<SpinWalletProps> = ({winningNumber}) => {
 
   return (
       <div className="spinwallet">
-       
+       <Wallets ref={walletRef} />
         <div className="wallet">
             <div className="wallet-inner">
-                <button className={(active && account)? "btn-main btn-transparent" : "btn-main btn-black m-0"} onClick={!(active && account) ? connectAccount : () => {}} style={{backgroundColor:"transparent"}}>
-                    { (active && account) ? <div><h5>Your Wallet</h5>{account}</div>: 'Connect'}
+                <button className={(active && account)? "btn-main btn-transparent" : "btn-main btn-black m-0"} onClick={!(active && account) ? walletModal : () => {}} style={{backgroundColor:"transparent"}}>
+                    { (active && account) ? <div><h5>Your Wallet</h5>{account}</div>: 'Connect wallet'}
                 </button>
                 {/* <div>
                     <h5>Your Wallet</h5>
                     0xbc3e03e0c277227066fea34d7e95d31bc424dad7
                 </div> */}
-                <img src="images/mt.svg" alt="Meta" />
+                {/* <img src="images/mt.svg" alt="Meta" /> */}
             </div>
         </div>
         <div className="luckybx">

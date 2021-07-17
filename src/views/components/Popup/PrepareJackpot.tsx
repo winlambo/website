@@ -41,6 +41,7 @@ const PrepareJackpot= forwardRef((props, ref) => {
             contentLabel="Modal"
             // @ts-ignore
             parentSelector={() => document.querySelector('.daily-draw')}
+            ariaHideApp={false}
         >
             <div className="lossmodal">
                 <h1>Not Started Yet</h1>

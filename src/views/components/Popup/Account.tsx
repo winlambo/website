@@ -1,6 +1,8 @@
+import { useWeb3React } from '@web3-react/core';
+import { Web3Provider } from '@ethersproject/providers'
 import React from 'react'
 import Modal from 'react-modal';
-
+import { injectedConnector, walletConnector, truewalletConnector } from '../../../utils/connectors';
 
 const customStyles = {
     content: {
@@ -10,14 +12,17 @@ const customStyles = {
         bottom: 'auto',
         marginRight: '-50%',
         transform: 'translate(-50%, -50%)',
-        background: 'transparent',
-        maxWidth: "700px"
+        maxWidth: "700px",
+        background: 'transparent'
     }
 };
 
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
 const { forwardRef, useRef, useImperativeHandle } = React;
-const Lose= forwardRef((props, ref) => {
+const Account= forwardRef((props, ref) => {
+    const context = useWeb3React<Web3Provider>()
+    const {connector, library, chainId, account, activate, deactivate, active, error } = context
+
     const [modalIsOpen, setIsOpen] = React.useState(false);
     useImperativeHandle(ref, () => ({
         openModal: () => {
@@ -31,6 +36,12 @@ const Lose= forwardRef((props, ref) => {
     function closeModal() {
         setIsOpen(false);
     }
+
+    // disconnect connect injected Metamask and walletConnect
+    const disconnectAccount = (id: any) => {
+         deactivate()
+         closeModal();
+    }
     return (
         <Modal
             isOpen={modalIsOpen}
@@ -40,15 +51,14 @@ const Lose= forwardRef((props, ref) => {
             contentLabel="Modal"
             ariaHideApp={false}
         >
-            <div className="lossmodal">
-                <h1>Better Luck Next Time!</h1>
-                <div className="infoouter">
-                Thank you for playing! There's an ongoing Twitter contest for 1000 WINLAMBO tokens to 50 lucky winners! To enter, you must help us find the winner of the Lambo by sharing on Twitter! You can see a suggested tweet on the next screen!
-                </div>
-                <a className="btn-main btn-white mx-auto mt-3" onClick={closeModal}>Close</a>
+            <div className="account-logout">
+                <h3>Your Account</h3>
+                <div>{account}</div>
+                <a className="btn-main btn-black mx-auto mt-3" onClick={disconnectAccount}>Logout</a>
             </div>
+
         </Modal>
     )
 })
 
-export default Lose
+export default Account
