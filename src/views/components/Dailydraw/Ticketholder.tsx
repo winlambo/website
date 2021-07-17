@@ -33,16 +33,13 @@ const Ticketholder: React.FC<TicketholderProp> = ({ heading, tickets }) => {
     // @ts-ignore
     walletRef.current.openModal();
   }
+
   useEffect(() => {
     if (account && walletRef.current) {
          // @ts-ignore
         walletRef.current.closeModal();
     }
   }, [account]);
-  // // connect injected Metamask
-  // const connectAccount = () => {
-  //   activate(injectedConnector);
-  // };
 
   // handle logic to recognize the connector currently being activated
   const [activatingConnector, setActivatingConnector] = React.useState();

@@ -23,8 +23,8 @@ ReactDOM.render(
     <Web3ReactProvider getLibrary={getLibrary}>
       <Provider store={store}>
         <AppUpdater />
-    <GlobalStyle />
-    <Home />
+        <GlobalStyle />
+        <Home />
         <RewardsButton />
       </Provider>
     </Web3ReactProvider>    
