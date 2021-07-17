@@ -25,6 +25,12 @@ const SpinnWallet: React.FC<SpinWalletProps> = ({winningNumber}) => {
         // @ts-ignore
         walletRef.current.openModal();
     }
+    useEffect(() => {
+        if (account && walletRef.current) {
+             // @ts-ignore
+            walletRef.current.closeModal();
+        }
+    }, [account]);
 
 
     // // connect injected Metamask

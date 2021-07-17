@@ -63,6 +63,13 @@ const Topnav: React.FC = () => {
     }, [chainId, library])
 
     useEffect(() => {
+        if (account && walletRef.current) {
+             // @ts-ignore
+            walletRef.current.closeModal();
+        }
+    }, [account]);
+
+    useEffect(() => {
         getLamboFund(chainId, library?.getSigner()).then((busdAmount) => {
             setLamboFundAmount(busdAmount)
         }).catch(e => {

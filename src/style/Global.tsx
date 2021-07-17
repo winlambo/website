@@ -1881,7 +1881,7 @@ const GlobalStyle = createGlobalStyle`
 		border-radius: 10px;
 		height: 35px;
 	}
-  } 
+  }
   .info-section {
 	display: flex;
     flex-direction: column;

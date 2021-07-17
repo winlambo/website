@@ -45,6 +45,9 @@ const Wallets= forwardRef((props, ref) => {
     useImperativeHandle(ref, () => ({
         openModal: () => {
             setIsOpen(true)
+        },
+        closeModal: () => {
+            setIsOpen(false);
         }
     }));
     function afterOpenModal() {

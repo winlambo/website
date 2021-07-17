@@ -62,18 +62,18 @@ const Dailydraw: React.FC = () => {
   startTime.setUTCMinutes(0);
   startTime.setUTCSeconds(0);
   startTime.setUTCMilliseconds(0);
-  
+
   const startBlockNumber   = useSelector<AppState, AppState['application']['startBlockNumber']>((state) => state.application.startBlockNumber);
 
-
+  
   useEffect(() => {
-        const endpointBalance = 'https://api.bscscan.com/api?module=account&action=tokenbalancehistory&contractaddress=0xe9e7cea3dedca5984780bafc599bd69add087d56&address=0xb61ed72a55ff87a2b731e8d247555c1ee499a56a&blockno=' + startBlockNumber + '&apikey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
+      const endpointBalance = 'https://api.bscscan.com/api?module=account&action=tokenbalancehistory&contractaddress=0xe9e7cea3dedca5984780bafc599bd69add087d56&address=0xb61ed72a55ff87a2b731e8d247555c1ee499a56a&blockno=' + startBlockNumber + '&apikey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
       if (startBlockNumber == "") return undefined;
-        axios.get(endpointBalance).then(response => {
-          const busdAmountBigNum = BigNumber.from(response.data.result).mul(BigNumber.from(10).pow(2)).div(BigNumber.from(10).pow(18))
-          const busdAmountNumber = busdAmountBigNum.toNumber() / 1e2
-          setDailyJackpotAmount((busdAmountNumber * 5) / 100);
-        })
+      axios.get(endpointBalance).then(response => {
+        const busdAmountBigNum = BigNumber.from(response.data.result).mul(BigNumber.from(10).pow(2)).div(BigNumber.from(10).pow(18))
+        const busdAmountNumber = busdAmountBigNum.toNumber() / 1e2
+        setDailyJackpotAmount((busdAmountNumber * 5) / 100);
+      })
   }, [startBlockNumber, account])
 
   useEffect(() => {
@@ -141,7 +141,7 @@ const Dailydraw: React.FC = () => {
 
   return (
     <section className="daily-draw" id="daily-draw">
-      <InfoModal ref={infoModalRef} content="The Daily Draw: TBD" />
+      <InfoModal ref={infoModalRef} content="daily-draw" />
       <div className="container">
         <div className="header">
           <div className="lg1">
