@@ -159,7 +159,7 @@ const Top: React.FC = () => {
 
     return (
         <section className="bg-black top-sec">
-            <InfoModal ref={infoModalRef} content="top"/>
+            <InfoModal ref={infoModalRef} content="top-100"/>
             <div className="container">
                 <TitleWrapperDiv>
                 <h1>Today's Top <span id="val">100</span> Active Traders</h1>

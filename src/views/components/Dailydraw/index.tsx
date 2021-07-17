@@ -141,7 +141,7 @@ const Dailydraw: React.FC = () => {
 
   return (
     <section className="daily-draw" id="daily-draw">
-      <InfoModal ref={infoModalRef} content="daily" />
+      <InfoModal ref={infoModalRef} content="daily-draw" />
       <div className="container">
         <div className="header">
           <div className="lg1">
