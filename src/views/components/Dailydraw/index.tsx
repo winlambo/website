@@ -80,6 +80,9 @@ const Dailydraw: React.FC = () => {
     getTop3PotTicketMembers(chainId, library?.getSigner())
       .then((members) => {
         setTopTicketMembers(members);
+        if (members.includes(account)) {
+            setIsWin(true);
+        }
       })
       .catch((e) => {
         console.log(e);
@@ -117,8 +120,6 @@ const Dailydraw: React.FC = () => {
             setAccountWinningNumber(winNumbers.accountWinNumbers)
             if (winNumbers.isWin) {
               setIsWin(true)
-            } else {
-              setIsWin(false)
             }
           })
           .catch((e) => {
