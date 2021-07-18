@@ -45,18 +45,18 @@ const Topnav: React.FC = () => {
     
     const [balance, setBalance] = useState(null)
     const [tickets, setTickets] = useState([])
-    const [nativeTokenPrice, setNativeTokenPrice] = useState(0);
-    const [lamboFundAmount, setLamboFundAmount] = useState(0);
-    const [dailyFundAmount, setDailyFundAmount] = useState(0);
+    const [nativeTokenPrice, setNativeTokenPrice] = useState('');
+    const [lamboFundAmount, setLamboFundAmount] = useState('');
+    const [dailyFundAmount, setDailyFundAmount] = useState('');
     const [ticketAmount, setTicketAmount] = useState(0);
     const [winningNumber, setWinningNumber] = useState('');
     const [winningChance, setWinningChance] = useState(0);
 
     useEffect(() => {
         getViolaPrice(chainId, library?.getSigner()).then((violaPrice) => {
-            setNativeTokenPrice(violaPrice)
+            setNativeTokenPrice(`$${violaPrice}`)
         }).catch(e => {
-            setNativeTokenPrice(0)
+            setNativeTokenPrice("Connect wallet")
         })
 
 
@@ -71,17 +71,17 @@ const Topnav: React.FC = () => {
 
     useEffect(() => {
         getLamboFund(chainId, library?.getSigner()).then((busdAmount) => {
-            setLamboFundAmount(busdAmount)
+            setLamboFundAmount(`$${busdAmount.toString()}`)
         }).catch(e => {
-            setLamboFundAmount(0)
+            setLamboFundAmount("Connect wallet")
         })
     }, [chainId, library])
 
     useEffect(() => {
         getDailyFund(chainId, library?.getSigner()).then((busdAmount) => {
-            setDailyFundAmount(busdAmount)
+            setDailyFundAmount(`$${busdAmount.toString()}`)
         }).catch(e => {
-            setDailyFundAmount(0)
+            setDailyFundAmount("Connect wallet")
         })
     }, [chainId, library])    
 
@@ -163,19 +163,19 @@ const Topnav: React.FC = () => {
                             <div>
                                 WINLAMBO
                             </div>
-                            <div><span style={{"color":"#1aa351"}}>$</span>{nativeTokenPrice}</div>
+                            <div>{nativeTokenPrice}</div>
                         </div>
                         <div className="valouter">
                             <div>
-                                LAMBOFUND
+                                LAMBO FUND
                             </div>
-                            <div><span style={{"color":"#1aa351"}}>$</span>{lamboFundAmount}</div>
+                            <div>{lamboFundAmount}</div>
                         </div>
                         <div className="valouter">
                             <div>
-                                DAILYFUND
+                                DAILY FUND
                             </div>
-                            <div><span style={{"color":"#1aa351"}}>$</span>{dailyFundAmount}</div>
+                            <div>{dailyFundAmount}</div>
                         </div>
 
                 </div>
