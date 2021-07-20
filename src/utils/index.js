@@ -2,6 +2,7 @@ import { Contract } from '@ethersproject/contracts'
 import WinLamboABI from '../contracts/WinLambo.json'
 import MulticallABI from '../contracts/Multicall.json'
 import ERC20ABI from '../contracts/erc20.json'
+import RewardsABI from '../contracts/ClaimRewards.json'
 import LamboRandomNumberABI from '../contracts/LamboRandomNumber.json'
 
 
@@ -24,6 +25,10 @@ export const CONTRACTS_BY_NETWORK = {
       address: '0x7Bd9bC770685874a91DAe27D709742D5025D6348',
       abi: LamboRandomNumberABI
     },
+    Rewards: {
+      address: '0x4c6ac5964178cb4e022fdbe945e68433549f20c1',
+      abi: RewardsABI
+    }
   },
   [Networks.Testnet]: {
     WinLambo: {
@@ -38,6 +43,10 @@ export const CONTRACTS_BY_NETWORK = {
       address: '',
       abi: LamboRandomNumberABI
     },
+    Rewards: {
+      address: '0x4c6ac5964178cb4e022fdbe945e68433549f20c1',
+      abi: RewardsABI
+    }
   },
 }
 

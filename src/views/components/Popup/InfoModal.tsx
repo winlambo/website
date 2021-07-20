@@ -59,11 +59,10 @@ const InfoModal= forwardRef((props: {content: string}, ref: Ref<IRef>) => {
     function closeModal() {
         setIsOpen(false);
     }
-
     let contentElement = undefined;
-    if (content == 'top-100') {
+    if (content == 'top') {
         contentElement = <>
-        <h3>Top 100 Active Traders</h3>
+        <h3>Top 100 Active Traders: TBD</h3>
             <WrapperInfo>
             <Ptag>TODAY'S TOP 100 ACTIVE TRADERS section shows the players that have bought/sold/transferred the most WINLAMBO in the current day.</Ptag>
             <Ptag>Every day, these 100 players have a chance to win the daily prizes!<br/>
@@ -80,10 +79,10 @@ const InfoModal= forwardRef((props: {content: string}, ref: Ref<IRef>) => {
             See the info  <InfoIcon className="fas fa-info-circle" style={{paddingRight: 10, cursor: 'auto'}}></InfoIcon> tooltip in The Daily Draw section for more information!
         </WrapperInfo>
         </>
-    } else if (content == 'daily-draw') {
+    } else if (content == 'draw') {
         contentElement = 
         <>
-            <h3>The Daily Draw</h3>
+            <h3>The Daily Draw: TBD</h3>
             <WrapperInfo>
             <Ptag>The Daily Draw is a distribution of prizes EVERY DAY to the top 100 Winlambo players of the previous day!</Ptag>
 
@@ -121,9 +120,9 @@ const InfoModal= forwardRef((props: {content: string}, ref: Ref<IRef>) => {
             <Ptag>A player can win more than once.</Ptag>
         </WrapperInfo>
         </>
-    } else if (content == 'lambo-draw') {
+    } else if (content == 'daily') {
         contentElement = <>
-            <h3>Lambo Draw</h3>
+            <h3>Lambo Draw: TBD</h3>
             <WrapperInfo>
             <Ptag>The Lambo Draw is the reason WINLAMBO exists!</Ptag>
 
@@ -145,7 +144,8 @@ const InfoModal= forwardRef((props: {content: string}, ref: Ref<IRef>) => {
             </Ptag>
             <Ptag>
             The winner has 3 days to claim their winnings. To claim, the winner must send 0.0001 BNB to the Lambo Fund so that we know that the winner has access to their wallet. 
-            The Lambo Fund can be seen at <a href="https://bscscan.com/address/0x8dA5e332A088779be241C79B8ffe53003E4529A2" target="_blank" style={{border: 'none'}}>https://bscscan.com/address/0x8dA5e332A088779be241C79B8ffe53003E4529A2</a>
+            The Lambo Fund can be seen at 
+                <a href="https://bscscan.com/address/0x8dA5e332A088779be241C79B8ffe53003E4529A2" target="_blank" style={{border: 'none'}}>https://bscscan.com/address/0x8dA5e332A088779be241C79B8ffe53003E4529A2</a>
             </Ptag>
             <Ptag>Once the winner has claimed their winnings, they will receive 210,000 BEP-20 BUSD from the Lambo Fund.</Ptag>
             <Ptag>
