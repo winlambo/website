@@ -167,6 +167,7 @@ const Rewards= forwardRef((props, ref) => {
                             const amount = await getRewardsUser(chainId, account, library, res[id].address); 
                             _rewards.push(amount.toFixed(3));
                         }
+                        // @ts-ignore
                         setUserRewards(_rewards)
                         console.log(_rewards);
                     })
