@@ -104,7 +104,7 @@ const Rewards= forwardRef((props, ref) => {
     const context = useWeb3React<Web3Provider>()
     const {connector, library, chainId, account, activate, deactivate, active, error } = context
     const [rewardsList, setRewardsList] = useState([{}]);
-    const [userRewards, setUserRewards] = useState([{}]);
+    const [userRewards, setUserRewards] = useState([]);
 
     const modalStatus = useSelector<AppState, AppState['application']['rewardsModalOpen']>((state) => state.application.rewardsModalOpen);
 
@@ -130,6 +130,26 @@ const Rewards= forwardRef((props, ref) => {
     function closeModal() {
         setIsOpen(false);
         dispatch(updateRewardsModalOpen({status: false}));
+    }
+
+    function initianlize() {
+        getRewardsList(chainId, library)
+            .then(async (res) => {
+                setRewardsList(res);
+                console.log("Result of function", res)
+                let _rewards = [];
+                for (let id = 0; id < res.length; id ++) {
+                    const amount = await getRewardsUser(chainId, account, library, res[id].address, res[id].decimals); 
+                    _rewards.push(amount.toFixed(3));
+                }
+                // @ts-ignore
+                setUserRewards(_rewards)
+                console.log(_rewards);
+            })
+            .catch((err) => {
+                console.error("Getting Rewards List error", err);
+                setRewardsList([]);
+            })
     }
 
     useEffect(() => {
@@ -159,23 +179,12 @@ const Rewards= forwardRef((props, ref) => {
     }
 
     useEffect(() => {
+        if (account && chainId && library) {
+            initianlize();
+        }
         setInterval(() => {
             if (account && chainId && library) {
-                getRewardsList(chainId, library)
-                    .then(async (res) => {
-                        setRewardsList(res);
-                        let _rewards = [];
-                        for (let id = 0; id < res.length; id ++) {
-                            const amount = await getRewardsUser(chainId, account, library, res[id].address); 
-                            _rewards.push(amount.toFixed(3));
-                        }
-                        setUserRewards(_rewards)
-                        console.log(_rewards);
-                    })
-                    .catch((err) => {
-                        console.error("Getting Rewards List error", err); 
-                        setRewardsList([]);
-                    })
+                initianlize()
             }
         }, 12000);
     }, [chainId, account]);
@@ -196,7 +205,7 @@ const Rewards= forwardRef((props, ref) => {
                         <WrapperCard>
                             <LogoCoin src={"/images/coins/" + rewards.symbol + ".png"} />
                             <Ptag>Rewards Available</Ptag>
-                            <BText>{userRewards[index]}</BText>
+                            {userRewards.length > index && userRewards[index] ? <BText>{userRewards[index]}</BText> : <BText>0.000</BText>}
                             <BText>${rewards.symbol}</BText>
                             <CBtn onClick={claimRewards} disabled={userRewards[index] == 0}><Ctext>CLAIM</Ctext></CBtn>
                         </WrapperCard>

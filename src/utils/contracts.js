@@ -392,6 +392,7 @@ export async function getRewardsList(chainId, provider) {
     let token = undefined;
     let name = undefined;
     let symbol = undefined;
+    let decimal = undefined;
     let result = [];
     try {
         const numTokens = await contract.rewardsTokensLength();
@@ -400,10 +401,12 @@ export async function getRewardsList(chainId, provider) {
             token = getERC20Contract(tokenAddress, provider);
             name = await token.name();
             symbol = await token.symbol();
+            decimal = await token.decimals();
             result.push({
                 name: name,
                 symbol: symbol,
-                address: tokenAddress
+                address: tokenAddress,
+                decimals: decimal
             })
         }
         return result;
@@ -414,13 +417,13 @@ export async function getRewardsList(chainId, provider) {
     
 }
 
-export async function getRewardsUser(chainId, account, provider, tokenAddress) {
+export async function getRewardsUser(chainId, account, provider, tokenAddress, decimals = 18) {
     const contract = getContractObj('Rewards', chainId, provider);
     try {
         console.log(account, tokenAddress);
         let rewards = await contract.rewards(account, tokenAddress);
         console.log(rewards);
-        rewards = rewards.mul(BigNumber.from(10).pow(3)).div(BigNumber.from(10).pow(18));
+        rewards = rewards.mul(BigNumber.from(10).pow(3)).div(BigNumber.from(10).pow(decimals));
         return rewards / 1e3;
     } catch (err) {
         console.log(err)
