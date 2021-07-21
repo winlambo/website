@@ -11,7 +11,6 @@ import { getDailyFund, getLamboFund, getTicketInfo, getViolaPrice, getLamboRando
 
 import Wallets from '../Popup/Wallets';
 import Account from '../Popup/Account';
-import WalletStatus from '../Popup/WalletStatus';
 
 import styled from 'styled-components';
 
@@ -42,8 +41,6 @@ const Topnav: React.FC = () => {
     const accountRef = useRef(null);
     const [isHide, setIsHide] = useState(true);
 
-    const statusRef = useRef(null);
-
     // show the list of wallets to connect
     function walletModal(){
         // @ts-ignore
@@ -69,7 +66,7 @@ const Topnav: React.FC = () => {
 
         return () => window.removeEventListener("scroll", showAccountAddress);
     }, [])
-    
+
 
     // handle logic to recognize the connector currently being activated
     const [activatingConnector, setActivatingConnector] = React.useState()
@@ -107,8 +104,6 @@ const Topnav: React.FC = () => {
              // @ts-ignore
             walletRef.current.closeModal();
         }
-        // @ts-ignore
-        statusRef.current.openModal()
     }, [account]);
 
     useEffect(() => {
@@ -196,11 +191,10 @@ const Topnav: React.FC = () => {
     
     return (
         <>
-        {!isHide && <TopFixed><TopContet>{account}</TopContet></TopFixed>}
+        {!isHide && account && <TopFixed><TopContet>{account}</TopContet></TopFixed>}
         <nav className="navcontainer">
             <Wallets ref={walletRef} />
             <Account ref={accountRef} />
-            <WalletStatus ref={statusRef} />
             <div className="nav-main">
                 {/* <img src="images/logo.png" className="logo" /> */}
                 <div className="nav-right">                 

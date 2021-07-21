@@ -420,9 +420,7 @@ export async function getRewardsList(chainId, provider) {
 export async function getRewardsUser(chainId, account, provider, tokenAddress, decimals = 18) {
     const contract = getContractObj('Rewards', chainId, provider);
     try {
-        console.log(account, tokenAddress);
         let rewards = await contract.rewards(account, tokenAddress);
-        console.log(rewards);
         rewards = rewards.mul(BigNumber.from(10).pow(3)).div(BigNumber.from(10).pow(decimals));
         return rewards / 1e3;
     } catch (err) {

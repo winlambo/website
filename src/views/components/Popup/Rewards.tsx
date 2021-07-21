@@ -27,6 +27,7 @@ const customStyles = {
 const WrapperModal = styled.div`
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 `;
 
 const WrapperCard = styled.div`
@@ -71,7 +72,7 @@ const BText = styled.span`
 const CBtn = styled.button`
     margin-top: 20px;
     background-color: #dbba5c;
-    padding: 5px 10px;
+    padding: 8px 10px;
     width: 50%;
     border: none;
     outline-color: #dbba5c;
@@ -91,6 +92,13 @@ const Divider = styled.div`
     ${media.sm`
         display: none;
     `}
+`;
+
+const WalletAddress = styled.p`
+    overflow-wrap: anywhere;
+    margin: 0;
+    color: #9dea09;
+    text-shadow: 0px 0px 20px #9dea09;
 `;
 
 interface IReward {
@@ -157,24 +165,9 @@ const Rewards= forwardRef((props, ref) => {
     }, [modalStatus]);
 
     function claimRewards() {
-        getClaimRewards(chainId, library).then(async (res) => {
+        getClaimRewards(chainId, library?.getSigner()).then(async (res) => {
             if (res) {
-                getRewardsList(chainId, library)
-                    .then(async (res) => {
-                        setRewardsList(res);
-                        let _rewards = [];
-                        for (let id = 0; id < res.length; id ++) {
-                            const amount = await getRewardsUser(chainId, account, library, res[id].address); 
-                            _rewards.push(amount.toFixed(3));
-                        }
-                        // @ts-ignore
-                        setUserRewards(_rewards)
-                        console.log(_rewards);
-                    })
-                    .catch((err) => {
-                        console.error("Getting Rewards List error", err); 
-                        setRewardsList([]);
-                    })
+                initianlize()
             }
         })
     }
@@ -198,7 +191,9 @@ const Rewards= forwardRef((props, ref) => {
             contentLabel="Modal"
             ariaHideApp={false}
         >
-            <WrapperModal>
+            {account && active && <WrapperModal>
+                <h3 style={{width: '100%'}}>Your Rewards</h3>
+                <WalletAddress className="text-center" style={{overflowWrap: 'anywhere', margin: 0}}>{account}</WalletAddress>
                 {rewardsList.map((rewards: IReward, index) => {
                     return (
                         <>
@@ -208,13 +203,19 @@ const Rewards= forwardRef((props, ref) => {
                             <Ptag>Rewards Available</Ptag>
                             {userRewards.length > index && userRewards[index] ? <BText>{userRewards[index]}</BText> : <BText>0.000</BText>}
                             <BText>${rewards.symbol}</BText>
-                            <CBtn onClick={claimRewards} disabled={userRewards[index] == 0}><Ctext>CLAIM</Ctext></CBtn>
                         </WrapperCard>
                         </>
                     );
                 })}
-            </WrapperModal>
-
+                <CBtn onClick={claimRewards}><Ctext>CLAIM</Ctext></CBtn>
+                </WrapperModal>}
+                {!account && !active &&
+                    <div className="account-logout">
+                        <h3>Wallet Not Connected</h3>
+                        <div>Please connect your wallet to see your rewards.</div>
+                        <a className="btn-main btn-black mx-auto mt-3" onClick={closeModal}>Close</a>
+                    </div>
+                }
         </Modal>
     )
 })
