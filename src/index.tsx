@@ -9,6 +9,7 @@ import { ExternalProvider, JsonRpcFetchFunc, Web3Provider } from '@ethersproject
 import store from './state';
 import { Provider } from 'react-redux';
 import AppUpdater from './state/application/updater';
+import RewardsButton from './views/components/RewardsButton';
 
 function getLibrary(provider: ExternalProvider | JsonRpcFetchFunc) {
   const library = new Web3Provider(provider)
@@ -24,6 +25,7 @@ ReactDOM.render(
         <AppUpdater />
     <GlobalStyle />
     <Home />
+        <RewardsButton />
       </Provider>
     </Web3ReactProvider>    
   </React.StrictMode>,

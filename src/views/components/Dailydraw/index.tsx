@@ -80,9 +80,6 @@ const Dailydraw: React.FC = () => {
     getTop3PotTicketMembers(chainId, library?.getSigner())
       .then((members) => {
         setTopTicketMembers(members);
-        if (members.includes(account)) {
-            setIsWin(true);
-        }
       })
       .catch((e) => {
         console.log(e);
@@ -120,6 +117,8 @@ const Dailydraw: React.FC = () => {
             setAccountWinningNumber(winNumbers.accountWinNumbers)
             if (winNumbers.isWin) {
               setIsWin(true)
+            } else {
+              setIsWin(false)
             }
           })
           .catch((e) => {
@@ -142,7 +141,7 @@ const Dailydraw: React.FC = () => {
 
   return (
     <section className="daily-draw" id="daily-draw">
-      <InfoModal ref={infoModalRef} content="daily-draw" />
+      <InfoModal ref={infoModalRef} content="daily" />
       <div className="container">
         <div className="header">
           <div className="lg1">

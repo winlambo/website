@@ -1,5 +1,5 @@
 import { BigNumber, ethers } from "ethers";
-import { getContractObj, getERC20Contract, LAMBO_FUND_ADDRESS, DAILY_FUND_ADDRESS } from ".";
+import { getContractObj, getERC20Contract, LAMBO_FUND_ADDRESS, DAILY_FUND_ADDRESS, REWARDS_ADDRESS } from ".";
 import PairConfig, { QuoteToken } from "./types"
 import Pairs from "./pairs"
 import tokens from './tokens'
@@ -384,4 +384,58 @@ export async function get4LuckyHolders (account, randomNumbers, chainId, provide
         accountLuckyHolders : accountWinNumbers
     }
 
+}
+
+export async function getRewardsList(chainId, provider) {
+    const contract = getContractObj('Rewards', chainId, provider);
+    let tokenAddress = undefined;
+    let token = undefined;
+    let name = undefined;
+    let symbol = undefined;
+    let decimal = undefined;
+    let result = [];
+    try {
+        const numTokens = await contract.rewardsTokensLength();
+        for (let idx = 0; idx < numTokens.toNumber(); idx ++) {
+            tokenAddress = await contract.rewardsTokens(idx);
+            token = getERC20Contract(tokenAddress, provider);
+            name = await token.name();
+            symbol = await token.symbol();
+            decimal = await token.decimals();
+            result.push({
+                name: name,
+                symbol: symbol,
+                address: tokenAddress,
+                decimals: decimal
+            })
+        }
+        return result;
+    } catch (error) {
+        console.error(error);
+        return [];
+    }
+    
+}
+
+export async function getRewardsUser(chainId, account, provider, tokenAddress, decimals = 18) {
+    const contract = getContractObj('Rewards', chainId, provider);
+    try {
+        let rewards = await contract.rewards(account, tokenAddress);
+        rewards = rewards.mul(BigNumber.from(10).pow(3)).div(BigNumber.from(10).pow(decimals));
+        return rewards / 1e3;
+    } catch (err) {
+        console.log(err)
+        return 0;
+    }
+}
+
+export async function getClaimRewards(chainId, provider) {
+    const contract = getContractObj('Rewards', chainId, provider);
+    try {
+        contract.claimRewards();
+        return true;
+    } catch(error) {
+        console.log(error);
+        return false;
+    }
 }

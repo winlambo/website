@@ -1,5 +1,6 @@
 import { InjectedConnector } from "@web3-react/injected-connector";
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
+import { AbstractConnector } from '@web3-react/abstract-connector'
 import { currentNetwork } from "./index";
 
 export const injectedConnector = new InjectedConnector({
@@ -29,3 +30,13 @@ export const truewalletConnector = new WalletConnectConnector({
     name: "TrustWallet"
   }
 });
+
+export const resetWalletConnector = (connector) => {
+  if (
+    connector &&
+    connector instanceof WalletConnectConnector &&
+    connector.walletConnectProvider?.wc?.uri
+  ) {
+    connector.walletConnectProvider = undefined
+  }
+}

@@ -12,12 +12,34 @@ import { getDailyFund, getLamboFund, getTicketInfo, getViolaPrice, getLamboRando
 import Wallets from '../Popup/Wallets';
 import Account from '../Popup/Account';
 
+import styled from 'styled-components';
+
+const TopFixed = styled.div`
+    position: fixed;
+    top: 5px;
+    display: flex;
+    text-align: center;
+    left: 0;
+    right: 0;    
+    z-index: 99;
+    justify-content: center;
+`;
+
+const TopContet = styled.div`
+    padding: 20px;
+    color: #9dea09;
+    border-radius: 10px;
+    border: solid 2px;
+    background-color: black;
+`
+
 
 const Topnav: React.FC = () => {
     const context = useWeb3React<Web3Provider>()
     const {connector, library, chainId, account, activate, deactivate, active, error } = context
     const walletRef = useRef(null);
     const accountRef = useRef(null);
+    const [isHide, setIsHide] = useState(true);
 
     // show the list of wallets to connect
     function walletModal(){
@@ -29,7 +51,22 @@ const Topnav: React.FC = () => {
     function accountInfoModal() {
         // @ts-ignore
         accountRef.current.openModal();
+    };
+
+    useEffect(() => {
+        const showAccountAddress = () => {
+            if (window.pageYOffset > 100) {
+                setIsHide(false);
+            } else {
+                setIsHide(true);
+            }
     }
+
+        window.addEventListener("scroll", showAccountAddress);
+
+        return () => window.removeEventListener("scroll", showAccountAddress);
+    }, [])
+
 
     // handle logic to recognize the connector currently being activated
     const [activatingConnector, setActivatingConnector] = React.useState()
@@ -45,18 +82,18 @@ const Topnav: React.FC = () => {
     
     const [balance, setBalance] = useState(null)
     const [tickets, setTickets] = useState([])
-    const [nativeTokenPrice, setNativeTokenPrice] = useState('');
-    const [lamboFundAmount, setLamboFundAmount] = useState('');
-    const [dailyFundAmount, setDailyFundAmount] = useState('');
+    const [nativeTokenPrice, setNativeTokenPrice] = useState(0);
+    const [lamboFundAmount, setLamboFundAmount] = useState(0);
+    const [dailyFundAmount, setDailyFundAmount] = useState(0);
     const [ticketAmount, setTicketAmount] = useState(0);
     const [winningNumber, setWinningNumber] = useState('');
     const [winningChance, setWinningChance] = useState(0);
 
     useEffect(() => {
         getViolaPrice(chainId, library?.getSigner()).then((violaPrice) => {
-            setNativeTokenPrice(`$${violaPrice}`)
+            setNativeTokenPrice(violaPrice)
         }).catch(e => {
-            setNativeTokenPrice("Connect wallet")
+            setNativeTokenPrice(0)
         })
 
 
@@ -71,17 +108,17 @@ const Topnav: React.FC = () => {
 
     useEffect(() => {
         getLamboFund(chainId, library?.getSigner()).then((busdAmount) => {
-            setLamboFundAmount(`$${busdAmount.toString()}`)
+            setLamboFundAmount(busdAmount)
         }).catch(e => {
-            setLamboFundAmount("Connect wallet")
+            setLamboFundAmount(0)
         })
     }, [chainId, library])
 
     useEffect(() => {
         getDailyFund(chainId, library?.getSigner()).then((busdAmount) => {
-            setDailyFundAmount(`$${busdAmount.toString()}`)
+            setDailyFundAmount(busdAmount)
         }).catch(e => {
-            setDailyFundAmount("Connect wallet")
+            setDailyFundAmount(0)
         })
     }, [chainId, library])    
 
@@ -99,18 +136,18 @@ const Topnav: React.FC = () => {
                     
                     // caculate Liquid provider balance
                     let lpbalance = await getAccountBalance(chainId, LP_ADDRESS, library);
-                    lpbalance = lpbalance.div(BigNumber.from(10).pow(9));
-                    const lpbal = lpbalance.toNumber();
+                    lpbalance = lpbalance.mul(BigNumber.from(10).pow(8)).div(BigNumber.from(10).pow(18));
+                    const lpbal = lpbalance.toNumber() / 1e8
 
                     // get unicrypt locker balance
                     let ulbalance = await getAccountBalance(chainId, UL_ADDRESS, library);
-                    ulbalance = ulbalance.div(BigNumber.from(10).pow(9));
-                    const ulbal = ulbalance.toNumber();
+                    ulbalance = ulbalance.mul(BigNumber.from(10).pow(8)).div(BigNumber.from(10).pow(18));
+                    const ulbal = ulbalance.toNumber() / 1e8
 
                     // get burend balance
                     let burnbalance = await getAccountBalance(chainId, BURN_ADDRESS, library);
-                    burnbalance = burnbalance.div(BigNumber.from(10).pow(9));
-                    const burnbal = burnbalance.toNumber();
+                    burnbalance = burnbalance.mul(BigNumber.from(10).pow(8)).div(BigNumber.from(10).pow(18));
+                    const burnbal = burnbalance.toNumber() / 1e8;
 
                     // get the tickets hold by zero address
                     let zerotickets = await getTicketInfo(chainId, ZERO_ADDRESS, library);
@@ -153,6 +190,8 @@ const Topnav: React.FC = () => {
 
     
     return (
+        <>
+        {!isHide && account && <TopFixed><TopContet>{account}</TopContet></TopFixed>}
         <nav className="navcontainer">
             <Wallets ref={walletRef} />
             <Account ref={accountRef} />
@@ -163,19 +202,19 @@ const Topnav: React.FC = () => {
                             <div>
                                 WINLAMBO
                             </div>
-                            <div>{nativeTokenPrice}</div>
+                            <div><span style={{"color":"#1aa351"}}>$</span>{nativeTokenPrice}</div>
                         </div>
                         <div className="valouter">
                             <div>
                                 LAMBO FUND
                             </div>
-                            <div>{lamboFundAmount}</div>
+                            <div><span style={{"color":"#1aa351"}}>$</span>{lamboFundAmount}</div>
                         </div>
                         <div className="valouter">
                             <div>
                                 DAILY FUND
                             </div>
-                            <div>{dailyFundAmount}</div>
+                            <div><span style={{"color":"#1aa351"}}>$</span>{dailyFundAmount}</div>
                         </div>
 
                 </div>
@@ -203,6 +242,7 @@ const Topnav: React.FC = () => {
                 <i className={playing ?"volbtn fas fa-volume-mute":"volbtn fas fa-volume-up"} onClick={toggle}></i>   
             </div>
         </nav>
+        </>
     );
 }
 

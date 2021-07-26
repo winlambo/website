@@ -10,3 +10,12 @@ export const InfoIcon = styled.i`
     cursor: pointer;
     padding-left: 10px;
 `;
+
+export const RewardsBtn = styled.img`
+    position: fixed;
+    bottom: 60px;
+    right: 30px;
+    cursor: pointer;
+    z-index: 999;
+    height: 60px;
+`
