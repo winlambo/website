@@ -2,7 +2,6 @@ import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers'
 import React, { Ref } from 'react'
 import Modal from 'react-modal';
-import { injectedConnector, walletConnector, truewalletConnector } from '../../../utils/connectors';
 import styled from 'styled-components';
 import { InfoIcon } from '../Styled';
 

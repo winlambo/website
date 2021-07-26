@@ -15,22 +15,6 @@ export const walletConnector = new WalletConnectConnector({
   pollingInterval: 12000
 });
 
-export const truewalletConnector = new WalletConnectConnector({
-  rpc: {
-    56: "https://bsc-dataseed.binance.org/",
-  },
-  qrcode: true,
-  pollingInterval: 12000,
-  qrcodeModalOptions: {
-    mobileLinks: [
-      'trust'
-    ]
-  },
-  clientMeta: {
-    name: "TrustWallet"
-  }
-});
-
 export const resetWalletConnector = (connector) => {
   if (
     connector &&

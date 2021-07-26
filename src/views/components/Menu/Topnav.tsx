@@ -25,9 +25,9 @@ const TopFixed = styled.div`
     justify-content: center;
 `;
 
-const TopContet = styled.div`
+const TopContent = styled.div`
     padding: 20px;
-    color: #9dea09;
+    color: white;
     border-radius: 10px;
     border: solid 2px;
     background-color: black;
@@ -191,7 +191,7 @@ const Topnav: React.FC = () => {
     
     return (
         <>
-        {!isHide && account && <TopFixed><TopContet>{account}</TopContet></TopFixed>}
+        {!isHide && account && <TopFixed><TopContent>{account}</TopContent></TopFixed>}
         <nav className="navcontainer">
             <Wallets ref={walletRef} />
             <Account ref={accountRef} />
