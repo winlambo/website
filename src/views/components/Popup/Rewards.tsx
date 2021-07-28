@@ -12,14 +12,12 @@ import { AppState } from '../../../state';
 
 const customStyles = {
     content: {
-        top: '50%',
-        left: '50%',
+        top: '27.5%',
+        left: '27.5%',
         right: 'auto',
         bottom: 'auto',
-        marginRight: '-50%',
         maxWidth: "700px",
         background: 'transparent',
-        transform: 'skewX(10deg) translate(-40%, -50%)',
         border: '6px solid #7b7b7b',
         minWidth: '250px',
     }
@@ -37,7 +35,6 @@ const WrapperCard = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    transform: skewX(-10deg);
     padding: 20px 10px;
     ${media.md`
         padding: 10px 5px;
@@ -77,7 +74,6 @@ const CBtn = styled.button`
     border: none;
     outline-color: #dbba5c;
     border-radius: 5px;
-    transform: skewX(10deg);
 `;
 
 const Ctext = styled.span`
@@ -140,22 +136,20 @@ const Rewards= forwardRef((props, ref) => {
         dispatch(updateRewardsModalOpen({status: false}));
     }
 
-    function initianlize() {
+    function initialize() {
         getRewardsList(chainId, library)
             .then(async (res) => {
                 setRewardsList(res);
-                console.log("Result of function", res)
                 let _rewards = [];
                 for (let id = 0; id < res.length; id ++) {
-                    const amount = await getRewardsUser(chainId, account, library, res[id].address, res[id].decimals); 
-                    _rewards.push(amount.toFixed(3));
+                    const amount = await getRewardsUser(chainId, account, library, res[id].address, res[id].decimals);
+                    _rewards.push(amount.toFixed(2));
                 }
                 // @ts-ignore
                 setUserRewards(_rewards)
-                console.log(_rewards);
             })
             .catch((err) => {
-                console.error("Getting Rewards List error", err);
+                console.error("Error getting Rewards List: ", err);
                 setRewardsList([]);
             })
     }
@@ -167,21 +161,18 @@ const Rewards= forwardRef((props, ref) => {
     function claimRewards() {
         getClaimRewards(chainId, library?.getSigner()).then(async (res) => {
             if (res) {
-                initianlize()
+                setUserRewards([]);
             }
         })
     }
 
     useEffect(() => {
         if (account && chainId && library) {
-            initianlize();
+            initialize();
         }
-        setInterval(() => {
-            if (account && chainId && library) {
-                initianlize()
-            }
-        }, 12000);
-    }, [chainId, account]);
+
+    }, [account, chainId]);
+
     return (
         <Modal
             isOpen={modalIsOpen}
@@ -201,7 +192,7 @@ const Rewards= forwardRef((props, ref) => {
                         <WrapperCard>
                             <LogoCoin src={"/images/coins/" + rewards.symbol + ".png"} />
                             <Ptag>Rewards Available</Ptag>
-                            {userRewards.length > index && userRewards[index] ? <BText>{userRewards[index]}</BText> : <BText>0.000</BText>}
+                            {userRewards.length > index && userRewards[index] ? <BText>{userRewards[index]}</BText> : <BText>0.00</BText>}
                             <BText>${rewards.symbol}</BText>
                         </WrapperCard>
                         </>
