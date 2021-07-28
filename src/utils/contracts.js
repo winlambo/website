@@ -432,7 +432,7 @@ export async function getRewardsUser(chainId, account, provider, tokenAddress, d
 export async function getClaimRewards(chainId, provider) {
     const contract = getContractObj('Rewards', chainId, provider);
     try {
-        contract.claimRewards();
+        await contract.claimRewards();
         return true;
     } catch(error) {
         console.log(error);
