@@ -14,6 +14,8 @@ const customStyles = {
     content: {
         top: '10%',
         left: '25%',
+        bottom: 'auto',
+        right: 'auto',
         maxWidth: '49%',
         background: 'transparent',
         border: '6px solid #7b7b7b',
