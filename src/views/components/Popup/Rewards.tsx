@@ -12,14 +12,11 @@ import { AppState } from '../../../state';
 
 const customStyles = {
     content: {
-        top: '27.5%',
-        left: '27.5%',
-        right: 'auto',
-        bottom: 'auto',
-        maxWidth: "700px",
+        top: '10%',
+        left: '25%',
+        maxWidth: '49%',
         background: 'transparent',
         border: '6px solid #7b7b7b',
-        minWidth: '250px',
     }
 };
 const WrapperModal = styled.div`
@@ -93,8 +90,10 @@ const Divider = styled.div`
 const WalletAddress = styled.p`
     overflow-wrap: anywhere;
     margin: 0;
-    color: #9dea09;
-    text-shadow: 0px 0px 20px #9dea09;
+    color: rgb(204, 178, 111);
+    text-shadow: rgb(204, 178, 111) 0px 0px 20px; 
+    font-weight: 500;
+    padding: 2%;
 `;
 
 interface IReward {
