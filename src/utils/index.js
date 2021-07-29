@@ -26,7 +26,7 @@ export const CONTRACTS_BY_NETWORK = {
       abi: LamboRandomNumberABI
     },
     Rewards: {
-      address: '0x4c6ac5964178cb4e022fdbe945e68433549f20c1',
+      address: '0xAE392952d850B84eb186167A51fe23636e3B99c1',
       abi: RewardsABI
     }
   },
