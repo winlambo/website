@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { keyframes } from "styled-components";
 import Spinbox from "./Spinbox";
+import Rewards from '../Popup/Rewards';
+
 export interface WincolProps {
   items?: number[];
   winningticket?: number[];
@@ -16,6 +18,13 @@ const Wincol: React.FC<WincolProps> = ({
 }) => {
   const [opacity, setopacity] = useState(0);
 
+  const rewardsRef = useRef(null)
+  // open rewards modal
+  function rewardsModal() {
+      // @ts-ignore
+      rewardsRef.current.openModal();
+  }
+
   const displayWinAmount = winningAmount ? winningAmount.toString() : "0";
 
   useEffect(() => {
@@ -28,6 +37,7 @@ const Wincol: React.FC<WincolProps> = ({
   }, []);
   return (
     <div className="wincol">
+      <Rewards ref={rewardsRef} />
       <div className="row">
         {items?.map((item, index) => {
           setTimeout(function () {}, index * 2000);
@@ -42,13 +52,14 @@ const Wincol: React.FC<WincolProps> = ({
           );
         })}
 
-        {isWin ? (
+        {true ? (
             <div className="col-md-4" style={{ opacity: opacity }}>
             <div className="coloredinfo">
+              <a className="btn-main btn-black" target="_blank" onClick={rewardsModal}>Claim Rewards</a>
               <div className="coloredval">
-                Congrats! You will be airdropped your winnings!
+                Winner! Congratulations!
                 <div className="coloredbg">
-                  Congrats! You will be airdropped your winnings!
+                  Winner! Congratulations!
                 </div>
               </div>
             </div>
