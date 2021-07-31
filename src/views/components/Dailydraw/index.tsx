@@ -196,19 +196,19 @@ const Dailydraw: React.FC = () => {
           <div className="luckyholder">
             <div className= { accountLuckyHolders?.includes(luckyHolders[0]) ? "luckyholderbx green" : "luckyholderbx" }>
               <div>{luckyHolders.length > 0 ? luckyHolders[0] : 0}</div>
-              <div className="coloredval">$25</div>
+              <div className="coloredval">$5</div>
             </div>
             <div className={ accountLuckyHolders?.includes(luckyHolders[1]) ? "luckyholderbx green" : "luckyholderbx" }>
               <div>{luckyHolders.length > 1 ? luckyHolders[1] : 0}</div>
-              <div className="coloredval">$25</div>
+              <div className="coloredval">$5</div>
             </div>
             <div className={ accountLuckyHolders?.includes(luckyHolders[2]) ? "luckyholderbx green" : "luckyholderbx" }>
               <div>{luckyHolders.length > 2 ? luckyHolders[2] : 0}</div>
-              <div className="coloredval">$25</div>
+              <div className="coloredval">$5</div>
             </div>
             <div className={ accountLuckyHolders?.includes(luckyHolders[3]) ? "luckyholderbx green" : "luckyholderbx" }>
               <div>{luckyHolders.length > 3 ? luckyHolders[3] : 0}</div>
-              <div className="coloredval">$25</div>
+              <div className="coloredval">$5</div>
             </div>
           </div>
         </div>
