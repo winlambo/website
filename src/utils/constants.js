@@ -6,6 +6,7 @@ export const EXCLUDE_LIST = [
     "0x458b14915e651243acf89c05859a22d5cff976a6", // bulksender.app
     "0x6a79e08db6c08b8f88703794bf1a47f5a01eb9dc", // token contract
     "0x000000000000000000000000000000000000dEaD", // dead address
+    "0xAE392952d850B84eb186167A51fe23636e3B99c1", // claim contract
   ]
   
   export const BSC_LAUNCH_TIME = {

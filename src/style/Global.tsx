@@ -260,6 +260,11 @@ const GlobalStyle = createGlobalStyle`
 	margin: 20px 0;
 	display: flex;
 	flex-flow: wrap;
+	div {
+		display: flex;
+		width: 100%;
+		flex-wrap: wrap;
+	}
   }
   .btn-auto {
 	width: auto;

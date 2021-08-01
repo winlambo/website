@@ -2,7 +2,8 @@ import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers'
 import React from 'react'
 import Modal from 'react-modal';
-import { injectedConnector, walletConnector, truewalletConnector } from '../../../utils/connectors';
+import { injectedConnector, walletConnector, resetWalletConnector } from '../../../utils/connectors';
+
 
 const customStyles = {
     content: {
@@ -60,10 +61,10 @@ const Wallets= forwardRef((props, ref) => {
 
     // connect injected Metamask and walletConnect
     const connectAccount = (id: any) => {
-         if (id == 'mt') activate(injectedConnector);
-         if (id == 'wc') activate(walletConnector);
-         if (id == 'tw') activate(truewalletConnector);
-         console.log(id)
+        if (id == 'mt') { activate(injectedConnector); }
+        if (id == 'wc') { resetWalletConnector(walletConnector); activate(walletConnector); }
+        if (id == 'tw') { activate(injectedConnector); }
+        console.log(id)
     }
     return (
         <Modal
@@ -75,7 +76,7 @@ const Wallets= forwardRef((props, ref) => {
             ariaHideApp={false}
         >
             <div className="wallet-modal">
-                <h4>Connet to a wallet</h4>
+                <h4>Connect to a wallet</h4>
                 <div className="wallet-body">
                     {wallets.map((wallet, index) => {
                         return (

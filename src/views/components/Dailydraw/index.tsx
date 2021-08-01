@@ -80,9 +80,6 @@ const Dailydraw: React.FC = () => {
     getTop3PotTicketMembers(chainId, library?.getSigner())
       .then((members) => {
         setTopTicketMembers(members);
-        if (members.includes(account)) {
-            setIsWin(true);
-        }
       })
       .catch((e) => {
         console.log(e);
@@ -120,6 +117,8 @@ const Dailydraw: React.FC = () => {
             setAccountWinningNumber(winNumbers.accountWinNumbers)
             if (winNumbers.isWin) {
               setIsWin(true)
+            } else {
+              setIsWin(false)
             }
           })
           .catch((e) => {
@@ -142,7 +141,7 @@ const Dailydraw: React.FC = () => {
 
   return (
     <section className="daily-draw" id="daily-draw">
-      <InfoModal ref={infoModalRef} content="daily-draw" />
+      <InfoModal ref={infoModalRef} content="daily" />
       <div className="container">
         <div className="header">
           <div className="lg1">
@@ -197,19 +196,19 @@ const Dailydraw: React.FC = () => {
           <div className="luckyholder">
             <div className= { accountLuckyHolders?.includes(luckyHolders[0]) ? "luckyholderbx green" : "luckyholderbx" }>
               <div>{luckyHolders.length > 0 ? luckyHolders[0] : 0}</div>
-              <div className="coloredval">$25</div>
+              <div className="coloredval">$5</div>
             </div>
             <div className={ accountLuckyHolders?.includes(luckyHolders[1]) ? "luckyholderbx green" : "luckyholderbx" }>
               <div>{luckyHolders.length > 1 ? luckyHolders[1] : 0}</div>
-              <div className="coloredval">$25</div>
+              <div className="coloredval">$5</div>
             </div>
             <div className={ accountLuckyHolders?.includes(luckyHolders[2]) ? "luckyholderbx green" : "luckyholderbx" }>
               <div>{luckyHolders.length > 2 ? luckyHolders[2] : 0}</div>
-              <div className="coloredval">$25</div>
+              <div className="coloredval">$5</div>
             </div>
             <div className={ accountLuckyHolders?.includes(luckyHolders[3]) ? "luckyholderbx green" : "luckyholderbx" }>
               <div>{luckyHolders.length > 3 ? luckyHolders[3] : 0}</div>
-              <div className="coloredval">$25</div>
+              <div className="coloredval">$5</div>
             </div>
           </div>
         </div>
