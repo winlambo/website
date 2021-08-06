@@ -52,7 +52,7 @@ const Wincol: React.FC<WincolProps> = ({
           );
         })}
 
-        {true ? (
+        {isWin ? (
             <div className="col-md-4" style={{ opacity: opacity }}>
             <div className="coloredinfo">
               <a className="btn-main btn-black" target="_blank" onClick={rewardsModal}>Claim Rewards</a>
