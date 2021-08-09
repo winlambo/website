@@ -38,15 +38,18 @@ const Mainwrapper: React.FC = () => {
                             </div>
                             <h1>Lambo Generation Hold and Win <div className="arrow"></div> </h1>
                             <div className="info">
-                            A winner is chosen once the Lambo multisig reaches a balance of $210,000- enough to buy a sexy 2021 Huracan EVO! <br /><br />
+                            A lucky holder won $210,000 BUSD in June! <a href="https://bsctimes.com/winlambo-gives-away-its-first-lambo/" target="_blank">Read more.</a> <br /><br />
 
-                            Your tickets are your tokens. The more tokens you have, the more tickets you have, and the higher the chance of winning!<br /><br />
+                            Your tokens are your tickets. The more tokens you have, the more tickets you have, and the higher the chance of winning!<br /><br />
 
+                            Contract Address: <span className="info-contract-address">0x6a79e08db6c08b8f88703794bf1a47f5a01eb9dc</span><br /><br /> 
                             To learn more about the technicalities, read our Docs below.
+                            
+
                                 <div className="btn-outer">
                                     <div>
                                     <a className="btn-main btn-black" target="_blank" onClick={rewardsModal}>Claim Rewards</a>
-                                    <a href="https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x6a79e08db6c08b8f88703794bf1a47f5a01eb9dc" className="btn-main btn-black" target="_blank">Buy Now</a>
+                                    <a href="https://pancakeswap.finance/swap?outputCurrency=0x6a79e08db6c08b8f88703794bf1a47f5a01eb9dc" className="btn-main btn-black" target="_blank">Buy Now</a>
                                     </div>
                                     <div>
                                     <a href="http://docs.winlambo.fund" className="btn-main btn-black" target="_blank">Docs</a>
