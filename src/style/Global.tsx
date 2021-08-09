@@ -497,6 +497,9 @@ const GlobalStyle = createGlobalStyle`
 	  color: #030303;
 	  font-weight: 300;
 	}
+    .info-contract-address {
+        color: rgb(255,51,118);
+    }
   }
   
   .blk-bx {
