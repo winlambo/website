@@ -53,30 +53,13 @@ const Top: React.FC = () => {
                               if (!result.value) continue
                               let value = BigNumber.from(result.value);
                                  
-                                // initialize the balance of an unseen sender
-                                // or increase it by the transaction value
-                                if (balances.get(result.from) === undefined) {
-                                    balances.set(result.from, value);
-                                }
-                                else {
-                                    balances.set(result.from, balances.get(result.from).add(value));
-                                }
-                        
-                                // initialize the balance of an unseen receiver
+                                // initialize the balance of an unseen buyer
                                 // or increase it by the transaction value
                                 if (balances.get(result.to) === undefined) {
                                     balances.set(result.to, value);
                                 }
                                 else {
                                     balances.set(result.to, balances.get(result.to).add(value));
-                                }
-                        
-                                // if the sender and receiver are the same user
-                                // i.e. someone sent tokens to themselves to generate volume
-                                // then subtract the amount that they sent so that they're not getting double the volume
-                                // because technically they only paid fees on it once
-                                if (result.from == result.to) {
-                                    balances.set(result.from, balances.get(result.from).sub(value));
                                 }
                             }
 
