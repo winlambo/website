@@ -145,7 +145,7 @@ const Top: React.FC = () => {
             <InfoModal ref={infoModalRef} content="top"/>
             <div className="container">
                 <TitleWrapperDiv>
-                <h1>Today's Top <span id="val">100</span> Active Traders</h1>
+                <h1>This Week's Top <span id="val">100</span> Active Traders</h1>
                     <InfoIcon className="fas fa-info-circle" onClick={infoModal}></InfoIcon>
                 </TitleWrapperDiv>
                 <div className="toptable">

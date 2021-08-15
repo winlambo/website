@@ -141,12 +141,12 @@ const Dailydraw: React.FC = () => {
 
   return (
     <section className="daily-draw" id="daily-draw">
-      <InfoModal ref={infoModalRef} content="daily" />
+      <InfoModal ref={infoModalRef} content="weekly" />
       <div className="container">
         <div className="header">
           <div className="lg1">
             <img src="images/car-engine.png" alt="Logo" className="wlogo" />
-            <h1>THE "DAILY" DRAW</h1>
+            <h1>THE "WEEKLY" DRAW</h1>
             <InfoIcon className="fas fa-info-circle" onClick={infoModal}></InfoIcon>
           </div>
 
@@ -188,7 +188,7 @@ const Dailydraw: React.FC = () => {
           </div>
         </div>
         <Ticketholder
-          heading={"Your Daily Volume Tickets"}
+          heading={"Your Weekly Volume Tickets"}
           tickets={dailyVolumeTickets}
         />
         <div className="luckyholderouter">
