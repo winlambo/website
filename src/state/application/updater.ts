@@ -10,19 +10,24 @@ import { updateEndBlockNumber, updateStartBlockNumber } from "./actions";
 export default function Updater(): null {
     const dispatch = useDispatch();
     const {account} = useWeb3React<Web3Provider>();
-    // set the start time to 16:00 UTC in local time
+    // set the start time to the beginning of the week
+    // this means Sunday at 16:00 UTC
     const startTime = new Date();
     startTime.setUTCHours(16);
     startTime.setUTCMinutes(0);
     startTime.setUTCSeconds(0);
     startTime.setUTCMilliseconds(0);
+    var todayDate = startTime.getUTCDate();  // day of the month
+    var todayDay = startTime.getUTCDay();  // day of the week
+    startTime.setUTCDate(todayDate - todayDay);  // set to beginning of the week
 
     // the end time is now
     const endTime = new Date();
 
-    // if the start time is in the future, then set it to the previous day
+    // if the start time is in the future, then set it to the previous week
+    // this happens on Sundays only
     if (startTime >= endTime) {
-        startTime.setDate(startTime.getDate() - 1);
+        startTime.setUTCDate(todayDate - 7);
     }
 
     // get the start and end times in seconds since epoch
