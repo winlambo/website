@@ -49,7 +49,7 @@ const PrepareJackpot= forwardRef((props, ref) => {
             <div className="lossmodal">
                 <h1>Not Started Yet</h1>
                 <div className="infoouter">
-                Preparing today's daily jackpot, hang tight!
+                Preparing this week's jackpot, hang tight!
                 </div>
                 <a className="btn-main btn-white mx-auto mt-3" onClick={closeModal}>Close</a>
             </div>

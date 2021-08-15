@@ -61,38 +61,37 @@ const InfoModal= forwardRef((props: {content: string}, ref: Ref<IRef>) => {
     let contentElement = undefined;
     if (content == 'top') {
         contentElement = <>
-        <h3>Top 100 Active Traders: TBD</h3>
+        <h3>Top 100 Active Traders</h3>
             <WrapperInfo>
-            <Ptag>TODAY'S TOP 100 ACTIVE TRADERS section shows the players that have bought/sold/transferred the most WINLAMBO in the current day.</Ptag>
-            <Ptag>Every day, these 100 players have a chance to win the daily prizes!<br/>
-            The prizes can be seen below in "The Daily Draw" section of the website!</Ptag>
-            <Ptag>To make it into TODAY'S TOP 100 ACTIVE TRADERS list, you just have to buy, sell, or transfer WINLAMBO.</Ptag>
+            <Ptag>THIS WEEK'S TOP 100 ACTIVE TRADERS section shows the players that have bought the most WINLAMBO in the past week, starting Sunday at 16:00 UTC.</Ptag>
+            <Ptag>Every week, these 100 players have a chance to win the weekly prizes!<br/>
+            The prizes can be seen below in "The Weekly Draw" section of the website!</Ptag>
+            <Ptag>To make it into THIS WEEK'S TOP 100 ACTIVE TRADERS list, you just have to buy or receive WINLAMBO.</Ptag>
             <Ptag>
-            Position #1 is guaranteed the top prize in The Daily Draw!<br/>
-            Position #2 is guaranteed the 2nd prize in The Daily Draw!<br/>
-            Position #3 is guaranteed the 3rd prize in The Daily Draw!<br/>
-            Positions #4 - #100 are all eligible to win the remaining 14 prizes in The Daily Draw, however they are not guaranteed a win.
+            Position #1 is guaranteed the top prize in The Weekly Draw!<br/>
+            Position #2 is guaranteed the 2nd prize in The Weekly Draw!<br/>
+            Position #3 is guaranteed the 3rd prize in The Weekly Draw!<br/>
+            Positions #4 - #100 are all eligible to win the remaining 14 prizes in The Weekly Draw, however they are not guaranteed a win.
             </Ptag>
             
 
-            See the info  <InfoIcon className="fas fa-info-circle" style={{paddingRight: 10, cursor: 'auto'}}></InfoIcon> tooltip in The Daily Draw section for more information!
+            See the info  <InfoIcon className="fas fa-info-circle" style={{paddingRight: 10, cursor: 'auto'}}></InfoIcon> tooltip in The Weekly Draw section for more information!
         </WrapperInfo>
         </>
-    } else if (content == 'draw') {
+    } else if (content == 'weekly') {
         contentElement = 
         <>
-            <h3>The Daily Draw: TBD</h3>
+            <h3>The Weekly Draw</h3>
             <WrapperInfo>
-            <Ptag>The Daily Draw is a distribution of prizes EVERY DAY to the top 100 Winlambo players of the previous day!</Ptag>
+            <Ptag>The Weekly Draw is a distribution of prizes EVERY WEEK to the top 100 Winlambo players of the previous week!</Ptag>
 
-            <Ptag>The Daily Draw happens at 16:00 UTC of every day.<br/>
-            To see the players that qualify for tomorrow's prizes, take a look at "TODAY'S TOP 100 ACTIVE TRADERS" section above!</Ptag>
+            <Ptag>The Weekly Draw happens at 16:00 UTC of every Sunday.<br/>
+            To see the players that qualify for this week's prizes, take a look at "THIS WEEK'S TOP 100 ACTIVE TRADERS" section above!</Ptag>
             <Ptag>
-            The total prizes distributed are equal to 5% of the BUSD in the Daily Jackpot Fund.<br/>
-            That means, every day, 5% of the BUSD in this <a href="https://bscscan.com/address/0xb61ed72a55ff87a2b731e8d247555c1ee499a56a" target="_blank" style={{border: 'none'}}>wallet</a> is distributed to Winlambo players!
+            That means, every week, 5% of the BUSD in this <a href="https://bscscan.com/address/0xb61ed72a55ff87a2b731e8d247555c1ee499a56a" target="_blank" style={{border: 'none'}}>wallet</a> is distributed to Winlambo players!
             </Ptag>
             <Ptag>
-            For example, if the wallet above has 2000 BUSD in it, then the total prizes for the day equal 100 BUSD.<br/>
+            For example, if the wallet above has 2000 BUSD in it, then the total prizes for the week equal 100 BUSD.<br/>
             The prizes are distributed as follows--
             </Ptag>
             <Ptag>
@@ -103,7 +102,7 @@ const InfoModal= forwardRef((props: {content: string}, ref: Ref<IRef>) => {
             </Ptag>
             <Ptag>
             14 Lucky Prizes<br/>
-            Any of the Top 100 Active Traders of the previous day have a chance to win up to 14 times!<br/>
+            Any of the Top 100 Active Traders of the week have a chance to win up to 14 times!<br/>
             Each prize is 5% of the total prizes, e.g. 5 BUSD.
             </Ptag>
             <Ptag>
@@ -113,15 +112,15 @@ const InfoModal= forwardRef((props: {content: string}, ref: Ref<IRef>) => {
             <Ptag>A player can win more than once.</Ptag>
             <Ptag>The Lucky Holders Jackpot</Ptag>
             <Ptag>
-            The Lucky Holders Jackpot is a total of $100 BUSD given out every day to WINLAMBO HOLDERS!
+            The Lucky Holders Jackpot is a total of $100 BUSD given out every week to WINLAMBO HOLDERS!
             Your WINLAMBO tokens are your tickets! All you have to do is hold!
             </Ptag>
             <Ptag>A player can win more than once.</Ptag>
         </WrapperInfo>
         </>
-    } else if (content == 'daily') {
+    } else if (content == 'lambo') {
         contentElement = <>
-            <h3>Lambo Draw: TBD</h3>
+            <h3>Lambo Draw</h3>
             <WrapperInfo>
             <Ptag>The Lambo Draw is the reason WINLAMBO exists!</Ptag>
 

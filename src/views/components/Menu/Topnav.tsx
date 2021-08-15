@@ -212,7 +212,7 @@ const Topnav: React.FC = () => {
                         </div>
                         <div className="valouter">
                             <div>
-                                DAILY FUND
+                                WEEKLY FUND
                             </div>
                             <div><span style={{"color":"#1aa351"}}>$</span>{dailyFundAmount}</div>
                         </div>

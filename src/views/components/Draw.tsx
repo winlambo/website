@@ -103,7 +103,7 @@ const Draw: React.FC = () => {
             <Lose ref={losRef}/>
             <Winmodal ref={winRef}/>
             <PrepareJackpot ref={prepareJackpotRef}/>
-            <InfoModal ref={infoModalRef} content="draw" />
+            <InfoModal ref={infoModalRef} content="lambo" />
             <div className="container">
                 
                 <div className="header">
