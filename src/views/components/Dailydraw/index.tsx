@@ -69,14 +69,11 @@ const Dailydraw: React.FC = () => {
   useEffect(() => {
       const endpointBalance = 'https://api.bscscan.com/api?module=account&action=tokenbalancehistory&contractaddress=0xe9e7cea3dedca5984780bafc599bd69add087d56&address=0xb61ed72a55ff87a2b731e8d247555c1ee499a56a&blockno=' + startBlockNumber + '&apikey=25BTGGRTJN6KFU7M6DRE25FUKJENDQ98HI'
       if (startBlockNumber == "") return undefined;
-      /*
       axios.get(endpointBalance).then(response => {
         const busdAmountBigNum = BigNumber.from(response.data.result).mul(BigNumber.from(10).pow(2)).div(BigNumber.from(10).pow(18))
         const busdAmountNumber = busdAmountBigNum.toNumber() / 1e2
         setDailyJackpotAmount((busdAmountNumber * 5) / 100);
       })
-      */
-      setDailyJackpotAmount(242.8);
   }, [startBlockNumber, account])
 
   useEffect(() => {
